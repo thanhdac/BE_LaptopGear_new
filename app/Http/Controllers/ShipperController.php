@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ShipperCreateRequest;
 use App\Http\Requests\ShipperDangKyRequest;
 use App\Http\Requests\ShipperDeleteRequest;
+use App\Http\Requests\ShipperLoginRequest;
 use App\Http\Requests\ShipperUpdateRequest;
 use App\Models\Shipper;
 use Illuminate\Http\Request;
@@ -89,5 +90,22 @@ class ShipperController extends Controller
             'status' => true,
             'message' => "Đã xóa shipper " . $request->ho_va_ten . " thành công.",
         ]);
+    }
+    public function Login(ShipperLoginRequest $request)
+    {
+        $check = Shipper::where('email', $request->email)
+            ->where('password', $request->password)
+            ->first();
+        if ($check) {
+            return response()->json([
+                'status' => 1,
+                'message' => "Đăng nhập thành công!",
+            ]);
+        } else {
+            return response()->json([
+                'status' => 0,
+                'message' => "Tài khoản hoặc mật khẩu không đúng.",
+            ]);
+        }
     }
 }

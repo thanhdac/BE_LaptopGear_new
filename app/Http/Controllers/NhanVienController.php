@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AdminLoginRequest;
 use App\Http\Requests\createNhanVienRequest;
 use App\Http\Requests\deleteNhanVienRequest;
 use App\Http\Requests\updateNhanVienRequest;
@@ -60,5 +61,22 @@ class NhanVienController extends Controller
             'status' => true,
             'message' => "Đã xóa nhân viên thành công.",
         ]);
+    }
+    public function Login(AdminLoginRequest $request)
+    {
+        $check = NhanVien::where('email', $request->email)
+                         ->where('password', $request->password)
+                         ->first();
+        if ($check) {
+            return response()->json([
+                'status' => 1,
+                'message' => "Bạn đã đăng nhập thành công.",
+            ]);
+        } else {
+            return response()->json([
+                'status' => 0,
+                'message' => "Tài khoản hoặc mật khẩu không đúng.",
+            ]);
+        }
     }
 }

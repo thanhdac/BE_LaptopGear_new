@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\QuanAnCapNhatRequest;
 use App\Http\Requests\QuanAnDangKyRequest;
+use App\Http\Requests\QuanAnLoginRequest;
 use App\Http\Requests\QuanAnThemMoiRequest;
 use App\Http\Requests\QuanAnXoaRequest;
 use App\Models\QuanAn;
@@ -89,5 +90,22 @@ class QuanAnController extends Controller
             'status' => true,
             'message' => "Đã đăng ký quán ăn " . $request->ten_quan_an . " thành công.",
         ]);
+    }
+    public function Login(QuanAnLoginRequest $request)
+    {
+        $check = QuanAn::where('email', $request->email)
+                        ->where('password', $request->password)
+                        ->first();
+        if ($check) {
+            return response()->json([
+                'status' => 1,
+                'message' => "Đăng nhập thành công!",
+            ]);
+        } else {
+            return response()->json([
+                'status' => 0,
+                'message' => "Tài khoản hoặc mật khẩu không đúng.",
+            ]);
+        }
     }
 }

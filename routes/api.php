@@ -17,10 +17,15 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/khach-hang/register', [KhachHangController::class, 'register']);
 
+Route::post('/admin/dang-nhap', [NhanVienController::class, 'Login']);
+
+
 Route::get('/admin/nhan-vien/data', [NhanVienController::class, 'getData']);
 Route::post('/admin/nhan-vien/create', [NhanVienController::class, 'store']);
 Route::post('/admin/nhan-vien/delete', [NhanVienController::class, 'destroy']);
 Route::post('/admin/nhan-vien/update', [NhanVienController::class, 'update']);
+
+Route::post('/khach-hang/dang-nhap', [KhachHangController::class, 'Login']);
 
 
 Route::get('/admin/khach-hang/data', [KhachHangController::class, 'getData']);
@@ -37,6 +42,9 @@ Route::get('/admin/phan-quyen/data', [PhanQuyenController::class, 'getData']);
 Route::post('/admin/phan-quyen/create', [PhanQuyenController::class, 'create']);
 Route::post('/admin/phan-quyen/update', [PhanQuyenController::class, 'update']);
 Route::post('/admin/phan-quyen/delete', [PhanQuyenController::class, 'destroy']);
+
+Route::post('/quan-an/dang-nhap', [QuanAnController::class, 'Login']);
+
 
 Route::get('/admin/quan-an/data', [QuanAnController::class, 'getData']);
 Route::post('/admin/quan-an/create', [QuanAnController::class, 'store']);
@@ -59,6 +67,9 @@ Route::post('/admin/tinh-thanh/delete', [TinhThanhController::class, 'destroy'])
 
 Route::post('/admin/quan-huyen/data', [TinhThanhController::class, 'getDataQuanHuyen']);
 Route::get('/admin/quan-huyen/data-open', [TinhThanhController::class, 'getDataQuanHuyenOpen']);
+
+
+Route::post('/shipper/dang-nhap', [ShipperController::class, 'Login']);
 
 Route::post('/shipper/dang-ky', [ShipperController::class, 'dangKyShipper']);
 Route::get('/admin/shipper/data', [ShipperController::class, 'getData']);

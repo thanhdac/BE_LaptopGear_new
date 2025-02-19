@@ -16,6 +16,8 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 // Admin
+Route::get('/admin/check-token', [NhanVienController::class, 'checkToken']);
+
 Route::post('/admin/dang-nhap', [NhanVienController::class, 'Login']);
 
 Route::get('/admin/nhan-vien/data', [NhanVienController::class, 'getData']);

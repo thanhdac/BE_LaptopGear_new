@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\createKhachHangRequest;
 use App\Http\Requests\deleteKhachHangRequest;
+use App\Http\Requests\KhachHangLoginRequest;
 use App\Http\Requests\registerKhachHangRequest;
 use App\Http\Requests\updateKhachHangRequest;
 use App\Models\KhachHang;
@@ -78,5 +79,22 @@ class KhachHangController extends Controller
             'status' => true,
             'message' => "Đã xóa khách hàng thành công.",
         ]);
+    }
+    public function Login(KhachHangLoginRequest $request)
+    {
+        $check = KhachHang::where('email', $request->email)
+                         ->where('password', $request->password)
+                         ->first();
+        if ($check) {
+            return response()->json([
+                'status' => 1,
+                'message' => "Đăng nhập thành công!",
+            ]);
+        } else {
+            return response()->json([
+                'status' => 0,
+                'message' => "Tài khoản hoặc mật khẩu không đúng.",
+            ]);
+        }
     }
 }

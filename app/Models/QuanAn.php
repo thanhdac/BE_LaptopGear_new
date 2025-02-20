@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class QuanAn extends Model
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+class QuanAn extends Authenticatable
 {
+    use HasFactory, Notifiable, HasApiTokens;
+
     protected $table = 'quan_ans';
     protected $fillable = [
         'email',

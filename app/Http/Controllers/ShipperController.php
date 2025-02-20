@@ -9,9 +9,24 @@ use App\Http\Requests\ShipperLoginRequest;
 use App\Http\Requests\ShipperUpdateRequest;
 use App\Models\Shipper;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class ShipperController extends Controller
 {
+    public function checkTokenShipper()
+    {
+        $user_login = Auth::guard('sanctum')->user();
+        if($user_login) {
+            return response()->json([
+                'status'    => 1,
+                'ho_ten'    => $user_login->ho_va_ten
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 0,
+                'message'   => 'Bạn cần đăng nhập hệ thống!'
+            ]);
+        }
+    }
     public function dangKyShipper(ShipperDangKyRequest $request)
     {
         Shipper::create([
@@ -100,6 +115,7 @@ class ShipperController extends Controller
             return response()->json([
                 'status' => 1,
                 'message' => "Đăng nhập thành công!",
+                'token'     => $check->createToken('token_shipper')->plainTextToken,
             ]);
         } else {
             return response()->json([

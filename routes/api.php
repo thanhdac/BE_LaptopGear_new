@@ -66,15 +66,18 @@ Route::post('/admin/shipper/delete', [ShipperController::class, 'destroy']);
 
 
 // Khách Hàng
+Route::get('/khach-hang/check-token', [KhachHangController::class, 'checkTokenUser']);
 Route::post('/khach-hang/register', [KhachHangController::class, 'register']);
 Route::post('/khach-hang/dang-nhap', [KhachHangController::class, 'Login']);
 
 
 // Quán Ăn
+Route::get('/quan-an/check-token', [QuanAnController::class, 'checkTokenQuanAn']);
 Route::post('/quan-an/dang-ky', [QuanAnController::class, 'dangKyQuanAn']);
 Route::post('/quan-an/dang-nhap', [QuanAnController::class, 'Login']);
 
 
 // Shipper
+Route::get('/shipper/check-token', [ShipperController::class, 'checkTokenShipper']);
 Route::post('/shipper/dang-ky', [ShipperController::class, 'dangKyShipper']);
 Route::post('/shipper/dang-nhap', [ShipperController::class, 'Login']);

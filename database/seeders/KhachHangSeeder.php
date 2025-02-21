@@ -43,6 +43,24 @@ class KhachHangSeeder extends Seeder
                 'is_active'     => 0,
                 'is_block'      => 1,
             ],
+            [
+                'ho_va_ten'     => 'Nguyễn Hữu Thái',
+                'email'         => 'thaidepzai@gmail.com',
+                'so_dien_thoai' => '0987654321',
+                'password'      => 111111,
+                'ngay_sinh'     => '1995-12-22',
+                'is_active'     => 0,
+                'is_block'      => 1,
+            ],
+            [
+                'ho_va_ten'     => 'Võ Văn Nhân',
+                'email'         => 'vovannhan@gmail.com',
+                'so_dien_thoai' => '0903005519',
+                'password'      => 123456,
+                'ngay_sinh'     => '1995-12-22',
+                'is_active'     => 0,
+                'is_block'      => 1,
+            ],
         ]);
     }
 }

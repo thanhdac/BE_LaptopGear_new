@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\createKhachHangRequest;
 use App\Http\Requests\deleteKhachHangRequest;
+use App\Http\Requests\DiaChiKhachHangCreateRequest;
+use App\Http\Requests\DiaChiKhachHangUpdateRequest;
 use App\Http\Requests\KhachHangLoginRequest;
 use App\Http\Requests\registerKhachHangRequest;
 use App\Http\Requests\updateKhachHangRequest;
+use App\Models\DiaChiKhachHang;
 use App\Models\KhachHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,14 +30,13 @@ class KhachHangController extends Controller
             ]);
         }
     }
-
-    public function getProfile()
+    public function profile()
     {
         $user_login = Auth::guard('sanctum')->user();
         if($user_login) {
             return response()->json([
                 'status'    => 1,
-                'data'      => $user_login
+                'data'    => $user_login,
             ]);
         } else {
             return response()->json([
@@ -43,7 +45,6 @@ class KhachHangController extends Controller
             ]);
         }
     }
-
     public function register(registerKhachHangRequest $request)
     {
         KhachHang::create([
@@ -128,5 +129,48 @@ class KhachHangController extends Controller
                 'message' => "Tài khoản hoặc mật khẩu không đúng.",
             ]);
         }
+    }
+    public function getDataDiaChi()
+    {
+        $data = DiaChiKhachHang::get();
+
+        return response()->json([
+            'data' => $data
+        ]);
+    }
+    public function storeDiaChi(DiaChiKhachHangCreateRequest $request)
+    {
+        DiaChiKhachHang::create([
+            'ho_ten_nguoi_nhan'     => $request->ho_ten_nguoi_nhan,
+            'so_dien_thoai_nhan'    => $request->so_dien_thoai_nhan,
+            'dia_chi_nhan_hang'     => $request->dia_chi_nhan_hang,
+            'id_khach_hang'         => 1,
+        ]);
+        return response()->json([
+            'status' => true,
+            'message' => "Đã tạo mới địa chỉ khách hàng thành công! ",
+        ]);
+    }
+    public function updateDiaChi(DiaChiKhachHangUpdateRequest $request)
+    {
+        DiaChiKhachHang::find($request->id)->update([
+            'ho_ten_nguoi_nhan'     => $request->ho_ten_nguoi_nhan,
+            'so_dien_thoai_nhan'    => $request->so_dien_thoai_nhan,
+            'dia_chi_nhan_hang'     => $request->dia_chi_nhan_hang,
+            'id_khach_hang'         => 1,
+        ]);
+        return response()->json([
+            'status' => true,
+            'message' => "Đã cập địa chỉ khách hàng thành công!" ,
+        ]);
+    }
+
+    public function destroyDiaChi(Request $request)
+    {
+        DiaChiKhachHang::find($request->id)->delete();
+        return response()->json([
+            'status' => true,
+            'message' => "Đã xóa địa chỉ khách hàng thành công.",
+        ]);
     }
 }

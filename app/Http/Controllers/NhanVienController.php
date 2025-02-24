@@ -97,4 +97,20 @@ class NhanVienController extends Controller
             ]);
         }
     }
+
+    public function profile()
+    {
+        $user_login = Auth::guard('sanctum')->user();
+        if($user_login) {
+            return response()->json([
+                'status'    => 1,
+                'data'    => $user_login,
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 0,
+                'message'   => 'Bạn cần đăng nhập hệ thống!'
+            ]);
+        }
+    }
 }

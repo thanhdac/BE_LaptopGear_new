@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class KhachHangController extends Controller
 {
-
     public function checkToken()
     {
         $user_login = Auth::guard('sanctum')->user();
@@ -28,6 +27,23 @@ class KhachHangController extends Controller
             ]);
         }
     }
+
+    public function getProfile()
+    {
+        $user_login = Auth::guard('sanctum')->user();
+        if($user_login) {
+            return response()->json([
+                'status'    => 1,
+                'data'      => $user_login
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 0,
+                'message'   => 'Bạn cần đăng nhập hệ thống!'
+            ]);
+        }
+    }
+
     public function register(registerKhachHangRequest $request)
     {
         KhachHang::create([

@@ -66,7 +66,8 @@ Route::post('/admin/shipper/delete', [ShipperController::class, 'destroy']);
 
 
 // Khách Hàng
-Route::get('/khach-hang/check-token', [KhachHangController::class, 'checkTokenUser']);
+Route::get('/khach-hang/check-token', [KhachHangController::class, 'checkToken']);
+Route::get('/khach-hang/profile', [KhachHangController::class, 'getProfile']);
 Route::post('/khach-hang/register', [KhachHangController::class, 'register']);
 Route::post('/khach-hang/dang-nhap', [KhachHangController::class, 'Login']);
 

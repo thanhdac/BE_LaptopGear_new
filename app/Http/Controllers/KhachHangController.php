@@ -139,26 +139,26 @@ class KhachHangController extends Controller
             'data' => $data
         ]);
     }
-    public function storeDC(DiaChiKhachHangCreateRequest $request)
+    public function storeDiaChi(DiaChiKhachHangCreateRequest $request)
     {
         DiaChiKhachHang::create([
             'ho_ten_nguoi_nhan'     => $request->ho_ten_nguoi_nhan,
             'so_dien_thoai_nhan'    => $request->so_dien_thoai_nhan,
             'dia_chi_nhan_hang'     => $request->dia_chi_nhan_hang,
-            'id_khach_hang'         => $request->id_khach_hang,
+            'id_khach_hang'         => 1,
         ]);
         return response()->json([
             'status' => true,
             'message' => "Đã tạo mới địa chỉ khách hàng thành công! ",
         ]);
     }
-    public function updateDC(DiaChiKhachHangUpdateRequest $request)
+    public function updateDiaChi(DiaChiKhachHangUpdateRequest $request)
     {
         DiaChiKhachHang::find($request->id)->update([
             'ho_ten_nguoi_nhan'     => $request->ho_ten_nguoi_nhan,
             'so_dien_thoai_nhan'    => $request->so_dien_thoai_nhan,
             'dia_chi_nhan_hang'     => $request->dia_chi_nhan_hang,
-            'id_khach_hang'         => $request->id_khach_hang,
+            'id_khach_hang'         => 1,
         ]);
         return response()->json([
             'status' => true,
@@ -166,7 +166,7 @@ class KhachHangController extends Controller
         ]);
     }
 
-    public function destroyDC(Request $request)
+    public function destroyDiaChi(Request $request)
     {
         DiaChiKhachHang::find($request->id)->delete();
         return response()->json([

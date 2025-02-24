@@ -15,7 +15,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class KhachHangController extends Controller
 {
-
     public function checkToken()
     {
         $user_login = Auth::guard('sanctum')->user();

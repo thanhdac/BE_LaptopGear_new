@@ -17,6 +17,7 @@ class KhachHangSeeder extends Seeder
         DB::table('khach_hangs')->truncate();
         DB::table('khach_hangs')->insert([
             [
+                'id'            => 1,
                 'ho_va_ten'     =>  'Nguyễn Văn A',
                 'email'         =>  'nguyenvana@gmail.com',
                 'so_dien_thoai' =>  '0708585120',
@@ -26,6 +27,7 @@ class KhachHangSeeder extends Seeder
                 'is_block'      =>  0,
             ],
             [
+                'id'            => 2,
                 'ho_va_ten'     => 'Trần Thị B',
                 'email'         => 'tranthib@gmail.com',
                 'so_dien_thoai' => '0901234567',
@@ -35,6 +37,7 @@ class KhachHangSeeder extends Seeder
                 'is_block'      => 0,
             ],
             [
+                'id'            => 3,
                 'ho_va_ten'     => 'Lê Văn C',
                 'email'         => 'levanc@gmail.com',
                 'so_dien_thoai' => '0987654321',
@@ -44,6 +47,7 @@ class KhachHangSeeder extends Seeder
                 'is_block'      => 1,
             ],
             [
+                'id'            => 4,
                 'ho_va_ten'     => 'Nguyễn Hữu Thái',
                 'email'         => 'thaidepzai@gmail.com',
                 'so_dien_thoai' => '0987654321',
@@ -53,6 +57,7 @@ class KhachHangSeeder extends Seeder
                 'is_block'      => 1,
             ],
             [
+                'id'            => 5,
                 'ho_va_ten'     => 'Võ Văn Nhân',
                 'email'         => 'vovannhan@gmail.com',
                 'so_dien_thoai' => '0903005519',

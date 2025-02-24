@@ -16,9 +16,9 @@ class DiaChiKhachHangCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-        'ho_ten_nguoi_nhan'  => 'required|string|max:255',
-        'so_dien_thoai_nhan' => 'required|digits:10',
-        'dia_chi_nhan_hang'  => 'required|string|max:255',
+            'ho_ten_nguoi_nhan'  => 'required|string|max:255',
+            'so_dien_thoai_nhan' => 'required|digits:10',
+            'dia_chi_nhan_hang'  => 'required|string|max:255',
         ];
     }
     public function messages()

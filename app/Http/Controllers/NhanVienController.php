@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AdminDoiMatKhauRequest;
 use App\Http\Requests\AdminLoginRequest;
 use App\Http\Requests\createNhanVienRequest;
 use App\Http\Requests\deleteNhanVienRequest;
@@ -112,5 +113,25 @@ class NhanVienController extends Controller
                 'message'   => 'Bạn cần đăng nhập hệ thống!'
             ]);
         }
+    }
+    public function doiMatKhau(AdminDoiMatKhauRequest $request)
+    {
+        $user_login = Auth::guard('sanctum')->user();
+        if($user_login->password == $request->mat_khau_cu) {
+            NhanVien::where('id', $user_login->id)->update([
+                'password' => $request->mat_khau_moi
+            ]);
+            return response()->json([
+                'status' => 1,
+                'message' => 'Đã đổi mật khẩu thành công!'
+            ]);
+
+        } else {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Mật khẩu cũ không đúng!'
+            ]);
+        }
+
     }
 }

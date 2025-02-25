@@ -20,6 +20,8 @@ Route::get('/admin/check-token', [NhanVienController::class, 'checkToken']);
 
 Route::post('/admin/dang-nhap', [NhanVienController::class, 'Login']);
 Route::get('/admin/profile', [NhanVienController::class, 'profile']);
+Route::post('/admin/doi-mat-khau', [NhanVienController::class, 'doiMatKhau']);
+
 
 Route::get('/admin/nhan-vien/data', [NhanVienController::class, 'getData']);
 Route::post('/admin/nhan-vien/create', [NhanVienController::class, 'store']);
@@ -77,12 +79,17 @@ Route::get('/khach-hang/profile', [KhachHangController::class, 'profile']);
 Route::post('/khach-hang/register', [KhachHangController::class, 'register']);
 Route::post('/khach-hang/dang-nhap', [KhachHangController::class, 'Login']);
 
+Route::post('/khach-hang/doi-mat-khau', [KhachHangController::class, 'doiMatKhau']);
+
+
 
 // Quán Ăn
 Route::get('/quan-an/check-token', [QuanAnController::class, 'checkTokenQuanAn']);
 Route::post('/quan-an/dang-ky', [QuanAnController::class, 'dangKyQuanAn']);
 Route::post('/quan-an/dang-nhap', [QuanAnController::class, 'Login']);
 Route::get('/quan-an/profile', [QuanAnController::class, 'profile']);
+
+Route::post('/quan-an/doi-mat-khau', [QuanAnController::class, 'doiMatKhau']);
 
 
 
@@ -91,3 +98,4 @@ Route::get('/shipper/check-token', [ShipperController::class, 'checkTokenShipper
 Route::post('/shipper/dang-ky', [ShipperController::class, 'dangKyShipper']);
 Route::post('/shipper/dang-nhap', [ShipperController::class, 'Login']);
 Route::get('/shipper/profile', [ShipperController::class, 'profile']);
+Route::post('/shipper/doi-mat-khau', [ShipperController::class, 'doiMatKhau']);

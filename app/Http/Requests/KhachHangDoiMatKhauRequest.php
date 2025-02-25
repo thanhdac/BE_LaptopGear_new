@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class KhachHangDoiMatKhauRequest extends FormRequest
 {
+
     public function authorize(): bool
     {
         return true;

@@ -8,6 +8,7 @@ use App\Http\Requests\DiaChiKhachHangCreateRequest;
 use App\Http\Requests\DiaChiKhachHangUpdateRequest;
 use App\Http\Requests\KhachHangDoiMatKhauRequest;
 use App\Http\Requests\KhachHangLoginRequest;
+use App\Http\Requests\KhachHangXoaDiaChiRequest;
 use App\Http\Requests\registerKhachHangRequest;
 use App\Http\Requests\updateKhachHangRequest;
 use App\Models\DiaChiKhachHang;
@@ -168,7 +169,7 @@ class KhachHangController extends Controller
         ]);
     }
 
-    public function destroyDiaChi(Request $request)
+    public function destroyDiaChi(KhachHangXoaDiaChiRequest $request)
     {
         DiaChiKhachHang::find($request->id)->delete();
         return response()->json([

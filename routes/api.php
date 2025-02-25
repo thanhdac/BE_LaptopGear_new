@@ -70,6 +70,7 @@ Route::post('/admin/shipper/delete', [ShipperController::class, 'destroy']);
 
 // Khách Hàng
 Route::get('/khach-hang/check-token', [KhachHangController::class, 'checkToken']);
+Route::post('/khach-hang/doi-mat-khau', [KhachHangController::class, 'doiMatKhau']);
 Route::get('/khach-hang/dia-chi/data', [KhachHangController::class, 'getDataDiaChi']);
 Route::post('/khach-hang/dia-chi/create', [KhachHangController::class, 'storeDiaChi']);
 Route::post('/khach-hang/dia-chi/update', [KhachHangController::class, 'updateDiaChi']);

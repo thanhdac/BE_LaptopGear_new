@@ -177,20 +177,22 @@ class KhachHangController extends Controller
             'message' => "Đã xóa địa chỉ khách hàng thành công.",
         ]);
     }
+
     public function doiMatKhau(KhachHangDoiMatKhauRequest $request)
     {
         $user_login = Auth::guard('sanctum')->user();
-        if ($user_login->password == $request->mat_khau_cu) {
-            KhachHang::find($user_login->id)->update([
-                'password' => $request->mat_khau_moi,
+        if($user_login->password == $request->mat_khau_cu) {
+            KhachHang::where('id', $user_login->id)->update([
+                'password' => $request->mat_khau_moi
             ]);
+
             return response()->json([
-                'status' => 1,
-                'message' => "Đổi mật khẩu thành công!",
+                'status'    => true,
+                'message'   => "Đổi mật khẩu thành công!",
             ]);
         } else {
             return response()->json([
-                'status' => 0,
+                'status' => false,
                 'message' => "Mật khẩu cũ không đúng!",
             ]);
         }

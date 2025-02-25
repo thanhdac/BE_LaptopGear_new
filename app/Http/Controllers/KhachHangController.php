@@ -6,7 +6,9 @@ use App\Http\Requests\createKhachHangRequest;
 use App\Http\Requests\deleteKhachHangRequest;
 use App\Http\Requests\DiaChiKhachHangCreateRequest;
 use App\Http\Requests\DiaChiKhachHangUpdateRequest;
+use App\Http\Requests\KhachHangDoiMatKhauRequest;
 use App\Http\Requests\KhachHangLoginRequest;
+use App\Http\Requests\KhachHangXoaDiaChiRequest;
 use App\Http\Requests\registerKhachHangRequest;
 use App\Http\Requests\updateKhachHangRequest;
 use App\Models\DiaChiKhachHang;
@@ -132,7 +134,8 @@ class KhachHangController extends Controller
     }
     public function getDataDiaChi()
     {
-        $data = DiaChiKhachHang::get();
+        $user_login = Auth::guard('sanctum')->user();
+        $data = DiaChiKhachHang::where('id_khach_hang', $user_login->id)->get();
 
         return response()->json([
             'data' => $data
@@ -140,11 +143,12 @@ class KhachHangController extends Controller
     }
     public function storeDiaChi(DiaChiKhachHangCreateRequest $request)
     {
+        $user_login = Auth::guard('sanctum')->user();
         DiaChiKhachHang::create([
             'ho_ten_nguoi_nhan'     => $request->ho_ten_nguoi_nhan,
             'so_dien_thoai_nhan'    => $request->so_dien_thoai_nhan,
             'dia_chi_nhan_hang'     => $request->dia_chi_nhan_hang,
-            'id_khach_hang'         => 1,
+            'id_khach_hang'         => $user_login->id,
         ]);
         return response()->json([
             'status' => true,
@@ -165,12 +169,30 @@ class KhachHangController extends Controller
         ]);
     }
 
-    public function destroyDiaChi(Request $request)
+    public function destroyDiaChi(KhachHangXoaDiaChiRequest $request)
     {
         DiaChiKhachHang::find($request->id)->delete();
         return response()->json([
             'status' => true,
             'message' => "Đã xóa địa chỉ khách hàng thành công.",
         ]);
+    }
+    public function doiMatKhau(KhachHangDoiMatKhauRequest $request)
+    {
+        $user_login = Auth::guard('sanctum')->user();
+        if ($user_login->password == $request->mat_khau_cu) {
+            KhachHang::find($user_login->id)->update([
+                'password' => $request->mat_khau_moi,
+            ]);
+            return response()->json([
+                'status' => 1,
+                'message' => "Đổi mật khẩu thành công!",
+            ]);
+        } else {
+            return response()->json([
+                'status' => 0,
+                'message' => "Mật khẩu cũ không đúng!",
+            ]);
+        }
     }
 }

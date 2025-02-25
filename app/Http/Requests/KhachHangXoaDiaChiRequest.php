@@ -22,8 +22,8 @@ class KhachHangXoaDiaChiRequest extends FormRequest
     public function messages()
     {
         return [
-            'id.required' => 'ID không được để trống',
-            'id.exists' => 'ID không tồn tại',
+            'id.required' => 'Địa chỉ cần xóa không được để trống',
+            'id.exists' => 'Địa chỉ cần xóa không tồn tại',
         ];
     }
 }

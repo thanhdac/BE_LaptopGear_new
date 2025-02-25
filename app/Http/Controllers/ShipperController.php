@@ -156,7 +156,7 @@ class ShipperController extends Controller
         } else {
             return response()->json([
                 'status' => 0,
-                'message' => 'Đổi mật khẩu thất bại!'
+                'message' => 'Mật khẩu cũ không đúng!'
             ]);
         }
     }

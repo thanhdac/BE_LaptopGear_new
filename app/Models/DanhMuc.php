@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class DanhMuc extends Model
 {
+
     protected $table = 'danh_mucs';
     protected $fillable = [
         'ten_danh_muc',
         'slug_danh_muc',
-        'hinh_anh',
+        'tinh_trang',
         'id_danh_muc_cha',
-        'tinh_trang'
+        'tinh_trang',
     ];
 }

@@ -13,15 +13,16 @@ return new class extends Migration
     {
         Schema::create('nhan_viens', function (Blueprint $table) {
             $table->id();
+            $table->string('email')->unique();
             $table->string('ho_va_ten');
-            $table->string('email');
             $table->string('password');
-            $table->string('so_dien_thoai');
+            $table->string('so_dien_thoai')->nullable();
             $table->string('dia_chi');
             $table->date('ngay_sinh');
+            $table->string('avatar')->nullable();
             $table->integer('tinh_trang')->default(1);
+            $table->integer('id_chuc_vu')->default(0);
             $table->integer('is_master')->default(0);
-            $table->integer('id_quyen')->nullable();
             $table->timestamps();
         });
     }

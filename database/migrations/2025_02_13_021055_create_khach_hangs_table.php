@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('khach_hangs', function (Blueprint $table) {
             $table->id();
             $table->string('ho_va_ten');
+            $table->string('so_dien_thoai');
             $table->string('email')->unique();
-            $table->string('so_dien_thoai')->nullable();
-            $table->date('ngay_sinh');
             $table->string('password');
+            $table->string('cccd')->nullable();
+            $table->date('ngay_sinh');
+            $table->string('avatar')->nullable();
+            $table->integer('id_dia_chi')->nullable();
             $table->string('hash_reset')->nullable();
             $table->string('hash_active')->nullable();
             $table->integer('is_active')->default(0);

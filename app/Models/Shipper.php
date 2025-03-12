@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+
 class Shipper extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;
@@ -17,12 +18,9 @@ class Shipper extends Authenticatable
         'email',
         'password',
         'cccd',
-        'dia_chi_thuong_tru',
-        'toa_do_x',
-        'toa_do_y',
+        'id_dia_chi',
         'is_active',
         'is_open',
-        'id_tinh_thanh',
-        'id_quan_huyen',
+        'tong_tien',
     ];
 }

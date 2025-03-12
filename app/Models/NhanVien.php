@@ -12,14 +12,15 @@ class NhanVien extends Authenticatable
 
     protected $table = 'nhan_viens';
     protected $fillable = [
-        'ho_va_ten',
         'email',
+        'ho_va_ten',
         'password',
         'so_dien_thoai',
         'dia_chi',
         'ngay_sinh',
+        'avatar',
         'tinh_trang',
+        'id_chuc_vu',
         'is_master',
-        'id_quyen',
     ];
 }

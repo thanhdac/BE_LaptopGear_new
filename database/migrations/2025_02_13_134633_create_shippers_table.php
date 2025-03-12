@@ -14,17 +14,14 @@ return new class extends Migration
         Schema::create('shippers', function (Blueprint $table) {
             $table->id();
             $table->string('ho_va_ten');
-            $table->string('so_dien_thoai');
-            $table->string('email');
+            $table->string('so_dien_thoai')->unique();
+            $table->string('email')->unique();
             $table->string('password');
-            $table->string('cccd');
-            $table->string('dia_chi_thuong_tru');
-            $table->float('toa_do_x')->nullable();
-            $table->float('toa_do_y')->nullable();
-            $table->integer('id_tinh_thanh');
-            $table->integer('id_quan_huyen');
+            $table->string('cccd')->nullable();
+            $table->integer('id_dia_chi')->default(0);
             $table->integer('is_active')->default(0);
             $table->integer('is_open')->default(0);
+            $table->integer('tong_tien')->default(0);
             $table->timestamps();
         });
     }

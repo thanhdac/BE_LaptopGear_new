@@ -13,20 +13,18 @@ return new class extends Migration
     {
         Schema::create('quan_ans', function (Blueprint $table) {
             $table->id();
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('password');
-            $table->string('ma_so_thue');
+            $table->string('ma_so_thue')->nullable();
             $table->string('ten_quan_an');
-            $table->string('dia_chi');
-            $table->string('so_dien_thoai');
-            $table->float('toa_do_x')->nullable();
-            $table->float('toa_do_y')->nullable();
+            $table->time('gio_mo_cua')->nullable();
+            $table->time('gio_dong_cua')->nullable();
+            $table->integer('id_dia_chi')->default(0);
+            $table->string('hinh_anh')->nullable();
+            $table->string('so_dien_thoai')->unique();
+            $table->integer('tong_tien')->default(0);
             $table->integer('tinh_trang')->default(0);
             $table->integer('is_active')->default(0);
-            $table->integer('id_quan_huyen');
-            $table->integer('id_tinh_thanh');
-            $table->string('gio_mo_cua');
-            $table->string('gio_dong_cua');
             $table->timestamps();
         });
     }

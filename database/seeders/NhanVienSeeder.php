@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class NhanVienSeeder extends Seeder
 {
@@ -19,24 +20,28 @@ class NhanVienSeeder extends Seeder
 
         DB::table('nhan_viens')->insert([
             [
-                'email'             =>  'nguyenquoclong@gmail.com',
-                'password'          =>  123456,
-                'ho_va_ten'         =>  'Nguyễn Quốc Long',
-                'so_dien_thoai'     =>  '0905523543',
-                'dia_chi'           =>  'Thành Phố Đà Nẵng',
-                'ngay_sinh'         =>  '1999-12-12',
-                'tinh_trang'        =>  1,
-                'id_quyen'          =>  1,
+                'email'         => 'admin@master.com',
+                'ho_va_ten'     => 'ADMIN MASTER',
+                'password'      => '123456',
+                'so_dien_thoai' => '0123456789',
+                'dia_chi'       => '180 Cao Lỗ',
+                'ngay_sinh'     => '1999-01-01',
+                'avatar'        => null,
+                'tinh_trang'    => 1,
+                'id_chuc_vu'    => 0,
+                'is_master'     => 1,
             ],
             [
-                'email'             =>  'dzfullstack@gmail.com',
-                'password'          =>  123456,
-                'ho_va_ten'         =>  'Nguyễn Quốc Long',
-                'so_dien_thoai'     =>  '0388824999',
-                'dia_chi'           =>  'Thành Phố Đà Nẵng',
-                'ngay_sinh'         =>  '1999-12-12',
-                'tinh_trang'        =>  1,
-                'id_quyen'          =>  2,
+                'email'         => 'nhanvien@gmail.com',
+                'ho_va_ten'     => 'Nhân Viên Test',
+                'password'      => '123456',
+                'so_dien_thoai' => '0987654321',
+                'dia_chi'       => '180 Cao Lỗ',
+                'ngay_sinh'     => '2000-01-01',
+                'avatar'        => null,
+                'tinh_trang'    => 1,
+                'id_chuc_vu'    => 1,
+                'is_master'     => 0,
             ],
         ]);
     }

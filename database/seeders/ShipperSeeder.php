@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class ShipperSeeder extends Seeder
 {
@@ -13,53 +14,31 @@ class ShipperSeeder extends Seeder
      */
     public function run(): void
     {
-         DB::table('shippers')->delete();
-
-        DB::table('shippers')->truncate();
+        DB::table('shippers')->delete();
 
         DB::table('shippers')->insert([
             [
-                'ho_va_ten' => 'Nguyễn Văn A',
-                'so_dien_thoai' => '0909090909',
-                'email' => 'nguyenvana@gmail.com',
-                'password' => '123456',
-                'cccd' => '123456789012345678',
-                'dia_chi_thuong_tru' => '123 Nguyễn Văn A, Hà Nội',
-                'toa_do_x' => 10.823099,
-                'toa_do_y' => 106.629699,
-                'id_tinh_thanh' => 1,
-                'id_quan_huyen' => 1,
-                'is_active' => 1,
-                'is_open' => 0,
+                'ho_va_ten'      => 'Shipper A',
+                'so_dien_thoai'  => '0123456789',
+                'email'          => 'shippera@gmail.com',
+                'password'       => '123456',
+                'cccd'           => '123456789012',
+                'id_dia_chi'     => 1,
+                'is_active'      => 1,
+                'is_open'        => 1,
+                'tong_tien'      => 0,
             ],
             [
-                'ho_va_ten' => 'Nguyễn Văn B',
-                'so_dien_thoai' => '0909090909',
-                'email' => 'nguyenvanb@gmail.com',
-                'password' => '123456',
-                'cccd' => '123456789012345678',
-                'dia_chi_thuong_tru' => '123 Nguyễn Văn B, Hà Nội',
-                'toa_do_x' => 10.823099,
-                'toa_do_y' => 106.629699,
-                'id_tinh_thanh' => 1,
-                'id_quan_huyen' => 1,
-                'is_active' => 1,
-                'is_open' => 1,
+                'ho_va_ten'      => 'Shipper B',
+                'so_dien_thoai'  => '0987654321',
+                'email'          => 'shipperb@gmail.com',
+                'password'       => '123456',
+                'cccd'           => '987654321098',
+                'id_dia_chi'     => 2,
+                'is_active'      => 1,
+                'is_open'        => 0,
+                'tong_tien'      => 0,
             ],
-            [
-                'ho_va_ten' => 'Nguyễn Văn C',
-                'so_dien_thoai' => '0909090909',
-                'email' => 'nguyenvanc@gmail.com',
-                'password' => '123456',
-                'cccd' => '123456789012345678',
-                'dia_chi_thuong_tru' => '123 Nguyễn Văn C, Hà Nội',
-                'toa_do_x' => 10.823099,
-                'toa_do_y' => 106.629699,
-                'id_tinh_thanh' => 1,
-                'id_quan_huyen' => 1,
-                'is_active' => 1,
-                'is_open' => 0,
-            ]
         ]);
     }
 }

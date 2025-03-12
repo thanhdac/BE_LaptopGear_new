@@ -10,13 +10,14 @@ use App\Http\Requests\updateKhachHangRequest;
 use App\Models\KhachHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 class KhachHangController extends Controller
 {
 
     public function checkToken()
     {
         $user_login = Auth::guard('sanctum')->user();
-        if($user_login) {
+        if ($user_login) {
             return response()->json([
                 'status'    => 1,
                 'ho_ten'    => $user_login->ho_va_ten
@@ -28,78 +29,32 @@ class KhachHangController extends Controller
             ]);
         }
     }
-    public function register(registerKhachHangRequest $request)
+    public function dangKyKhachHang(registerKhachHangRequest $request)
     {
-        KhachHang::create([
+        $khach_hang = KhachHang::create([
             'email'             => $request->email,
             'so_dien_thoai'     => $request->so_dien_thoai,
             'ho_va_ten'         => $request->ho_va_ten,
             'password'          => $request->password,
             'ngay_sinh'         => $request->ngay_sinh,
         ]);
-
-        return response()->json([
-            'status' => true,
-            'message' => "Đăng Kí Tài Khoản Thành Công!"
-        ]);
-    }
-
-    public function getData()
-    {
-        $data = KhachHang::get();
-
-        return response()->json([
-            'data' => $data
-        ]);
-    }
-
-    public function store(createKhachHangRequest $request)
-    {
-        KhachHang::create([
-            'email'             => $request->email,
-            'so_dien_thoai'     => $request->so_dien_thoai,
-            'ho_va_ten'         => $request->ho_va_ten,
-            'password'          => $request->password,
-            'ngay_sinh'         => $request->ngay_sinh,
-            'is_active'         => $request->is_active,
-            'is_block'          => $request->is_block,
-        ]);
-        return response()->json([
-            'status' => true,
-            'message' => "Đã tạo mới khách hàng " . $request->ho_va_ten . " thành công.",
-        ]);
-    }
-
-    public function update(updateKhachHangRequest $request)
-    {
-        KhachHang::find($request->id)->update([
-            'email'             => $request->email,
-            'so_dien_thoai'     => $request->so_dien_thoai,
-            'ho_va_ten'         => $request->ho_va_ten,
-            'password'          => $request->password,
-            'ngay_sinh'         => $request->ngay_sinh,
-            'is_active'         => $request->is_active,
-            'is_block'          => $request->is_block,
-        ]);
-        return response()->json([
-            'status' => true,
-            'message' => "Đã cập nhật khách hàng " . $request->ho_va_ten . " thành công.",
-        ]);
-    }
-
-    public function destroy(deleteKhachHangRequest $request)
-    {
-        KhachHang::find($request->id)->delete();
-        return response()->json([
-            'status' => true,
-            'message' => "Đã xóa khách hàng thành công.",
-        ]);
+        if ($khach_hang) {
+            return response()->json([
+                'status' => true,
+                'message' => "Đăng Kí Tài Khoản Thành Công!"
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => "Đăng Kí Tài Khoản Thất Bại!"
+            ]);
+        }
     }
     public function Login(KhachHangLoginRequest $request)
     {
         $check = KhachHang::where('email', $request->email)
-                         ->where('password', $request->password)
-                         ->first();
+                        ->where('password', $request->password)
+                        ->first();
         if ($check) {
             return response()->json([
                 'status' => 1,

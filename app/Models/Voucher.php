@@ -15,6 +15,6 @@ class Voucher extends Model
         'so_giam_gia',
         'so_tien_toi_da',
         'don_hang_toi_thieu',
-        'tinh_trang'
+        'tinh_trang',
     ];
 }

@@ -11,6 +11,6 @@ class TinhThanh extends Model
         'ten_tinh_thanh',
         'toa_do_x',
         'toa_do_y',
-        'tinh_trang'
+        'trang_thai',
     ];
 }

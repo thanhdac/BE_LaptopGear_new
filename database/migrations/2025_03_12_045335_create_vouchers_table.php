@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
-            $table->string('ma_code');
-            $table->date('thoi_gian_bat_dau');
-            $table->date('thoi_gian_ket_thuc');
+            $table->string('ma_code')->unique();
+            $table->dateTime('thoi_gian_bat_dau');
+            $table->dateTime('thoi_gian_ket_thuc');
             $table->integer('loai_giam');
             $table->integer('so_giam_gia');
             $table->integer('so_tien_toi_da');
             $table->integer('don_hang_toi_thieu');
-            $table->boolean('tinh_trang');
+            $table->integer('tinh_trang')->default(1);
             $table->timestamps();
         });
     }

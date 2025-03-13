@@ -13,6 +13,6 @@ class DanhMuc extends Model
         'slug_danh_muc',
         'tinh_trang',
         'id_danh_muc_cha',
-        'tinh_trang',
+        'hinh_anh',
     ];
 }

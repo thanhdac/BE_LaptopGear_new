@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('chi_tiet_don_hangs', function (Blueprint $table) {
             $table->id();
             $table->integer('id_don_hang');
-            $table->integer('id_quan_an');
             $table->integer('id_mon_an');
-            $table->integer('id_khach_hang');
             $table->integer('don_gia');
             $table->integer('so_luong');
             $table->integer('thanh_tien');

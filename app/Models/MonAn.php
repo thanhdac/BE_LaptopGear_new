@@ -18,6 +18,6 @@ class MonAn extends Model
         'hinh_anh',
         'is_combo',
         'list_combo',
-        'id_loai_mon',
+        'id_danh_muc',
     ];
 }

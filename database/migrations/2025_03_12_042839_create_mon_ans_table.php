@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('hinh_anh')->nullable();
             $table->integer('is_combo')->default(0);
             $table->text('list_combo')->nullable();
-            $table->integer('id_loai_mon');
+            $table->integer('id_danh_muc');
             $table->timestamps();
         });
     }

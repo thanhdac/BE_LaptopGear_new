@@ -14,17 +14,19 @@ return new class extends Migration
         Schema::create('don_hangs', function (Blueprint $table) {
             $table->id();
             $table->string('ma_don_hang')->unique();
-            $table->integer('tong_tien');
-            $table->integer('id_quan_an');
             $table->integer('id_khach_hang');
+            $table->integer('id_voucher')->nullable();
+            $table->integer('id_shipper')->nullable();
+            $table->integer('id_quan_an');
+            $table->integer('tong_tien');
             $table->string('dia_chi');
             $table->string('ten_nguoi_nhan');
             $table->string('so_dien_thoai');
-            $table->integer('id_voucher')->nullable();
             $table->integer('phi_ship')->default(0);
             $table->tinyInteger('tinh_trang')->default(1);
             $table->integer('is_thanh_toan')->default(0);
-            $table->integer('id_shipper')->nullable();
+            $table->integer('toa_do_x')->nullable();
+            $table->integer('toa_do_y')->nullable();
             $table->timestamps();
         });
     }

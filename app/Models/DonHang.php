@@ -9,16 +9,18 @@ class DonHang extends Model
     protected $table = 'don_hangs';
     protected $fillable = [
         'ma_don_hang',
-        'tong_tien',
-        'id_quan_an',
         'id_khach_hang',
+        'id_voucher',
+        'id_shipper',
+        'id_quan_an',
+        'tong_tien',
         'dia_chi',
         'ten_nguoi_nhan',
         'so_dien_thoai',
-        'id_voucher',
         'phi_ship',
         'tinh_trang',
         'is_thanh_toan',
-        'id_shipper',
+        'toa_do_x',
+        'toa_do_y',
     ];
 }

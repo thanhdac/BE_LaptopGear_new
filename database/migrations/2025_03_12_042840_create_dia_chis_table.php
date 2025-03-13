@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('dia_chi');
             $table->integer('id_quan_huyen');
-            $table->integer('id_tinh_thanh');
-            $table->integer('id_khach_hang');
             $table->double('toa_do_x');
             $table->double('toa_do_y');
             $table->integer('tinh_trang')->default(1);

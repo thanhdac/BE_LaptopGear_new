@@ -10,8 +10,6 @@ class DiaChi extends Model
     protected $fillable = [
         'dia_chi',
         'id_quan_huyen',
-        'id_tinh_thanh',
-        'id_khach_hang',
         'toa_do_x',
         'toa_do_y',
         'tinh_trang',

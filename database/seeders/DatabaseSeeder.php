@@ -17,10 +17,18 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         $this->call([
+            DiaChiSeeder::class,
             NhanVienSeeder::class,
             KhachHangSeeder::class,
-            QuanAnSeeder::class,
             ShipperSeeder::class,
+            DanhMucSeeder::class,
+            QuanHuyenSeeder::class,
+            TinhThanhSeeder::class,
+            ChucVuSeeder::class,
+            ChucNangSeeder::class,
+            PhanQuyenSeeder::class,
+            QuanAnSeeder::class,
+
         ]);
     }
 }

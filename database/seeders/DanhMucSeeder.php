@@ -66,6 +66,7 @@ class DanhMucSeeder extends Seeder
             ['id' => '44', 'ten_danh_muc' => 'Heo', 'slug_danh_muc' => Str::slug('Heo'), 'hinh_anh' => 'https://cdn.tgdd.vn/Files/2022/06/29/1443581/cach-uop-thit-heo-quay-da-gion-vang-rum-vi-ngon-dam-da-202206300705513803.jpg', 'id_danh_muc_cha' => '42', 'tinh_trang' => '1'],
             ['id' => '45', 'ten_danh_muc' => 'Bò', 'slug_danh_muc' => Str::slug('Bò'), 'hinh_anh' => 'https://vietair.com.vn/Media/Images/be-thui-o2.jpg?p=1&w=412', 'id_danh_muc_cha' => '42', 'tinh_trang' => '1'],
             ['id' => '46', 'ten_danh_muc' => 'Vịt', 'slug_danh_muc' => Str::slug('Vịt'), 'hinh_anh' => 'https://cdn.tgdd.vn/Files/2021/08/04/1372934/cong-thuc-lam-vit-quay-tieu-ngon-bat-bai-202201070922187050.jpg', 'id_danh_muc_cha' => '42', 'tinh_trang' => '1'],
+            ['id' => '47', 'ten_danh_muc' => 'Mì Quảng', 'slug_danh_muc' => Str::slug('Mì Quảng'), 'hinh_anh' => 'https://images2.thanhnien.vn/528068263637045248/2024/11/12/1000022316-1731386167793124667085.jpg', 'id_danh_muc_cha' => '0', 'tinh_trang' => '1'],
         ]);
 
     }

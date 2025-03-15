@@ -28,7 +28,9 @@ class DatabaseSeeder extends Seeder
             ChucNangSeeder::class,
             PhanQuyenSeeder::class,
             QuanAnSeeder::class,
-
+            VoucherSeeder::class,
+            MonAnSeeder::class,
+            ChiTietDanhMucQuanAnSeeder::class,
         ]);
     }
 }

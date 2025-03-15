@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug_mon_an');
             $table->integer('gia_ban');
             $table->integer('gia_khuyen_mai')->nullable();
-            $table->string('mo_ta')->nullable();
+            $table->longText('mo_ta')->nullable();
             $table->integer('id_quan_an');
             $table->integer('tinh_trang')->default(1);
             $table->string('hinh_anh')->nullable();

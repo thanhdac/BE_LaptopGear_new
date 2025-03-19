@@ -19,7 +19,7 @@ Route::post('/admin/dang-nhap', [NhanVienController::class, 'Login']);
 
 
 // Khách Hàng
-Route::get('/khach-hang/check-token', [KhachHangController::class, 'checkTokenUser']);
+Route::get('/khach-hang/check-token', [KhachHangController::class, 'checkToken']);
 Route::post('/khach-hang/dang-nhap', [KhachHangController::class, 'Login']);
 
 

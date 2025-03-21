@@ -11,7 +11,7 @@ class ThemMoiDanhMucRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -44,8 +44,8 @@ class ThemMoiDanhMucRequest extends FormRequest
             'tinh_trang.required' => 'Tình trạng không được để trống!',
             'tinh_trang.boolean' => 'Tình trạng phải là boolean!',
 
-            'id_danh_muc_cha.integer' => 'ID danh mục cha phải là số nguyên!',
-            'id_danh_muc_cha.exists' => 'ID danh mục cha không tồn tại!',
+            'id_danh_muc_cha.integer' => 'Danh mục cha phải là số nguyên!',
+            'id_danh_muc_cha.exists' => 'Danh mục cha không tồn tại!',
 
             'hinh_anh.string' => 'Hình ảnh phải là chuỗi!',
             'hinh_anh.max' => 'Hình ảnh không được quá 255 ký tự!',

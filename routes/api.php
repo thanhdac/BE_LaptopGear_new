@@ -45,7 +45,12 @@ Route::post('/admin/khach-hang/change-active', [KhachHangController::class, 'cha
 Route::get('/quan-an/check-token', [QuanAnController::class, 'checkTokenQuanAn']);
 Route::post('/quan-an/dang-nhap', [QuanAnController::class, 'Login']);
 
-
+Route::get('/admin/quan-an/data', [QuanAnController::class, 'getData']);
+Route::post('/admin/quan-an/create', [QuanAnController::class, 'store']);
+Route::post('/admin/quan-an/delete', [QuanAnController::class, 'destroy']);
+Route::post('/admin/quan-an/update', [QuanAnController::class, 'update']);
+Route::post('/admin/quan-an/change-status', [QuanAnController::class, 'changeStatus']);
+Route::post('/admin/quan-an/change-active', [QuanAnController::class, 'changeActive']);
 
 
 // Shipper
@@ -59,10 +64,3 @@ Route::post('/admin/shipper/delete', [ShipperController::class, 'destroy']);
 Route::post('/admin/shipper/change-status', [ShipperController::class, 'changeStatus']);
 Route::post('/admin/shipper/active', [ShipperController::class, 'active']);
 
-
-//Món Ăn
-Route::get('/admin/mon-an/data', [MonAnController::class, 'getData']);
-Route::post('/admin/mon-an/create', [MonAnController::class, 'store']);
-Route::post('/admin/mon-an/update', [MonAnController::class, 'update']);
-Route::post('/admin/mon-an/delete', [MonAnController::class, 'destroy']);
-Route::post('/admin/mon-an/change-status', [MonAnController::class, 'changeStatus']);

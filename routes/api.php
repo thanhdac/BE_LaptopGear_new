@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DanhMucController;
 use App\Http\Controllers\KhachHangController;
+use App\Http\Controllers\MonAnController;
 use App\Http\Controllers\NhanVienController;
 use App\Http\Controllers\QuanAnController;
 use App\Http\Controllers\ShipperController;
@@ -32,6 +33,12 @@ Route::post('/admin/danh-muc/change-status', [DanhMucController::class, 'changeS
 // Khách Hàng
 Route::get('/khach-hang/check-token', [KhachHangController::class, 'checkToken']);
 Route::post('/khach-hang/dang-nhap', [KhachHangController::class, 'Login']);
+Route::get('/admin/khach-hang/data', [KhachHangController::class, 'getData']);
+Route::post('/admin/khach-hang/create', [KhachHangController::class, 'store']);
+Route::post('/admin/khach-hang/delete', [KhachHangController::class, 'destroy']);
+Route::post('/admin/khach-hang/update', [KhachHangController::class, 'update']);
+Route::post('/admin/khach-hang/change-status', [KhachHangController::class, 'changeStatus']);
+Route::post('/admin/khach-hang/change-active', [KhachHangController::class, 'changeActive']);
 
 
 // Quán Ăn
@@ -44,3 +51,18 @@ Route::post('/quan-an/dang-nhap', [QuanAnController::class, 'Login']);
 // Shipper
 Route::get('/shipper/check-token', [ShipperController::class, 'checkTokenShipper']);
 Route::post('/shipper/dang-nhap', [ShipperController::class, 'Login']);
+
+Route::get('/admin/shipper/data', [ShipperController::class, 'getData']);
+Route::post('/admin/shipper/create', [ShipperController::class, 'store']);
+Route::post('/admin/shipper/update', [ShipperController::class, 'update']);
+Route::post('/admin/shipper/delete', [ShipperController::class, 'destroy']);
+Route::post('/admin/shipper/change-status', [ShipperController::class, 'changeStatus']);
+Route::post('/admin/shipper/active', [ShipperController::class, 'active']);
+
+
+//Món Ăn
+Route::get('/admin/mon-an/data', [MonAnController::class, 'getData']);
+Route::post('/admin/mon-an/create', [MonAnController::class, 'store']);
+Route::post('/admin/mon-an/update', [MonAnController::class, 'update']);
+Route::post('/admin/mon-an/delete', [MonAnController::class, 'destroy']);
+Route::post('/admin/mon-an/change-status', [MonAnController::class, 'changeStatus']);

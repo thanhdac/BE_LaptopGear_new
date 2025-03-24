@@ -17,7 +17,7 @@ class QuanAnDeleteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|integer|exists:quan_ans,id',
+            'id' => 'required|exists:quan_ans,id',
 
         ];
     }
@@ -25,7 +25,6 @@ class QuanAnDeleteRequest extends FormRequest
     {
            return [
             'id.required'   => 'Quán ăn cần xóa không được để trống!',
-            'id.integer'    => 'Quán ăn cần xóa phải là số nguyên!',
             'id.exists'     => 'Quán ăn cần xóa không tồn tại!',
         ];
     }

@@ -83,11 +83,11 @@ class KhachHangController extends Controller
             ]);
         } else {
             $data = KhachHang::create([
-                'ho_va_ten' => $request->ho_va_ten,
+                'ho_va_ten'     => $request->ho_va_ten,
                 'so_dien_thoai' => $request->so_dien_thoai,
-                'email' => $request->email,
-                'password' => $request->password,
-                'ngay_sinh' => $request->ngay_sinh,
+                'email'         => $request->email,
+                'password'      => $request->password,
+                'ngay_sinh'     => $request->ngay_sinh,
             ]);
             return response()->json([
                 'status'    => 1,
@@ -117,10 +117,10 @@ class KhachHangController extends Controller
             $data = KhachHang::find($request->id);
             if ($data) {
                 $data->update([
-                    'ho_va_ten' => $request->ho_va_ten,
+                    'ho_va_ten'     => $request->ho_va_ten,
                     'so_dien_thoai' => $request->so_dien_thoai,
-                    'email' => $request->email,
-                    'ngay_sinh' => $request->ngay_sinh,
+                    'email'         => $request->email,
+                    'ngay_sinh'     => $request->ngay_sinh,
                 ]);
                 return response()->json([
                     'status'    => 1,
@@ -138,7 +138,11 @@ class KhachHangController extends Controller
     public function changeStatus(changKhachHangRequest $request)
     {
         $data = KhachHang::find($request->id);
-        $data->is_block = $data->is_block == 1 ? 0 : 1;
+        if ($data->is_block == 1) {
+            $data->is_block = 0;
+        } else {
+            $data->is_block = 1;
+        }
         $data->save();
         return response()->json([
             'status' => 1,
@@ -149,7 +153,11 @@ class KhachHangController extends Controller
     public function changeActive(changeActiveRequest $request)
     {
         $data = KhachHang::find($request->id);
-        $data->is_active = $data->is_active == 1 ? 0 : 1;
+        if ($data->is_active == 1) {
+            $data->is_active = 0;
+        } else {
+            $data->is_active = 1;
+        }
         $data->save();
         return response()->json([
             'status' => 1,

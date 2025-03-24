@@ -22,15 +22,14 @@ class XoaKhachHangRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|integer|exists:khach_hangs,id',
+            'id' => 'required|exists:khach_hangs,id',
         ];
     }
     public function messages()
     {
         return [
-            'id.required' => 'Khách hàng cần xóa là bắt buộc!',
-            'id.integer' => 'Khách hàng cần xóa phải là số nguyên!',
-            'id.exists' => 'Khách hàng cần xóa không tồn tại!',
+            'id.required'   => 'Khách hàng cần xóa là bắt buộc!',
+            'id.exists'     => 'Khách hàng cần xóa không tồn tại!',
         ];
     }
 }

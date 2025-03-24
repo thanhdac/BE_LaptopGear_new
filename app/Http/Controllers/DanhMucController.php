@@ -47,7 +47,11 @@ class DanhMucController extends Controller
     public function changeStatus(XoaDanhMucRequest $request)
     {
         $data = DanhMuc::find($request->id);
-        $data->tinh_trang = $data->tinh_trang == 1 ? 0 : 1;
+        if ($data->tinh_trang == 1) {
+            $data->tinh_trang = 0;
+        } else {
+            $data->tinh_trang = 1;
+        }
         $data->save();
         return response()->json([
             'status' => 1,

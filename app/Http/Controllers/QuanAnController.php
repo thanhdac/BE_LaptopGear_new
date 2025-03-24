@@ -69,7 +69,17 @@ class QuanAnController extends Controller
                 'message'   => 'Bạn cần đăng nhập hệ thống!'
             ]);
         } else {
-            $data = QuanAn::create($request->all());
+            $data = QuanAn::create([
+                'email'                 => $request->email,
+                'password'              => $request->password,
+                'ma_so_thue'            => $request->ma_so_thue,
+                'ten_quan_an'           => $request->ten_quan_an,
+                'gio_mo_cua'            => $request->gio_mo_cua,
+                'gio_dong_cua'          => $request->gio_dong_cua,
+                'id_dia_chi'            => $request->id_dia_chi,
+                'hinh_anh'              => $request->hinh_anh,
+                'so_dien_thoai'         => $request->so_dien_thoai,
+            ]);
             return response()->json([
                 'status'    => 1,
                 'message'   => 'Thêm quán ăn thành công!',
@@ -96,9 +106,9 @@ class QuanAnController extends Controller
                     'gio_mo_cua'            => $request->gio_mo_cua,
                     'gio_dong_cua'          => $request->gio_dong_cua,
                     'id_dia_chi'            => $request->id_dia_chi,
-                    'so_dien_thoai'         => $request->so_dien_thoai,
                     'hinh_anh'              => $request->hinh_anh,
-                    'tong_tien'             => $request->tong_tien,
+                    'so_dien_thoai'         => $request->so_dien_thoai,
+                    'is_active'             => $request->is_active,
                 ]);
                 return response()->json([
                     'status'    => 1,

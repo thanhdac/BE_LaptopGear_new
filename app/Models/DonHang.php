@@ -23,4 +23,9 @@ class DonHang extends Model
         'toa_do_x',
         'toa_do_y',
     ];
+
+    CONST TINH_TRANG_CHUA_NHAN = 0;
+    CONST TINH_TRANG_DA_NHAN = 1;
+    CONST TINH_TRANG_DA_GIAO = 2;
+    CONST TINH_TRANG_DA_HUY = 3;
 }

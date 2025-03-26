@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('dia_chi');
             $table->integer('id_quan_huyen');
-            $table->double('toa_do_x');
-            $table->double('toa_do_y');
+            $table->double('toa_do_x')->nullable();
+            $table->double('toa_do_y')->nullable();
             $table->integer('tinh_trang')->default(1);
             $table->timestamps();
         });

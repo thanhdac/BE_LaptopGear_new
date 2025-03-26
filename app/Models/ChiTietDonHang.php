@@ -15,4 +15,8 @@ class ChiTietDonHang extends Model
         'thanh_tien',
         'tinh_trang',
     ];
+
+    CONST TINH_TRANG_CHUA_XAC_NHAN = 0;
+    CONST TINH_TRANG_DA_XAC_NHAN = 1;
+
 }

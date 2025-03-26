@@ -46,7 +46,6 @@ class ChucNangSeeder extends Seeder
             ['id' => 30, 'ten_chuc_nang' => 'Cập nhật Quán Ăn'],
             ['id' => 31, 'ten_chuc_nang' => 'Xóa Quán Ăn'],
             ['id' => 32, 'ten_chuc_nang' => 'Đổi trạng thái Quán Ăn'],
-
             ['id' => 33, 'ten_chuc_nang' => 'Thêm Mới Chức Vụ'],
             ['id' => 34, 'ten_chuc_nang' => 'Lấy dữ liệu chức vụ'],
             ['id' => 35, 'ten_chuc_nang' => 'Đổi Trạng Thái Chức Vụ'],

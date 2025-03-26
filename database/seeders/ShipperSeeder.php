@@ -15,7 +15,7 @@ class ShipperSeeder extends Seeder
     public function run(): void
     {
         DB::table('shippers')->delete();
-
+        DB::table('shippers')->truncate();
         DB::table('shippers')->insert([
             [
                 'ho_va_ten'      => 'Shipper A',

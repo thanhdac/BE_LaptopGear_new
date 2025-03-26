@@ -5,7 +5,9 @@ use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\MonAnController;
 use App\Http\Controllers\NhanVienController;
 use App\Http\Controllers\QuanAnController;
+use App\Http\Controllers\QuanHuyenController;
 use App\Http\Controllers\ShipperController;
+use App\Http\Controllers\TinhThanhController;
 use App\Http\Controllers\VoucherController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -64,3 +66,31 @@ Route::post('/admin/shipper/delete', [ShipperController::class, 'destroy']);
 Route::post('/admin/shipper/change-status', [ShipperController::class, 'changeStatus']);
 Route::post('/admin/shipper/active', [ShipperController::class, 'active']);
 
+
+// Tỉnh Thành
+Route::get('/admin/tinh-thanh/data', [TinhThanhController::class, 'getData'])->middleware('nhanVienMiddle');
+Route::post('/admin/tinh-thanh/create', [TinhThanhController::class, 'store'])->middleware('nhanVienMiddle');
+Route::post('/admin/tinh-thanh/delete', [TinhThanhController::class, 'destroy'])->middleware('nhanVienMiddle');
+Route::post('/admin/tinh-thanh/update', [TinhThanhController::class, 'update'])->middleware('nhanVienMiddle');
+Route::post('/admin/tinh-thanh/change-status', [TinhThanhController::class, 'changeStatus'])->middleware('nhanVienMiddle');
+
+// Quận Huyện
+Route::get('/admin/quan-huyen/data', [QuanHuyenController::class, 'getData'])->middleware('nhanVienMiddle');
+Route::post('/admin/quan-huyen/create', [QuanHuyenController::class, 'store'])->middleware('nhanVienMiddle');
+Route::post('/admin/quan-huyen/delete', [QuanHuyenController::class, 'destroy'])->middleware('nhanVienMiddle');
+Route::post('/admin/quan-huyen/update', [QuanHuyenController::class, 'update'])->middleware('nhanVienMiddle');
+Route::post('/admin/quan-huyen/change-status', [QuanHuyenController::class, 'changeStatus'])->middleware('nhanVienMiddle');
+
+// Món Ăn
+Route::get('/admin/mon-an/data', [MonAnController::class, 'getData'])->middleware('nhanVienMiddle');
+Route::post('/admin/mon-an/create', [MonAnController::class, 'store'])->middleware('nhanVienMiddle');
+Route::post('/admin/mon-an/delete', [MonAnController::class, 'destroy'])->middleware('nhanVienMiddle');
+Route::post('/admin/mon-an/update', [MonAnController::class, 'update'])->middleware('nhanVienMiddle');
+Route::post('/admin/mon-an/change-status', [MonAnController::class, 'changeStatus'])->middleware('nhanVienMiddle');
+
+// Nhân Viên
+Route::get('/admin/tai-khoan/data', [NhanVienController::class, 'getData'])->middleware('nhanVienMiddle');
+Route::post('/admin/tai-khoan/create', [NhanVienController::class, 'store'])->middleware('nhanVienMiddle');
+Route::post('/admin/tai-khoan/delete', [NhanVienController::class, 'destroy'])->middleware('nhanVienMiddle');
+Route::post('/admin/tai-khoan/update', [NhanVienController::class, 'update'])->middleware('nhanVienMiddle');
+Route::post('/admin/tai-khoan/change-status', [NhanVienController::class, 'changeStatus'])->middleware('nhanVienMiddle');

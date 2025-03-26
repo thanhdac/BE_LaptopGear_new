@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             ChiTietDanhMucQuanAnSeeder::class,
             DonHangSeeder::class,
             ChiTietDonHangSeeder::class,
+            ChiTietDiaChiSeeder::class,
         ]);
     }
 }

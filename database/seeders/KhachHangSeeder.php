@@ -15,7 +15,7 @@ class KhachHangSeeder extends Seeder
     public function run(): void
     {
         DB::table('khach_hangs')->delete();
-
+        DB::table('khach_hangs')->truncate();
         DB::table('khach_hangs')->insert([
             [
                 'ho_va_ten'     => 'Võ Văn Việt',

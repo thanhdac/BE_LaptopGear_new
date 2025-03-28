@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\ChucNangController;
 use App\Http\Controllers\DanhMucController;
 use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\MonAnController;
 use App\Http\Controllers\NhanVienController;
+use App\Http\Controllers\PhanQuyenController;
 use App\Http\Controllers\QuanAnController;
 use App\Http\Controllers\QuanHuyenController;
 use App\Http\Controllers\ShipperController;
@@ -95,17 +97,29 @@ Route::post('/quan-an/dang-nhap', [QuanAnController::class, 'Login']);
 
 
 
-
 //ACTOR KHÁCH HÀNG
 Route::get('/khach-hang/check-token', [KhachHangController::class, 'checkToken']);
 Route::post('/khach-hang/dang-nhap', [KhachHangController::class, 'Login']);
 
-
-
-
+Route::get('/khach-hang/data-login', [KhachHangController::class, 'getDataKhachHang'])->middleware('khachHangMiddle');
+Route::post('/khach-hang/update-profile', [KhachHangController::class, 'updateProfile'])->middleware('khachHangMiddle');
+Route::post('/khach-hang/update-password', [KhachHangController::class, 'updatePassword'])->middleware('khachHangMiddle');
+Route::get('/khach-hang/dia-chi/data', [KhachHangController::class, 'getDataDiaChi'])->middleware('khachHangMiddle');
+Route::post('/khach-hang/dia-chi/create', [KhachHangController::class, 'storeDiaChi'])->middleware('khachHangMiddle');
+Route::post('/khach-hang/dia-chi/update', [KhachHangController::class, 'updateDiaChi'])->middleware('khachHangMiddle');
+Route::post('/khach-hang/dia-chi/delete', [KhachHangController::class, 'destroyDiaChi'])->middleware('khachHangMiddle');
 
 
 
 //ACTOR SHIPPER
 Route::get('/shipper/check-token', [ShipperController::class, 'checkTokenShipper']);
 Route::post('/shipper/dang-nhap', [ShipperController::class, 'Login']);
+
+
+// CHỨC NĂNG
+Route::get('/admin/chuc-nang/data', [ChucNangController::class, 'getData'])->middleware('nhanVienMiddle');
+
+// PHÂN QUYỀN
+Route::get('/admin/phan-quyen/data/{id_chuc_vu}', [PhanQuyenController::class, 'getData'])->middleware('nhanVienMiddle');
+Route::post('/admin/phan-quyen-chuc-vu/create', [PhanQuyenController::class, 'store'])->middleware('nhanVienMiddle');
+Route::post('/admin/phan-quyen-chuc-vu/delete', [PhanQuyenController::class, 'destroy'])->middleware('nhanVienMiddle');

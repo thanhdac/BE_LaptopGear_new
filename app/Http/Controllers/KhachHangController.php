@@ -11,6 +11,7 @@ use App\Http\Requests\DiaChiKhachHangCreateRequest;
 use App\Http\Requests\DiaChiKhachHangUpdateRequest;
 use App\Http\Requests\KhachHangDoiMatKhauRequest;
 use App\Http\Requests\KhachHangLoginRequest;
+use App\Http\Requests\KhachHangUpdateRequest;
 use App\Http\Requests\KhachHangXoaDiaChiRequest;
 use App\Http\Requests\registerKhachHangRequest;
 use App\Http\Requests\ThemMoiKhachHangRequest;
@@ -164,4 +165,6 @@ class KhachHangController extends Controller
             'message' => 'Cập nhật trạng thái khách hàng thành công',
         ]);
     }
+   
 }
+

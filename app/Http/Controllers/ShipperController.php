@@ -12,7 +12,10 @@ use App\Http\Requests\ShipperDoiMatKhauRequest;
 use App\Http\Requests\ShipperLoginRequest;
 use App\Http\Requests\ShipperUpdateRequest;
 use App\Http\Requests\ThemMoiShipperRequest;
+use App\Http\Requests\updatePasswordShipperRequest;
+use App\Http\Requests\updateProFileShipperRequest;
 use App\Http\Requests\XoaShipperRequest;
+use App\Models\DonHang;
 use App\Models\Shipper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -140,6 +143,187 @@ class ShipperController extends Controller
                 'status'  => 0,
                 'message' => "Tài khoản không tồn tại",
             ]);
+        }
+    }
+    public function dataSP()
+    {
+        $user_login = Auth::guard('sanctum')->user();
+        if ($user_login) {
+            $shipper = Shipper::where('id', $user_login->id)->first();
+            return response()->json([
+                'status'    => 1,
+                'data'      => $shipper
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 0,
+                'message'   => 'Bạn cần đăng nhập hệ thống!'
+            ]);
+        }
+    }
+    public function updateSP(updateProFileShipperRequest $request)
+    {
+        $user_login = Auth::guard('sanctum')->user();
+        if ($user_login) {
+            Shipper::where('id', $user_login->id)->update([
+                'ho_va_ten' => $request->ho_va_ten,
+                'password'  => $request->password,
+                'cccd'  => $request->cccd,
+                'so_dien_thoai' => $request->so_dien_thoai,
+            ]);
+            return response()->json([
+                'status'    => 1,
+                'message'   => 'Cập nhật thông tin thành công!'
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 0,
+                'message'   => 'Bạn cần đăng nhập hệ thống!'
+            ]);
+        }
+    }
+    public function updatePassword(updatePasswordShipperRequest $request)
+    {
+        $user_login = Auth::guard('sanctum')->user();
+        if ($user_login) {
+            if($request->old_password == $user_login->password){
+                Shipper::where('id', $user_login->id)->update([
+                    'password'  => $request->password,
+                ]);
+                return response()->json([
+                'status'    => 1,
+                'message'   => 'Cập nhật mật khẩu thành công!'
+            ]);
+
+            }
+            return response()->json([
+                'status'    => 0,
+                'message'   => 'Mật khẩu cũ không đúng!'
+            ]);
+
+        } else {
+            return response()->json([
+                'status'    => 0,
+                'message'   => 'Bạn cần đăng nhập hệ thống!'
+            ]);
+        }
+    }
+    public function donHangChuaNhan()
+    {
+        $data = DonHang::where('tinh_trang', 0)
+        ->whereNull('id_shipper')
+        ->get();
+
+            return response()->json([
+                'data'      => $data
+            ]);
+    }
+    public function dataDonHangNhan()
+    {
+        $user = Auth::guard('sanctum')->user();
+        $data = DonHang::join('khach_hangs', 'don_hangs.id_khach_hang', '=', 'khach_hangs.id')
+            ->join('quan_ans', 'quan_ans.id', '=', 'don_hangs.id_quan_an')
+            ->leftJoin('shippers', 'shippers.id', '=', 'don_hangs.id_shipper')
+            ->where('don_hangs.id_shipper', $user->id)
+            ->where('don_hangs.tinh_trang', '=', 1)
+            ->orderBy('don_hangs.created_at')
+            ->select('don_hangs.*', 'khach_hangs.ho_va_ten', 'quan_ans.ten_quan_an', 'shippers.ho_va_ten')
+            ->get();
+
+        return response()->json([
+            'data'      => $data
+        ]);
+    }
+    public function dataDaGiao()
+    {
+        $user = Auth::guard('sanctum')->user();
+
+        if ($user) {
+            $data = DonHang::where('don_hangs.id_shipper', $user->id)
+                ->where('don_hangs.tinh_trang', 2)
+                ->join('quan_ans', 'quan_ans.id', 'don_hangs.id_quan_an')
+                ->join('khach_hangs', 'khach_hangs.id', 'don_hangs.id_khach_hang')
+                ->leftjoin('shippers', 'shippers.id', 'don_hangs.id_shipper')
+                ->select('don_hangs.*', 'khach_hangs.ho_va_ten', 'quan_ans.ten_quan_an', 'quan_ans.hinh_anh', 'shippers.ho_va_ten as ten_shipper')
+                ->orderByDESC('don_hangs.created_at')
+                ->get();
+
+            return response()->json([
+                'user'  => $user->ho_va_ten,
+                'data'  => $data,
+            ]);
+        }
+    }
+    public function nhanDonHang(Request $request)
+    {
+        $user = Auth::guard('sanctum')->user();
+        if ($user) {
+            $donHang = DonHang::find($request->id);
+            if ($donHang) {
+                if ($donHang->id_shipper == $user->id) {
+                    return response()->json([
+                        'status'    => 0,
+                        'message'   => 'Đơn hàng đã được bạn nhận!'
+                    ]);
+                } else if ($donHang->id_shipper != null) {
+                    return response()->json([
+                        'status'    => 0,
+                        'message'   => 'Đơn hàng đã được shipper khác nhận!'
+                    ]);
+                }
+                $donHang->id_shipper = $user->id;
+                $donHang->save();
+                return response()->json([
+                    'status'    => 1,
+                    'message'   => 'Nhận đơn hàng thành công!'
+                ]);
+            } else {
+                return response()->json([
+                    'status'    => 0,
+                    'message'   => 'Đơn hàng không tồn tại!'
+                ]);
+            }
+        }
+    }
+    public function hoanThanhDonHang(Request $request)
+    {
+        $user = Auth::guard('sanctum')->user();
+        if($user) {
+            $donHang = DonHang::find($request->id);
+            if($donHang) {
+                if($donHang->id_shipper !== $user->id) {
+                    return response()->json([
+                        'status'    => 0,
+                        'message'   => 'Bạn không thể hoàn thành đơn hàng này!'
+                    ]);
+                } else if($donHang->tinh_trang == 2) {
+                    return response()->json([
+                        'status'    => 0,
+                        'message'   => 'Đơn hàng này đã được giao trước đó!'
+                    ]);
+                } else if ($donHang->id_shipper == null) {
+                   return response()->json([
+                       'status'    => 0,
+                       'message'   => 'Đơn hàng chưa được nhận!'
+                   ]);
+                }
+                $donHang->tinh_trang    = 2;
+                $donHang->is_thanh_toan = 1;
+                $donHang->save();
+                $shipper = Shipper::find($user->id);
+                $shipper->tong_tien = $shipper->tong_tien + $donHang->phi_ship * 0.8;
+                $shipper->save();
+                
+                return response()->json([
+                    'status'    => 1,
+                    'message'   => 'Hoàn thành đơn hàng thành công!'
+                ]);
+            } else {
+                return response()->json([
+                    'status'    => 0,
+                    'message'   => 'Đơn hàng không tồn tại!'
+                ]);
+            }
         }
     }
 }

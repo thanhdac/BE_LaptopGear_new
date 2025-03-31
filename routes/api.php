@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Controllers\ChucVuController;
 use App\Http\Controllers\ChucNangController;
 use App\Http\Controllers\DanhMucController;
 use App\Http\Controllers\KhachHangController;
@@ -21,6 +23,11 @@ Route::get('/user', function (Request $request) {
 // Admin
 Route::get('/admin/check-token', [NhanVienController::class, 'checkToken']);
 Route::post('/admin/dang-nhap', [NhanVienController::class, 'Login']);
+//CHỨC VỤ
+Route::get('/admin/chuc-vu/data',[ChucVuController::class, 'getData'])->middleware('nhanVienMiddle');
+Route::post('/admin/chuc-vu/create',[ChucVuController::class, 'store'])->middleware('nhanVienMiddle');
+Route::post('/admin/chuc-vu/update',[ChucVuController::class, 'update'])->middleware('nhanVienMiddle');
+Route::post('/admin/chuc-vu/delete',[ChucVuController::class, 'destroy'])->middleware('nhanVienMiddle');
 
 Route::get('/admin/voucher/data', [VoucherController::class, 'getData'])->middleware('nhanVienMiddle');
 Route::post('/admin/voucher/create', [VoucherController::class, 'store'])->middleware('nhanVienMiddle');
@@ -111,10 +118,18 @@ Route::post('/khach-hang/dia-chi/delete', [KhachHangController::class, 'destroyD
 
 
 
+
 //ACTOR SHIPPER
 Route::get('/shipper/check-token', [ShipperController::class, 'checkTokenShipper']);
 Route::post('/shipper/dang-nhap', [ShipperController::class, 'Login']);
-
+Route::get('/shipper/data-login', [ShipperController::class, 'dataSP'])->middleware('shipperMiddle');
+Route::post('/shipper/update-profile', [ShipperController::class, 'updateSP'])->middleware('shipperMiddle');
+Route::post('/shipper/update-password', [ShipperController::class, 'updatePassword'])->middleware('shipperMiddle');
+Route::get('/shipper/data', [ShipperController::class, 'donHangChuaNhan'])->middleware('shipperMiddle');
+Route::get('/shipper/don-hang/data-nhan', [ShipperController::class, 'dataDonHangNhan'])->middleware('shipperMiddle');
+Route::get('/shipper/don-hang/data-da-giao', [ShipperController::class, 'dataDaGiao'])->middleware('shipperMiddle');
+Route::post('/shipper/nhan-don-hang', [ShipperController::class, 'nhanDonHang'])->middleware('shipperMiddle');
+Route::post('/shipper/hoan-thanh-don', [ShipperController::class, 'hoanThanhDonHang'])->middleware('shipperMiddle');
 
 // CHỨC NĂNG
 Route::get('/admin/chuc-nang/data', [ChucNangController::class, 'getData'])->middleware('nhanVienMiddle');

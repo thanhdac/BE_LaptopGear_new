@@ -24,3 +24,4 @@ class Shipper extends Authenticatable
         'tong_tien',
     ];
 }
+

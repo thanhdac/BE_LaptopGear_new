@@ -13,3 +13,4 @@ class ChucVu extends Model
         'tinh_trang',
     ];
 }
+

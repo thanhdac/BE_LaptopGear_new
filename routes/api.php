@@ -138,3 +138,7 @@ Route::get('/admin/chuc-nang/data', [ChucNangController::class, 'getData'])->mid
 Route::get('/admin/phan-quyen/data/{id_chuc_vu}', [PhanQuyenController::class, 'getData'])->middleware('nhanVienMiddle');
 Route::post('/admin/phan-quyen-chuc-vu/create', [PhanQuyenController::class, 'store'])->middleware('nhanVienMiddle');
 Route::post('/admin/phan-quyen-chuc-vu/delete', [PhanQuyenController::class, 'destroy'])->middleware('nhanVienMiddle');
+
+
+Route::get('/khach-hang/data-mon-an', [KhachHangController::class, 'getMonAn']);
+Route::post('/khach-hang/doi-mat-khau', [KhachHangController::class, 'doiMatKhau']);

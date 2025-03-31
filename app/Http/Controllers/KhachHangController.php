@@ -11,6 +11,7 @@ use App\Http\Requests\deleteDiaChiKhachHangRequest;
 use App\Http\Requests\deleteKhachHangRequest;
 use App\Http\Requests\DiaChiKhachHangCreateRequest;
 use App\Http\Requests\DiaChiKhachHangUpdateRequest;
+use App\Http\Requests\doiMatKhauKhachHangRequest;
 use App\Http\Requests\KhachHangDoiMatKhauRequest;
 use App\Http\Requests\KhachHangLoginRequest;
 use App\Http\Requests\KhachHangUpdateRequest;
@@ -25,6 +26,7 @@ use App\Models\ChiTietDiaChi;
 use App\Models\DiaChi;
 use App\Models\DiaChiKhachHang;
 use App\Models\KhachHang;
+use App\Models\MonAn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -327,6 +329,46 @@ class KhachHangController extends Controller
             'message'   => 'Xóa Địa Chỉ không tồn tại!',
         ]);
     }
+
+    public function getMonAn(){
+        $data = MonAn::join('quan_ans', 'mon_ans.id_quan_an', '=', 'quan_ans.id')
+            ->select('mon_ans.*', 'quan_ans.ten_quan_an')
+            ->get();
+        return response()->json([
+            'status'    => 1,
+            'data'      => $data
+        ]);
+
+}
+public function doiMatKhau(doiMatKhauKhachHangRequest $request){
+    $user_login = Auth::guard('sanctum')->user();
+    if (!$user_login) {
+        return response()->json([
+            'status'    => 0,
+            'message'   => 'Bạn cần đăng nhập hệ thống!!'
+        ]);
+    } else {
+        $kh = KhachHang::where('id', $user_login->id)->first();
+        if ($kh) {
+            if($request->password == $kh->password){
+                $kh->update([
+                    'password' => $request->new_password
+                ]);
+                return response()->json([
+                    'status'    => 1,
+                    'message'   => 'Đổi mật khẩu thành công!'
+                ]);
+            }else{
+                return response()->json([
+                    'status'    => 0,
+                    'message'   => 'Mật khẩu cũ không đúng!'
+                ]);
+            }
+        }
+    }
+
+}
+
 
 }
 

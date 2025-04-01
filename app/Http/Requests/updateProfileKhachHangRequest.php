@@ -17,7 +17,6 @@ class updateProfileKhachHangRequest extends FormRequest
             'ho_va_ten'     => 'required|min:10|max:50',
             'so_dien_thoai' => 'required|digits:10|unique:khach_hangs, so_dien_thoai,' . $this->id,
             'email'         => 'required|email|unique:khach_hangs, email,' . $this->id,
-            'password'      => 'required|min:6|max:20',
             'ngay_sinh'     => 'required|date',
         ];
     }
@@ -34,9 +33,6 @@ class updateProfileKhachHangRequest extends FormRequest
             'email.required'         => 'Email không được để trống',
             'email.email'            => 'Email không đúng định dạng',
             'email.unique'           => 'Email đã tồn tại',
-            'password.required'      => 'Mật khẩu không được để trống',
-            'password.min'           => 'Mật khẩu phải có ít nhất 6 ký tự',
-            'password.max'           => 'Mật khẩu không được quá 20 ký tự',
             'ngay_sinh.required'     => 'Ngày sinh không được để trống',
             'ngay_sinh.date'         => 'Ngày sinh không đúng định dạng',
         ];

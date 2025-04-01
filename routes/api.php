@@ -24,10 +24,10 @@ Route::get('/user', function (Request $request) {
 Route::get('/admin/check-token', [NhanVienController::class, 'checkToken']);
 Route::post('/admin/dang-nhap', [NhanVienController::class, 'Login']);
 //CHỨC VỤ
-Route::get('/admin/chuc-vu/data',[ChucVuController::class, 'getData'])->middleware('nhanVienMiddle');
-Route::post('/admin/chuc-vu/create',[ChucVuController::class, 'store'])->middleware('nhanVienMiddle');
-Route::post('/admin/chuc-vu/update',[ChucVuController::class, 'update'])->middleware('nhanVienMiddle');
-Route::post('/admin/chuc-vu/delete',[ChucVuController::class, 'destroy'])->middleware('nhanVienMiddle');
+Route::get('/admin/chuc-vu/data', [ChucVuController::class, 'getData'])->middleware('nhanVienMiddle');
+Route::post('/admin/chuc-vu/create', [ChucVuController::class, 'store'])->middleware('nhanVienMiddle');
+Route::post('/admin/chuc-vu/update', [ChucVuController::class, 'update'])->middleware('nhanVienMiddle');
+Route::post('/admin/chuc-vu/delete', [ChucVuController::class, 'destroy'])->middleware('nhanVienMiddle');
 
 Route::get('/admin/voucher/data', [VoucherController::class, 'getData'])->middleware('nhanVienMiddle');
 Route::post('/admin/voucher/create', [VoucherController::class, 'store'])->middleware('nhanVienMiddle');
@@ -101,6 +101,7 @@ Route::post('/quan-an/dang-nhap', [QuanAnController::class, 'Login']);
 
 
 
+Route::get('/admin/quan-huyen/data', [QuanHuyenController::class, 'getData']);
 
 
 

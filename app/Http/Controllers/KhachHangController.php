@@ -21,12 +21,14 @@ use App\Http\Requests\ThemMoiKhachHangRequest;
 use App\Http\Requests\updateDiaChiKhachHangRequest;
 use App\Http\Requests\updateKhachHangRequest;
 use App\Http\Requests\updatePasswordKhachHangRequest;
+use App\Http\Requests\updateProfileKhachHangRequest;
 use App\Http\Requests\XoaKhachHangRequest;
 use App\Models\ChiTietDiaChi;
 use App\Models\DiaChi;
 use App\Models\DiaChiKhachHang;
 use App\Models\KhachHang;
 use App\Models\MonAn;
+use App\Models\QuanHuyen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -177,160 +179,129 @@ class KhachHangController extends Controller
     public function getDataKhachHang()
     {
         $user = Auth::guard('sanctum')->user();
-        if ($user) {
-            $data = KhachHang::where('id', $user->id)->first();
-            return response()->json([
-                'status' => 1,
-                'data' => $data
-            ]);
-        }
+        $data = KhachHang::find($user->id);
+        return response()->json([
+            'status' => 1,
+            'data' => $data
+        ]);
     }
 
-    public function updateProfile(Request $request)
+    public function updateProfile(updateProfileKhachHangRequest $request)
     {
         $user = Auth::guard('sanctum')->user();
-        if ($user) {
-            $data = KhachHang::where('id', $user->id);
-            if ($data) {
-                $data->update([
-                    'ho_va_ten'     => $request->ho_va_ten,
-                    'so_dien_thoai' => $request->so_dien_thoai,
-                    'email'         => $request->email,
-                    "password"     => $request->password,
-                    'ngay_sinh'     => $request->ngay_sinh,
-                ]);
-                return response()->json([
-                    'status'    => 1,
-                    'message'   => 'Cập nhật thông tin thành công!',
-                ]);
-            } else {
-                return response()->json([
-                    'status'    => 0,
-                    'message'   => 'Thông tin khách hàng không tồn tại!',
-                ]);
-            }
+        $data = KhachHang::find($user->id);
+        if ($data) {
+            $data->update([
+                'ho_va_ten'     => $request->ho_va_ten,
+                'so_dien_thoai' => $request->so_dien_thoai,
+                'email'         => $request->email,
+                'ngay_sinh'     => $request->ngay_sinh
+            ]);
+            return response()->json([
+                'status'    => 1,
+                'message'   => 'Cập nhật thông tin thành công!',
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 0,
+                'message'   => 'Thông tin khách hàng không tồn tại!',
+            ]);
         }
     }
 
     public function updatePassword(updatePasswordKhachHangRequest $request)
     {
         $user = Auth::guard('sanctum')->user();
-        if ($user) {
-            $data = KhachHang::where('id', $user->id)
-                ->where('password', $request->old_password)
-                ->first();
-            if ($data) {
-                $data->update([
-                    'password' => $request->password,
-                ]);
-                return response()->json([
-                    'status'    => 1,
-                    'message'   => 'Cập nhật mật khẩu thành công!',
-                ]);
-            } else {
-                return response()->json([
-                    'status'    => 0,
-                    'message'   => 'Mật khẩu cũ không đúng!',
-                ]);
-            }
+        $data = KhachHang::where('id', $user->id)
+            ->where('password', $request->old_password)
+            ->first();
+        if ($data) {
+            $data->update([
+                'password' => $request->password,
+            ]);
+            return response()->json([
+                'status'    => 1,
+                'message'   => 'Cập nhật mật khẩu thành công!',
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 0,
+                'message'   => 'Mật khẩu cũ không đúng!',
+            ]);
         }
     }
 
     public function getDataDiaChi()
     {
         $user = Auth::guard('sanctum')->user();
-        if ($user) {
-            $data = DiaChi::where('id_khach_hang', $user->id)
-                ->join('chi_tiet_dia_chis', 'dia_chis.id', 'chi_tiet_dia_chis.id_dia_chi')
-                ->join('khach_hangs', 'chi_tiet_dia_chis.id_khach_hang', 'khach_hangs.id')
-                ->join('quan_huyens', 'dia_chis.id_quan_huyen', 'quan_huyens.id')
-                ->join('tinh_thanhs', 'quan_huyens.id_tinh_thanh', 'tinh_thanhs.id')
-                ->select('dia_chis.*', 'chi_tiet_dia_chis.*', 'khach_hangs.ho_va_ten', 'quan_huyens.ten_quan_huyen', 'tinh_thanhs.ten_tinh_thanh')
-                ->get();
-            return response()->json([
-                'status' => 1,
-                'data' => $data
-            ]);
-        }
+        $data = DiaChi::where('id_khach_hang', $user->id)
+            ->join('chi_tiet_dia_chis', 'dia_chis.id', 'chi_tiet_dia_chis.id_dia_chi')
+            ->join('khach_hangs', 'chi_tiet_dia_chis.id_khach_hang', 'khach_hangs.id')
+            ->join('quan_huyens', 'dia_chis.id_quan_huyen', 'quan_huyens.id')
+            ->join('tinh_thanhs', 'quan_huyens.id_tinh_thanh', 'tinh_thanhs.id')
+            ->select('dia_chis.*', 'chi_tiet_dia_chis.ten_nguoi_nhan', 'chi_tiet_dia_chis.so_dien_thoai', 'quan_huyens.ten_quan_huyen', 'tinh_thanhs.ten_tinh_thanh')
+            ->get();
+        return response()->json([
+            'status' => 1,
+            'data' => $data
+        ]);
     }
 
     public function storeDiaChi(createDiaChiKhachHangRequest $request)
     {
         $user = Auth::guard('sanctum')->user();
-        if ($user) {
-            $diaChi = DiaChi::create([
+        $diaChi = DiaChi::join('chi_tiet_dia_chis', 'dia_chis.id', 'chi_tiet_dia_chis.id_dia_chi')
+            ->join('khach_hangs', 'chi_tiet_dia_chis.id_khach_hang', 'khach_hangs.id')
+            ->create([
                 'dia_chi'           => $request->dia_chi,
                 'id_quan_huyen'     => $request->id_quan_huyen,
-                'toa_do_x'          => 0,
-                'toa_do_y'          => 0,
             ]);
+        ChiTietDiaChi::create([
+            'id_dia_chi'    => $diaChi->id,
+            'id_khach_hang' => $user->id,
+            'ten_nguoi_nhan' => $request->ten_nguoi_nhan,
+            'so_dien_thoai' => $request->so_dien_thoai,
+        ]);
 
-            $chiTietDiaChi = ChiTietDiaChi::create([
-                'id_dia_chi'    => $diaChi->id,
-                'id_khach_hang' => $user->id,
-            ]);
-
-            return response()->json([
-                'status'    => 1,
-                'message'   => 'Thêm mới địa chỉ thành công!',
-                'data'      => [
-                    'dia_chi'        => $diaChi,
-                    'chi_tiet_dia_chi' => $chiTietDiaChi
-                ]
-            ]);
-        }
+        return response()->json([
+            'status'    => 1,
+            'message'   => 'Thêm mới địa chỉ thành công!'
+        ]);
     }
 
     public function updateDiaChi(updateDiaChiKhachHangRequest $request)
     {
         $user = Auth::guard('sanctum')->user();
-        if ($user) {
-            $chiTietDiaChi = ChiTietDiaChi::where('id_khach_hang', $user->id)
-                ->where('id_dia_chi', $request->id)
-                ->first();
-            $diaChi = DiaChi::where('id', $chiTietDiaChi->id_dia_chi)->update([
+        $chiTietDiaChi = ChiTietDiaChi::where('id_khach_hang', $user->id)
+            ->where('id_dia_chi', $request->id)
+            ->first();
+        DiaChi::where('id', $chiTietDiaChi->id_dia_chi)->update([
+            'dia_chi'        => $request->dia_chi,
+            'id_quan_huyen'  => $request->id_quan_huyen,
+        ]);
+
+        return response()->json([
+            'status'    => 1,
+            'message'   => 'Cập nhật địa chỉ thành công!',
+            'data'      => [
                 'dia_chi'        => $request->dia_chi,
                 'id_quan_huyen'  => $request->id_quan_huyen,
-            ]);
-
-            return response()->json([
-                'status'    => 1,
-                'message'   => 'Cập nhật địa chỉ thành công!',
-                'data'      => [
-                    'dia_chi'        => $request->dia_chi,
-                    'id_quan_huyen'  => $request->id_quan_huyen,
-                    'id_khach_hang'  => $user->id
-                ]
-            ]);
-        }
+                'id_khach_hang'  => $user->id
+            ]
+        ]);
     }
 
     public function destroyDiaChi(deleteDiaChiKhachHangRequest $request)
     {
-        $user = Auth::guard('sanctum')->user();
-        if ($user) {
-            $dia_chi = DiaChi::find($request->id);
-            if ($dia_chi) {
-                $dia_chi->delete();
-
-                return response()->json([
-                    'status'    => 1,
-                    'message'   => 'Xóa Địa Chỉ thành công!',
-                ]);
-            }
-
-            return response()->json([
-                'status'    => 0,
-                'message'   => 'Xóa Địa Chỉ không tồn tại!',
-            ]);
-        }
+        $dia_chi = DiaChi::find($request->id)->delete();
         return response()->json([
-            'status'    => 0,
-            'message'   => 'Xóa Địa Chỉ không tồn tại!',
+            'status'    => 1,
+            'message'   => 'Xóa Địa Chỉ thành công!',
         ]);
     }
 
-    public function getMonAn(){
+    public function getMonAn()
+    {
         $data = MonAn::join('quan_ans', 'mon_ans.id_quan_an', '=', 'quan_ans.id')
             ->select('mon_ans.*', 'quan_ans.ten_quan_an')
             ->get();
@@ -338,19 +309,13 @@ class KhachHangController extends Controller
             'status'    => 1,
             'data'      => $data
         ]);
-
-}
-public function doiMatKhau(doiMatKhauKhachHangRequest $request){
-    $user_login = Auth::guard('sanctum')->user();
-    if (!$user_login) {
-        return response()->json([
-            'status'    => 0,
-            'message'   => 'Bạn cần đăng nhập hệ thống!!'
-        ]);
-    } else {
+    }
+    public function doiMatKhau(doiMatKhauKhachHangRequest $request)
+    {
+        $user_login = Auth::guard('sanctum')->user();
         $kh = KhachHang::where('id', $user_login->id)->first();
         if ($kh) {
-            if($request->password == $kh->password){
+            if ($request->password == $kh->password) {
                 $kh->update([
                     'password' => $request->new_password
                 ]);
@@ -358,7 +323,7 @@ public function doiMatKhau(doiMatKhauKhachHangRequest $request){
                     'status'    => 1,
                     'message'   => 'Đổi mật khẩu thành công!'
                 ]);
-            }else{
+            } else {
                 return response()->json([
                     'status'    => 0,
                     'message'   => 'Mật khẩu cũ không đúng!'
@@ -366,9 +331,4 @@ public function doiMatKhau(doiMatKhauKhachHangRequest $request){
             }
         }
     }
-
 }
-
-
-}
-

@@ -12,6 +12,9 @@ use App\Http\Requests\QuanAnLoginRequest;
 use App\Http\Requests\QuanAnThemMoiRequest;
 use App\Http\Requests\QuanAnUpdateRequest;
 use App\Http\Requests\QuanAnXoaRequest;
+use App\Models\ChiTietDanhMucQuanAn;
+use App\Models\DanhMuc;
+use App\Models\MonAn;
 use App\Models\QuanAn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -192,5 +195,257 @@ class QuanAnController extends Controller
                 'message' => 'Quán ăn này đã được kích hoạt trước đó!'
             ]);
         }
+    }
+
+    public function getDataDanhMuc()
+    {
+        $user = Auth::guard('sanctum')->user();
+        $data = DanhMuc::join('chi_tiet_danh_muc_quan_ans', 'danh_mucs.id', 'chi_tiet_danh_muc_quan_ans.id_danh_muc')
+            ->join('quan_ans', 'chi_tiet_danh_muc_quan_ans.id_quan_an', 'quan_ans.id')
+            ->select('danh_mucs.*', 'chi_tiet_danh_muc_quan_ans.id_quan_an', 'quan_ans.ten_quan_an')
+            ->where('chi_tiet_danh_muc_quan_ans.id_quan_an', $user->id)
+            ->get();
+
+        return response()->json([
+            'data'      => $data
+        ]);
+    }
+    public function createDanhMuc(Request $request)
+    {
+        $user = Auth::guard('sanctum')->user();
+        $danhMuc = DanhMuc::create([
+            'ten_danh_muc'      => $request->ten_danh_muc,
+            'slug_danh_muc'     => $request->slug_danh_muc,
+            'tinh_trang'        => $request->tinh_trang,
+            'id_danh_muc_cha'   => $request->id_danh_muc_cha,
+            'hinh_anh'          => $request->hinh_anh,
+        ]);
+        ChiTietDanhMucQuanAn::create([
+            'id_danh_muc' => $danhMuc->id,
+            'id_quan_an'  => $user->id
+        ]);
+        return response()->json([
+            'status' => 1,
+            'message' => 'Thêm danh mục món ăn thành công'
+        ]);
+    }
+
+    public function updateDanhMuc(Request $request)
+    {
+        $user = Auth::guard('sanctum')->user();
+        if (!$user || !$user->id) {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Bạn cần đăng nhập để cập nhật danh mục!'
+            ]);
+        }
+        $danhMuc = DanhMuc::find($request->id);
+        if (!$danhMuc) {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Danh mục không tồn tại!'
+            ]);
+        }
+        $check = ChiTietDanhMucQuanAn::where('id_danh_muc', $request->id)
+            ->where('id_quan_an', $user->id)
+            ->first();
+        if (!$check) {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Bạn không có quyền cập nhật danh mục này!'
+            ]);
+        }
+        $danhMuc->update([
+            'ten_danh_muc'      => $request->ten_danh_muc,
+            'slug_danh_muc'     => $request->slug_danh_muc,
+            'tinh_trang'        => $request->tinh_trang,
+            'id_danh_muc_cha'   => $request->id_danh_muc_cha,
+            'hinh_anh'          => $request->hinh_anh,
+        ]);
+
+        return response()->json([
+            'status' => 1,
+            'message' => 'Cập nhật danh mục món ăn thành công',
+        ]);
+    }
+    public function deleteDanhMuc(Request $request)
+    {
+        $user = Auth::guard('sanctum')->user();
+        if (!$user || !$user->id) {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Bạn cần đăng nhập để xóa danh mục!'
+            ]);
+        }
+        $danhMuc = DanhMuc::find($request->id);
+        $check = ChiTietDanhMucQuanAn::where('id_danh_muc', $request->id)
+            ->where('id_quan_an', $user->id)
+            ->first();
+        if ($check) {
+            $danhMuc->delete();
+            $check->delete();
+            return response()->json([
+                'status' => 1,
+                'message' => 'Xóa danh mục món ăn thành công'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Bạn không có quyền xóa danh mục này!'
+            ]);
+        }
+    }
+    public function doiTrangThaiDanhMuc(Request $request)
+    {
+        $user = Auth::guard('sanctum')->user();
+        if (!$user || !$user->id) {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Bạn cần đăng nhập để xóa danh mục!'
+            ]);
+        }
+        $data = DanhMuc::find($request->id);
+        $check = ChiTietDanhMucQuanAn::where('id_danh_muc', $request->id)
+            ->where('id_quan_an', $user->id)
+            ->first();
+        if ($check) {
+            $data->tinh_trang = $data->tinh_trang == 1 ? 0 : 1;
+            $data->save();
+        } else {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Bạn không có quyền thay đổi trạng thái danh mục này!'
+            ]);
+        }
+        return response()->json([
+            'status' => 1,
+            'message' => 'Cập nhật tình trạng danh mục món ăn thành công'
+        ]);
+    }
+    public function getDataMonAn()
+    {
+        $user = Auth::guard('sanctum')->user();
+        $data = MonAn::join('quan_ans', 'mon_ans.id_quan_an', 'quan_ans.id')
+            ->join('danh_mucs', 'mon_ans.id_danh_muc', 'danh_mucs.id')
+            ->select('mon_ans.*', 'quan_ans.ten_quan_an', 'danh_mucs.ten_danh_muc')
+            ->where('id_quan_an', $user->id)
+            ->get();
+        return response()->json([
+            'data' => $data
+        ]);
+    }
+    // ThemMoiMonAnRequest
+    public function createMonAn(Request $request)
+    {
+        $user = Auth::guard('sanctum')->user();
+        MonAn::create([
+            'ten_mon_an'    => $request->ten_mon_an,
+            'slug_mon_an'   => $request->slug_mon_an,
+            'gia_ban'       => $request->gia_ban,
+            'gia_khuyen_mai' => $request->gia_khuyen_mai,
+            'id_quan_an'    => $user->id,
+            'tinh_trang'    => $request->tinh_trang,
+            'hinh_anh'      => $request->hinh_anh,
+            'is_combo'      => 0,
+            'id_danh_muc'   => $request->id_danh_muc,
+        ]);
+        return response()->json([
+            'status' => 1,
+            'message' => 'Thêm món ăn thành công!',
+        ]);
+    }
+    // CapNhatMonAnRequest
+    public function updateMonAn(Request $request)
+    {
+        $user = Auth::guard('sanctum')->user();
+        if (!$user || !$user->id) {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Bạn cần đăng nhập để cập nhật món ăn!'
+            ]);
+        }
+
+        $monAn = MonAn::where('id', $request->id)
+            ->where('id_quan_an', $user->id)
+            ->first();
+
+        if (!$monAn) {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Món ăn không tồn tại hoặc bạn không có quyền cập nhật!'
+            ]);
+        }
+
+        $monAn->update([
+            'ten_mon_an'        => $request->ten_mon_an,
+            'slug_mon_an'       => $request->slug_mon_an,
+            'gia_ban'           => $request->gia_ban,
+            'gia_khuyen_mai'    => $request->gia_khuyen_mai,
+            'id_quan_an'        => $user->id,
+            'tinh_trang'        => $request->tinh_trang,
+            'hinh_anh'          => $request->hinh_anh,
+            'is_combo'          => $request->is_combo,
+            'id_danh_muc'       => $request->id_danh_muc,
+        ]);
+
+        return response()->json([
+            'status' => 1,
+            'message' => 'Cập nhật món ăn thành công!',
+        ]);
+    }
+
+    // XoaMonAnRequest
+    public function deleteMonAn(Request $request)
+    {
+        $user = Auth::guard('sanctum')->user();
+        if (!$user || !$user->id) {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Bạn cần đăng nhập để xóa món ăn!'
+            ]);
+        }
+        $check = MonAn::where('id', $request->id)
+            ->where('id_quan_an', $user->id)
+            ->first();
+
+        if (!$check) {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Món ăn không tồn tại hoặc bạn không có quyền xóa!'
+            ]);
+        }
+        $check->delete();
+
+        return response()->json([
+            'status' => 1,
+            'message' => 'Xóa món ăn thành công!'
+        ]);
+    }
+    // DoiTrangThaiMonAnRequest
+    public function doiTrangThaiMonAn(Request $request)
+    {
+        $user = Auth::guard('sanctum')->user();
+        if (!$user || !$user->id) {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Bạn cần đăng nhập để thay đổi trạng thái món ăn!'
+            ]);
+        }
+        $check = MonAn::where('id', $request->id)
+            ->where('id_quan_an', $user->id)
+            ->first();
+        if (!$check) {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Món ăn không tồn tại hoặc bạn không có quyền thay đổi trạng thái!'
+            ]);
+        }
+        $data = MonAn::find($request->id);
+        $data->tinh_trang = $data->tinh_trang == 1 ? 0 : 1;
+        $data->save();
+        return response()->json([
+            'status' => 1,
+            'message' => 'Cập nhật tình trạng món ăn thành công!',
+        ]);
     }
 }

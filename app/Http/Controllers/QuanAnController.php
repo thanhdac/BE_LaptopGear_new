@@ -70,6 +70,15 @@ class QuanAnController extends Controller
         ]);
     }
 
+
+    public function getDataOpen()
+    {
+        $data = QuanAn::where('tinh_trang', 1)->get();
+        return response()->json([
+            'data' => $data
+        ]);
+    }
+
     public function store(QuanAnThemMoiRequest $request)
     {
         $check = Auth::guard('sanctum')->user();

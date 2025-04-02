@@ -159,3 +159,11 @@ Route::post('/quan-an/mon-an/create', [QuanAnController::class, 'createMonAn']);
 Route::post('/quan-an/mon-an/update', [QuanAnController::class, 'updateMonAn']);
 Route::post('/quan-an/mon-an/delete', [QuanAnController::class, 'deleteMonAn']);
 Route::post('/quan-an/mon-an/change', [QuanAnController::class, 'doiTrangThaiMonAn']);
+
+// BTVN
+Route::get('/quan-an/voucher/data', [VoucherController::class, 'getDataQuanAnVoucher']);
+Route::post('/quan-an/voucher/create', [VoucherController::class, 'createQuanAnVoucher']);
+Route::post('/quan-an/voucher/update', [VoucherController::class, 'updateQuanAnVoucher']);
+Route::post('/quan-an/voucher/delete', [VoucherController::class, 'deleteQuanAnVoucher']);
+Route::post('/quan-an/voucher/change', [VoucherController::class, 'doiTrangThaiQuanAnVoucher']);
+Route::get('/khach-hang/quan-an/data-open', [QuanAnController::class, 'getDataOpen']);

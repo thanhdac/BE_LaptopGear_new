@@ -12,6 +12,7 @@ class Voucher extends Model
         'thoi_gian_bat_dau',
         'thoi_gian_ket_thuc',
         'loai_giam',
+        'id_quan_an',
         'so_giam_gia',
         'so_tien_toi_da',
         'don_hang_toi_thieu',

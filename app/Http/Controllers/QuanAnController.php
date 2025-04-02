@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CapNhatDanhMucRequest;
 use App\Http\Requests\changeActiveQuanAnrequest;
 use App\Http\Requests\ChangeStatusQuanAnrequest;
+use App\Http\Requests\crateDanhMucQuanAnRequest;
+use App\Http\Requests\createMonAnRequest;
+use App\Http\Requests\deleteMonAnRequest;
 use App\Http\Requests\QuanAnCapNhatRequest;
 use App\Http\Requests\QuanAnDangKyRequest;
 use App\Http\Requests\QuanAnDeleteRequest;
@@ -12,6 +16,9 @@ use App\Http\Requests\QuanAnLoginRequest;
 use App\Http\Requests\QuanAnThemMoiRequest;
 use App\Http\Requests\QuanAnUpdateRequest;
 use App\Http\Requests\QuanAnXoaRequest;
+use App\Http\Requests\ThemMoiDanhMucRequest;
+use App\Http\Requests\updateMonAnRequest;
+use App\Http\Requests\XoaDanhMucRequest;
 use App\Models\ChiTietDanhMucQuanAn;
 use App\Models\DanhMuc;
 use App\Models\MonAn;
@@ -210,7 +217,7 @@ class QuanAnController extends Controller
             'data'      => $data
         ]);
     }
-    public function createDanhMuc(Request $request)
+    public function createDanhMuc(ThemMoiDanhMucRequest $request)
     {
         $user = Auth::guard('sanctum')->user();
         $danhMuc = DanhMuc::create([
@@ -230,7 +237,7 @@ class QuanAnController extends Controller
         ]);
     }
 
-    public function updateDanhMuc(Request $request)
+    public function updateDanhMuc(CapNhatDanhMucRequest $request)
     {
         $user = Auth::guard('sanctum')->user();
         if (!$user || !$user->id) {
@@ -268,7 +275,7 @@ class QuanAnController extends Controller
             'message' => 'Cập nhật danh mục món ăn thành công',
         ]);
     }
-    public function deleteDanhMuc(Request $request)
+    public function deleteDanhMuc(XoaDanhMucRequest $request)
     {
         $user = Auth::guard('sanctum')->user();
         if (!$user || !$user->id) {
@@ -295,7 +302,7 @@ class QuanAnController extends Controller
             ]);
         }
     }
-    public function doiTrangThaiDanhMuc(Request $request)
+    public function doiTrangThaiDanhMuc(XoaDanhMucRequest $request)
     {
         $user = Auth::guard('sanctum')->user();
         if (!$user || !$user->id) {
@@ -334,8 +341,7 @@ class QuanAnController extends Controller
             'data' => $data
         ]);
     }
-    // ThemMoiMonAnRequest
-    public function createMonAn(Request $request)
+    public function createMonAn(createMonAnRequest $request)
     {
         $user = Auth::guard('sanctum')->user();
         MonAn::create([
@@ -354,8 +360,7 @@ class QuanAnController extends Controller
             'message' => 'Thêm món ăn thành công!',
         ]);
     }
-    // CapNhatMonAnRequest
-    public function updateMonAn(Request $request)
+    public function updateMonAn(updateMonAnRequest $request)
     {
         $user = Auth::guard('sanctum')->user();
         if (!$user || !$user->id) {
@@ -395,7 +400,7 @@ class QuanAnController extends Controller
     }
 
     // XoaMonAnRequest
-    public function deleteMonAn(Request $request)
+    public function deleteMonAn(deleteMonAnRequest $request)
     {
         $user = Auth::guard('sanctum')->user();
         if (!$user || !$user->id) {
@@ -422,7 +427,7 @@ class QuanAnController extends Controller
         ]);
     }
     // DoiTrangThaiMonAnRequest
-    public function doiTrangThaiMonAn(Request $request)
+    public function doiTrangThaiMonAn(deleteMonAnRequest $request)
     {
         $user = Auth::guard('sanctum')->user();
         if (!$user || !$user->id) {

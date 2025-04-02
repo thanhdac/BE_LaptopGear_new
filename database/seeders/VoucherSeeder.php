@@ -28,6 +28,7 @@ class VoucherSeeder extends Seeder
                 'so_tien_toi_da' => 50000,
                 'don_hang_toi_thieu' => 150000,
                 'tinh_trang' => 1,
+                'id_quan_an'=>2
             ],
             [
                 'ma_code' => 'SUMMER2025',
@@ -38,6 +39,7 @@ class VoucherSeeder extends Seeder
                 'so_tien_toi_da' => 100000,
                 'don_hang_toi_thieu' => 300000,
                 'tinh_trang' => 1,
+                'id_quan_an'=>2
             ],
             [
                 'ma_code' => 'NEWYEAR2025',
@@ -48,6 +50,7 @@ class VoucherSeeder extends Seeder
                 'so_tien_toi_da' => 100000,
                 'don_hang_toi_thieu' => 500000,
                 'tinh_trang' => 1,
+                'id_quan_an'=>2
             ],
             [
                 'ma_code' => 'WELCOME2025',
@@ -58,6 +61,7 @@ class VoucherSeeder extends Seeder
                 'so_tien_toi_da' => 50000,
                 'don_hang_toi_thieu' => 100000,
                 'tinh_trang' => 1,
+                'id_quan_an'=>3
             ],
             [
                 'ma_code' => 'FLASH2025',
@@ -68,6 +72,7 @@ class VoucherSeeder extends Seeder
                 'so_tien_toi_da' => 30000,
                 'don_hang_toi_thieu' => 50000,
                 'tinh_trang' => 1,
+                'id_quan_an'=>3
             ],
             [
                 'ma_code' => 'SPECIAL2025',
@@ -78,6 +83,7 @@ class VoucherSeeder extends Seeder
                 'so_tien_toi_da' => 200000,
                 'don_hang_toi_thieu' => 400000,
                 'tinh_trang' => 0,
+                'id_quan_an'=>3
             ],
             [
                 'ma_code' => 'EASTER2025',
@@ -88,6 +94,7 @@ class VoucherSeeder extends Seeder
                 'so_tien_toi_da' => 70000,
                 'don_hang_toi_thieu' => 200000,
                 'tinh_trang' => 1,
+                'id_quan_an'=>4
             ],
             [
                 'ma_code' => 'LABORDAY2025',
@@ -98,6 +105,7 @@ class VoucherSeeder extends Seeder
                 'so_tien_toi_da' => 120000,
                 'don_hang_toi_thieu' => 350000,
                 'tinh_trang' => 1,
+                'id_quan_an'=>4
             ],
             [
                 'ma_code' => 'MAYSALE2025',
@@ -108,6 +116,7 @@ class VoucherSeeder extends Seeder
                 'so_tien_toi_da' => 60000,
                 'don_hang_toi_thieu' => 180000,
                 'tinh_trang' => 1,
+                'id_quan_an'=>4
             ],
             [
                 'ma_code' => 'JUNEPROMO2025',
@@ -118,6 +127,7 @@ class VoucherSeeder extends Seeder
                 'so_tien_toi_da' => 250000,
                 'don_hang_toi_thieu' => 600000,
                 'tinh_trang' => 1,
+                'id_quan_an'=>5
             ],
             [
                 'ma_code' => 'JULYDISCOUNT2025',
@@ -128,6 +138,7 @@ class VoucherSeeder extends Seeder
                 'so_tien_toi_da' => 90000,
                 'don_hang_toi_thieu' => 250000,
                 'tinh_trang' => 1,
+                'id_quan_an'=>5
             ],
             [
                 'ma_code' => 'BACKTOSCHOOL2025',
@@ -138,6 +149,7 @@ class VoucherSeeder extends Seeder
                 'so_tien_toi_da' => 150000,
                 'don_hang_toi_thieu' => 450000,
                 'tinh_trang' => 1,
+                'id_quan_an'=>5
             ],
             [
                 'ma_code' => 'AUTUMN2025',
@@ -148,6 +160,7 @@ class VoucherSeeder extends Seeder
                 'so_tien_toi_da' => 75000,
                 'don_hang_toi_thieu' => 300000,
                 'tinh_trang' => 1,
+                'id_quan_an'=>6
             ],
             [
                 'ma_code' => 'HALLOWEEN2025',
@@ -158,6 +171,7 @@ class VoucherSeeder extends Seeder
                 'so_tien_toi_da' => 220000,
                 'don_hang_toi_thieu' => 500000,
                 'tinh_trang' => 1,
+                'id_quan_an'=>6
             ],
             [
                 'ma_code' => 'BLACKFRIDAY2025',
@@ -168,6 +182,7 @@ class VoucherSeeder extends Seeder
                 'so_tien_toi_da' => 150000,
                 'don_hang_toi_thieu' => 700000,
                 'tinh_trang' => 1,
+                'id_quan_an'=>6
             ],
         ]);
     }

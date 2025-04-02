@@ -23,6 +23,6 @@ class NhanVienMiddleware
         }
         return response()->json([
             'message' => 'Bạn cần đăng nhập để thực hiện chức năng này'
-        ], 401);
+        ]);
     }
 }

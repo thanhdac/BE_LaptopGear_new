@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('cccd')->nullable();
-            $table->integer('id_dia_chi')->default(0);
+            $table->integer('id_dia_chi')->default(1);
             $table->integer('is_active')->default(0);
             $table->integer('is_open')->default(0);
             $table->integer('tong_tien')->default(0);

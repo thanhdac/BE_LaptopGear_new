@@ -55,9 +55,12 @@ class ShipperController extends Controller
             ]);
         }
     }
-    public function getData(Request $request)
+    public function getData()
     {
-        $shipper = Shipper::all();
+        $shipper = Shipper::join('dia_chis', 'dia_chis.id','shippers.id_dia_chi')
+                            ->join('chi_tiet_dia_chis', 'chi_tiet_dia_chis.id','shippers.id_dia_chi')
+                            ->select('shippers.*', 'dia_chis.dia_chi')
+                            ->get();
         return response()->json([
             'data' => $shipper
         ]);
@@ -65,12 +68,13 @@ class ShipperController extends Controller
     public function store(ThemMoiShipperRequest $request)
     {
         Shipper::create([
-            'ho_va_ten' => $request->ho_va_ten,
-            'email' => $request->email,
-            'password'  => $request->password,
-            'cccd'  => $request->cccd,
+            'ho_va_ten'     => $request->ho_va_ten,
+            'email'         => $request->email,
+            'password'      => $request->password,
+            'cccd'          => $request->cccd,
             'so_dien_thoai' => $request->so_dien_thoai,
-            'tinh_trang'    => $request->tinh_trang,
+            'is_active'    => $request->is_active,
+            'is_open '   => $request->is_open,
 
         ]);
         return response()->json([
@@ -91,11 +95,13 @@ class ShipperController extends Controller
     public function update(CapNhatShipperRequest $request)
     {
         Shipper::where('id', $request->id)->update([
-                'ho_va_ten' => $request->ho_va_ten,
-                'email' => $request->email,
-                'password'  => $request->password,
-                'cccd'  => $request->cccd,
+                'ho_va_ten'     => $request->ho_va_ten,
+                'email'         => $request->email,
+                'password'      => $request->password,
+                'cccd'          => $request->cccd,
                 'so_dien_thoai' => $request->so_dien_thoai,
+                'is_active'     => $request->is_active,
+                'is_open'       => $request->is_open,
 
         ]);
         return response()->json([
@@ -313,7 +319,7 @@ class ShipperController extends Controller
                 $shipper = Shipper::find($user->id);
                 $shipper->tong_tien = $shipper->tong_tien + $donHang->phi_ship * 0.8;
                 $shipper->save();
-                
+
                 return response()->json([
                     'status'    => 1,
                     'message'   => 'Hoàn thành đơn hàng thành công!'

@@ -19,6 +19,14 @@ class TinhThanhController extends Controller
         ]);
     }
 
+    public function getDataOpen()
+    {
+        $data = TinhThanh::where('tinh_trang', 1)->get();
+        return response()->json([
+            'data' => $data
+        ]);
+    }
+
     public function store(createTinhThanhRequest $request)
     {
         $tinhThanh = TinhThanh::create([

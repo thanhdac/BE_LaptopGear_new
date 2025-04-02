@@ -68,6 +68,7 @@ Route::post('/admin/shipper/active', [ShipperController::class, 'active'])->midd
 
 // Tỉnh Thành
 Route::get('/admin/tinh-thanh/data', [TinhThanhController::class, 'getData'])->middleware('nhanVienMiddle');
+Route::get('/admin/tinh-thanh/data-open', [TinhThanhController::class, 'getDataOpen']);
 Route::post('/admin/tinh-thanh/create', [TinhThanhController::class, 'store'])->middleware('nhanVienMiddle');
 Route::post('/admin/tinh-thanh/delete', [TinhThanhController::class, 'destroy'])->middleware('nhanVienMiddle');
 Route::post('/admin/tinh-thanh/update', [TinhThanhController::class, 'update'])->middleware('nhanVienMiddle');
@@ -75,6 +76,7 @@ Route::post('/admin/tinh-thanh/change-status', [TinhThanhController::class, 'cha
 
 // Quận Huyện
 Route::get('/admin/quan-huyen/data', [QuanHuyenController::class, 'getData'])->middleware('nhanVienMiddle');
+Route::get('/admin/quan-huyen/data-open', [QuanHuyenController::class, 'getDataOpen']);
 Route::post('/admin/quan-huyen/create', [QuanHuyenController::class, 'store'])->middleware('nhanVienMiddle');
 Route::post('/admin/quan-huyen/delete', [QuanHuyenController::class, 'destroy'])->middleware('nhanVienMiddle');
 Route::post('/admin/quan-huyen/update', [QuanHuyenController::class, 'update'])->middleware('nhanVienMiddle');

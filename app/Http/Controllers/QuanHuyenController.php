@@ -20,6 +20,14 @@ class QuanHuyenController extends Controller
         ]);
     }
 
+    public function getDataOpen()
+    {
+        $data = QuanHuyen::where('tinh_trang', 1)->get();
+        return response()->json([
+            'data' => $data
+        ]);
+    }
+
     public function store(createQuanHuyenRequest $request)
     {
         $tinhThanh = QuanHuyen::create([

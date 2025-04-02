@@ -14,9 +14,9 @@ class updatePasswordKhachHangRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'old_password' => 'required|min:6|max:20',
-            'password' => 'required|min:6|max:20',
-            're_password' => 'required|min:6|max:20|same:password',
+            'old_password'  => 'required|min:6|max:20',
+            'password'      => 'required|min:6|max:20',
+            're_password'   => 'required|min:6|max:20|same:password',
         ];
     }
 

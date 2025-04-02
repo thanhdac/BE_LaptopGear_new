@@ -15,8 +15,8 @@ class updateProfileKhachHangRequest extends FormRequest
     {
         return [
             'ho_va_ten'     => 'required|min:10|max:50',
-            'so_dien_thoai' => 'required|digits:10|unique:khach_hangs, so_dien_thoai,' . $this->id,
-            'email'         => 'required|email|unique:khach_hangs, email,' . $this->id,
+            'so_dien_thoai' => 'required|digits:10|unique:khach_hangs,so_dien_thoai,' . $this->id,
+            'email'         => 'required|email|unique:khach_hangs,email,' . $this->id,
             'ngay_sinh'     => 'required|date',
         ];
     }

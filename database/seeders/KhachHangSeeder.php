@@ -19,7 +19,7 @@ class KhachHangSeeder extends Seeder
         DB::table('khach_hangs')->insert([
             [
                 'ho_va_ten'     => 'Võ Văn Việt',
-                'so_dien_thoai' => '0123456789',
+                'so_dien_thoai' => '0123456780',
                 'email'         => 'voviet@gmail.com',
                 'password'      => '123456',
                 'cccd'          => '123456789012',

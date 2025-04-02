@@ -272,28 +272,27 @@ class KhachHangController extends Controller
     public function updateDiaChi(updateDiaChiKhachHangRequest $request)
     {
         $user = Auth::guard('sanctum')->user();
-        $chiTietDiaChi = ChiTietDiaChi::where('id_khach_hang', $user->id)
-            ->where('id_dia_chi', $request->id)
-            ->first();
-        DiaChi::where('id', $chiTietDiaChi->id_dia_chi)->update([
+        $chiTietDiaChi = ChiTietDiaChi::find($user->id)->where('id_dia_chi', $request->id)->first();
+
+        DiaChi::where('id', $chiTietDiaChi->id)->update([
             'dia_chi'        => $request->dia_chi,
             'id_quan_huyen'  => $request->id_quan_huyen,
         ]);
-
+        ChiTietDiaChi::where('id', $chiTietDiaChi->id)->update([
+            'ten_nguoi_nhan' => $request->ten_nguoi_nhan,
+            'so_dien_thoai'  => $request->so_dien_thoai,
+        ]);
         return response()->json([
             'status'    => 1,
             'message'   => 'Cập nhật địa chỉ thành công!',
-            'data'      => [
-                'dia_chi'        => $request->dia_chi,
-                'id_quan_huyen'  => $request->id_quan_huyen,
-                'id_khach_hang'  => $user->id
-            ]
         ]);
     }
 
     public function destroyDiaChi(deleteDiaChiKhachHangRequest $request)
     {
-        $dia_chi = DiaChi::find($request->id)->delete();
+        $dia_chi = DiaChi::find($request->id)->first();
+        ChiTietDiaChi::where('id_dia_chi', $dia_chi->id)->delete();
+        $dia_chi->delete();
         return response()->json([
             'status'    => 1,
             'message'   => 'Xóa Địa Chỉ thành công!',

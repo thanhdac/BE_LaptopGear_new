@@ -17,6 +17,8 @@ class updateDiaChiKhachHangRequest extends FormRequest
             'id'                => 'required|exists:chi_tiet_dia_chis,id',
             'dia_chi'           => 'required|min:10|max:255',
             'id_quan_huyen'     => 'required|exists:quan_huyens,id',
+            'ten_nguoi_nhan'    => 'required|min:3|max:255',
+            'so_dien_thoai'     => 'required|digits:10',
         ];
     }
 
@@ -30,6 +32,11 @@ class updateDiaChiKhachHangRequest extends FormRequest
             'dia_chi.max'               => 'Địa chỉ không được vượt quá 255 ký tự',
             'id_quan_huyen.required'    => 'Quận huyện không được để trống',
             'id_quan_huyen.exists'      => 'Quận huyện không tồn tại',
+            'ten_nguoi_nhan.required'   => 'Họ và tên không được để trống',
+            'ten_nguoi_nhan.min'        => 'Họ và tên phải có ít nhất 3 ký tự',
+            'ten_nguoi_nhan.max'        => 'Họ và tên không được vượt quá 255 ký tự',
+            'so_dien_thoai.required'    => 'Số điện thoại không được để trống',
+            'so_dien_thoai.digits'      => 'Số điện thoại phải có 10 chữ số',
         ];
     }
 }

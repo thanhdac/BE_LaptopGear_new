@@ -19,8 +19,6 @@ class createChucVuRequest extends FormRequest
     {
         return [
             'ten_chuc_vu' => 'required|string|max:255',
-            'slug_chuc_vu' => 'required|string|max:255',
-            'tinh_trang' => 'required|integer',
         ];
     }
     public function messages(): array
@@ -29,11 +27,6 @@ class createChucVuRequest extends FormRequest
             'ten_chuc_vu.required' => 'Tên chức vụ không được để trống',
             'ten_chuc_vu.string' => 'Tên chức vụ phải là chuỗi',
             'ten_chuc_vu.max' => 'Tên chức vụ không được vượt quá 255 ký tự',
-            'slug_chuc_vu.required' => 'Slug chức vụ không được để trống',
-            'slug_chuc_vu.string' => 'Slug chức vụ phải là chuỗi',
-            'slug_chuc_vu.max' => 'Slug chức vụ không được vượt quá 255 ký tự',
-            'tinh_trang.required' => 'Tình trạng không được để trống',
-            'tinh_trang.integer' => 'Tình trạng phải là số nguyên',
         ];
     }
 }

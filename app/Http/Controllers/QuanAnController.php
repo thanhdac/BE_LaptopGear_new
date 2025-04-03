@@ -462,4 +462,21 @@ class QuanAnController extends Controller
             'message' => 'Cập nhật tình trạng món ăn thành công!',
         ]);
     }
+
+    public function dangKy(Request $request)
+    {
+        QuanAn::create([
+            'email'                 => $request->email,
+            'password'              => $request->password,
+            'ma_so_thue'            => $request->ma_so_thue,
+            'ten_quan_an'           => $request->ten_quan_an,
+            'gio_mo_cua'            => $request->gio_mo_cua,
+            'gio_dong_cua'          => $request->gio_dong_cua,
+            'so_dien_thoai'         => $request->so_dien_thoai,
+        ]);
+        return response()->json([
+            'status'    => 1,
+            'message'   => 'Đăng ký quán ăn thành công!',
+        ]);
+    }
 }

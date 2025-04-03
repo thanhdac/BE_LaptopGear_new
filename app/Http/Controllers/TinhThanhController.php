@@ -36,6 +36,7 @@ class TinhThanhController extends Controller
             'tinh_trang'        => $request->tinh_trang
         ]);
         return response()->json([
+            'status'  => 1,
             'message' => 'Thêm ' . $request->ten_tinh_thanh . ' thành công'
         ]);
     }
@@ -49,6 +50,7 @@ class TinhThanhController extends Controller
             'tinh_trang'        => $request->tinh_trang
         ]);
         return response()->json([
+            'status'  => 1,
             'message' => 'Cập nhật ' . $request->ten_tinh_thanh . ' thành công'
         ]);
     }
@@ -57,6 +59,7 @@ class TinhThanhController extends Controller
     {
         $tinhThanh = TinhThanh::where('id', $request->id)->delete();
         return response()->json([
+            'status'  => 1,
             'message' => 'Xóa ' . $request->ten_tinh_thanh . ' thành công'
         ]);
     }
@@ -72,6 +75,7 @@ class TinhThanhController extends Controller
             $tinhThanh->save();
         }
         return response()->json([
+            'status'  => 1,
             'message' => 'Cập nhật trạng thái ' . $request->ten_tinh_thanh . ' thành công'
         ]);
     }

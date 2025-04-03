@@ -90,15 +90,16 @@ Route::post('/admin/mon-an/update', [MonAnController::class, 'update'])->middlew
 Route::post('/admin/mon-an/change-status', [MonAnController::class, 'changeStatus'])->middleware('nhanVienMiddle');
 
 // Nhân Viên
-Route::get('/admin/tai-khoan/data', [NhanVienController::class, 'getData'])->middleware('nhanVienMiddle');
-Route::post('/admin/tai-khoan/create', [NhanVienController::class, 'store'])->middleware('nhanVienMiddle');
-Route::post('/admin/tai-khoan/delete', [NhanVienController::class, 'destroy'])->middleware('nhanVienMiddle');
-Route::post('/admin/tai-khoan/update', [NhanVienController::class, 'update'])->middleware('nhanVienMiddle');
-Route::post('/admin/tai-khoan/change-status', [NhanVienController::class, 'changeStatus'])->middleware('nhanVienMiddle');
+Route::get('/admin/nhan-vien/data', [NhanVienController::class, 'getData'])->middleware('nhanVienMiddle');
+Route::post('/admin/nhan-vien/create', [NhanVienController::class, 'store'])->middleware('nhanVienMiddle');
+Route::post('/admin/nhan-vien/delete', [NhanVienController::class, 'destroy'])->middleware('nhanVienMiddle');
+Route::post('/admin/nhan-vien/update', [NhanVienController::class, 'update'])->middleware('nhanVienMiddle');
+Route::post('/admin/nhan-vien/change-status', [NhanVienController::class, 'changeStatus'])->middleware('nhanVienMiddle');
 
 //ACTOR QUÁN ĂN
 Route::get('/quan-an/check-token', [QuanAnController::class, 'checkTokenQuanAn']);
 Route::post('/quan-an/dang-nhap', [QuanAnController::class, 'Login']);
+Route::post('/quan-an/dang-ky', [QuanAnController::class, 'dangKy']);
 
 
 
@@ -136,6 +137,13 @@ Route::post('/shipper/hoan-thanh-don', [ShipperController::class, 'hoanThanhDonH
 
 // CHỨC NĂNG
 Route::get('/admin/chuc-nang/data', [ChucNangController::class, 'getData'])->middleware('nhanVienMiddle');
+
+// CHỨC VỤ
+Route::get('/admin/chuc-vu/data', [ChucVuController::class, 'getData'])->middleware('nhanVienMiddle');
+Route::get('/admin/chuc-vu/create', [ChucVuController::class, 'store'])->middleware('nhanVienMiddle');
+Route::get('/admin/chuc-vu/update', [ChucVuController::class, 'update'])->middleware('nhanVienMiddle');
+Route::get('/admin/chuc-vu/delete', [ChucVuController::class, 'destroy'])->middleware('nhanVienMiddle');
+
 
 // PHÂN QUYỀN
 Route::get('/admin/phan-quyen/data/{id_chuc_vu}', [PhanQuyenController::class, 'getData'])->middleware('nhanVienMiddle');

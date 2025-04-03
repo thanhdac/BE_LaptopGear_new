@@ -15,9 +15,7 @@ class updateTinhThanhRequest extends FormRequest
     {
         return [
             'id'                => 'required|exists:tinh_thanhs,id',
-            'ten_tinh_thanh'    => 'required|min:10|max:255',
-            'toa_do_x'          => '',
-            'toa_do_y'          => '',
+            'ten_tinh_thanh'    => 'required|min:3|max:255',
             'tinh_trang'        => 'required|boolean'
         ];
     }
@@ -37,8 +35,6 @@ class updateTinhThanhRequest extends FormRequest
         return [
             'id'                => 'Tỉnh thành',
             'ten_tinh_thanh'    => 'Tên tỉnh thành',
-            'toa_do_x'          => 'Tọa độ X',
-            'toa_do_y'          => 'Tọa độ Y',
             'tinh_trang'        => 'Tình trạng'
         ];
     }

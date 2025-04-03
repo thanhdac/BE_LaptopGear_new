@@ -50,7 +50,9 @@ class NhanVienController extends Controller
 
     public function getData()
     {
-        $data = NhanVien::get();
+        $data = NhanVien::join('chuc_vus', 'nhan_viens.id_chuc_vu','chuc_vus.id')
+                        ->select('nhan_viens.*', 'chuc_vus.ten_chuc_vu')
+                        ->get();
         return response()->json([
             'data' => $data
         ]);
@@ -69,6 +71,7 @@ class NhanVienController extends Controller
             'id_chuc_vu'    => $request->id_chuc_vu,
         ]);
         return response()->json([
+            'status'  => 1,
             'message' => 'Thêm ' . $request->ho_va_ten . ' thành công'
         ]);
     }
@@ -86,6 +89,7 @@ class NhanVienController extends Controller
             'id_chuc_vu'    => $request->id_chuc_vu,
         ]);
         return response()->json([
+            'status'  => 1,
             'message' => 'Cập nhật ' . $request->ho_va_ten . ' thành công'
         ]);
     }
@@ -94,6 +98,7 @@ class NhanVienController extends Controller
     {
         $nhanVien = NhanVien::where('id', $request->id)->delete();
         return response()->json([
+            'status'  => 1,
             'message' => 'Xóa ' . $request->ho_va_ten . ' thành công'
         ]);
     }
@@ -109,6 +114,7 @@ class NhanVienController extends Controller
             $nhanVien->save();
         }
         return response()->json([
+            'status'  => 1,
             'message' => 'Cập nhật trạng thái ' . $request->ho_va_ten . ' thành công'
         ]);
     }

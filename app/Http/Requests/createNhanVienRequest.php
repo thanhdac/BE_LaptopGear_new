@@ -16,7 +16,8 @@ class createNhanVienRequest extends FormRequest
         return [
             'email'         => 'required|email|unique:nhan_viens,email',
             'ho_va_ten'     => 'required|min:5|max:255',
-            'password'      => 'required|password',
+            'password'      => 'required|min:3|max:30',
+            're_password'   => 'required|same:password',
             'so_dien_thoai' => 'required|digits:10',
             'dia_chi'       => 'required',
             'ngay_sinh'     => 'required|date',
@@ -28,29 +29,26 @@ class createNhanVienRequest extends FormRequest
     public function messages()
     {
         return [
-            'required'      => ' :attribute không được để trống.',
-            'email'         => ' :attribute không đúng định dạng.',
-            'unique'        => ' :attribute đã tồn tại.',
-            'min'           => ' :attribute không được nhỏ hơn :min ký tự.',
-            'max'           => ' :attribute không được lớn hơn :max ký tự.',
-            'digits'        => ' :attribute phải có :digits số.',
-            'date'          => ' :attribute không đúng định dạng.',
-            'boolean'       => ' :attribute phải là true hoặc false.',
-            'exists'        => ' :attribute không tồn tại.'
-        ];
-    }
-
-    public function attributes()
-    {
-        return [
-            'email'         => 'Email',
-            'ho_va_ten'     => 'Họ và tên',
-            'password'      => 'Mật khẩu',
-            'so_dien_thoai' => 'Số điện thoại',
-            'dia_chi'       => 'Địa chỉ',
-            'ngay_sinh'     => 'Ngày sinh',
-            'tinh_trang'    => 'Tình trạng',
-            'id_chuc_vu'    => 'Chức vụ',
+            'email.required'         => 'Email không được để trống.',
+            'email.email'            => 'Email không đúng định dạng.',
+            'email.unique'           => 'Email đã tồn tại.',
+            'ho_va_ten.required'     => 'Họ và tên không được để trống.',
+            'ho_va_ten.min'          => 'Họ và tên phải có ít nhất :min ký tự.',
+            'ho_va_ten.max'          => 'Họ và tên không được vượt quá :max ký tự.',
+            'password.required'      => 'Mật khẩu không được để trống.',
+            'password.min'           => 'Mật khẩu phải có ít nhất :min ký tự.',
+            'password.max'           => 'Mật khẩu không được vượt quá :max ký tự.',
+            're_password.required'   => 'Xác nhận mật khẩu không được để trống.',
+            're_password.same'       => 'Xác nhận mật khẩu không khớp với mật khẩu.',
+            'so_dien_thoai.required' => 'Số điện thoại không được để trống.',
+            'so_dien_thoai.digits'   => 'Số điện thoại phải có đúng :digits số.',
+            'dia_chi.required'       => 'Địa chỉ không được để trống.',
+            'ngay_sinh.required'     => 'Ngày sinh không được để trống.',
+            'ngay_sinh.date'         => 'Ngày sinh không đúng định dạng.',
+            'tinh_trang.required'    => 'Tình trạng không được để trống.',
+            'tinh_trang.boolean'     => 'Tình trạng phải là true hoặc false.',
+            'id_chuc_vu.required'    => 'Chức vụ không được để trống.',
+            'id_chuc_vu.exists'      => 'Chức vụ không tồn tại trong hệ thống.',
         ];
     }
 }

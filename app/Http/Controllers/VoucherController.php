@@ -157,19 +157,19 @@ class VoucherController extends Controller
             ]);
         } else {
             $data = Voucher::create([
-                'ma_code'    => $request->ma_code,
-                'thoi_gian_bat_dau'  => $request->thoi_gian_bat_dau,
-                'thoi_gian_ket_thuc'    => $request->thoi_gian_ket_thuc,
-                'loai_giam' => $request->loai_giam,
-                'so_giam_gia'      => $request->so_giam_gia,
+                'ma_code'           => $request->ma_code,
+                'id_quan_an'        => $check->id,
+                'thoi_gian_bat_dau' => $request->thoi_gian_bat_dau,
+                'thoi_gian_ket_thuc'=> $request->thoi_gian_ket_thuc,
+                'loai_giam'         => $request->loai_giam,
+                'so_giam_gia'       => $request->so_giam_gia,
                 'so_tien_toi_da'    => $request->so_tien_toi_da,
-                'don_hang_toi_thieu'    => $request->don_hang_toi_thieu,
+                'don_hang_toi_thieu'=> $request->don_hang_toi_thieu,
             ]);
 
             return response()->json([
                 'status'    => 1,
                 'message'   => 'Thêm voucher thành công!',
-                'data'      => $data
             ]);
         }
     }
@@ -209,19 +209,19 @@ class VoucherController extends Controller
             $data = Voucher::find($request->id);
             if ($data) {
                 $data->update([
-                    'ma_code'    => $request->ma_code,
-                    'thoi_gian_bat_dau'  => $request->thoi_gian_bat_dau,
+                    'ma_code'               => $request->ma_code,
+                    'thoi_gian_bat_dau'     => $request->thoi_gian_bat_dau,
                     'thoi_gian_ket_thuc'    => $request->thoi_gian_ket_thuc,
-                    'loai_giam' => $request->loai_giam,
-                    'so_giam_gia'      => $request->so_giam_gia,
-                    'so_tien_toi_da'    => $request->so_tien_toi_da,
+                    'id_quan_an'            => $check->id,
+                    'loai_giam'             => $request->loai_giam,
+                    'so_giam_gia'           => $request->so_giam_gia,
+                    'so_tien_toi_da'        => $request->so_tien_toi_da,
                     'don_hang_toi_thieu'    => $request->don_hang_toi_thieu,
-                    'tinh_trang'    => $request->tinh_trang,
+                    'tinh_trang'            => $request->tinh_trang,
                 ]);
                 return response()->json([
                     'status'    => 1,
                     'message'   => 'Cập nhật Voucher thành công!',
-                    'data'      => $data
                 ]);
             } else {
                 return response()->json([

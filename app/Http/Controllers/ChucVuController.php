@@ -7,6 +7,7 @@ use App\Http\Requests\deleteChucVuRequest;
 use App\Http\Requests\updateChucVuRequest;
 use App\Models\ChucVu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ChucVuController extends Controller
 {
@@ -21,8 +22,7 @@ class ChucVuController extends Controller
     {
         $data = ChucVu::create([
             'ten_chuc_vu' => $request->ten_chuc_vu,
-            'slug_chuc_vu' => $request->slug_chuc_vu,
-            'tinh_trang' => $request->tinh_trang,
+            'slug_chuc_vu' => Str::slug($request->ten_chuc_vu),
         ]);
         return response()->json([
             'status' => true,
@@ -34,8 +34,7 @@ class ChucVuController extends Controller
         $data = ChucVu::where('id',$request->id)
                      ->update([
                         'ten_chuc_vu' => $request->ten_chuc_vu,
-                        'slug_chuc_vu' => $request->slug_chuc_vu,
-                        'tinh_trang' => $request->tinh_trang,
+                        'slug_chuc_vu' => Str::slug($request->ten_chuc_vu),
         ]);
         return response()->json([
             'status' => true,

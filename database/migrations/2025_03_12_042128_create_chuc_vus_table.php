@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('ten_chuc_vu');
             $table->string('slug_chuc_vu');
-            $table->integer('tinh_trang')->default(1);
             $table->timestamps();
         });
     }

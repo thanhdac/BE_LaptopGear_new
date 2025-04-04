@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('don_gia');
             $table->integer('so_luong');
             $table->integer('thanh_tien');
+            $table->longText('ghi_chu')->nullable();
             $table->integer('tinh_trang')->default(0);
             $table->timestamps();
         });

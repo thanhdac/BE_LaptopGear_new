@@ -25,7 +25,6 @@ class CapNhatShipperRequest extends FormRequest
             'id' => 'required|exists:shippers,id',
             'ho_va_ten' => 'required|max:100',
             'email' => 'required|email|unique:shippers,email,' . $this->id,
-            'password' => 'required|min:6|max:30',
             'cccd' => 'required|digits:12|unique:shippers,cccd,' . $this->id,
             'so_dien_thoai' => 'required|digits:10|unique:shippers,so_dien_thoai,' . $this->id,
         ];
@@ -41,9 +40,6 @@ class CapNhatShipperRequest extends FormRequest
             'email.required' => 'Email không được để trống',
             'email.email' => 'Email không đúng định dạng',
             'email.unique' => 'Email đã tồn tại',
-            'password.required' => 'Mật khẩu không được để trống',
-            'password.min' => 'Mật khẩu phải có ít nhất 6 ký tự',
-            'password.max' => 'Mật khẩu không được quá 30 ký tự',
             'cccd.required' => 'CCCD không được để trống',
             'cccd.digits' => 'CCCD không đúng định dạng',
             'cccd.unique' => 'CCCD đã tồn tại',

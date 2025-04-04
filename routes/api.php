@@ -126,6 +126,7 @@ Route::post('/khach-hang/dia-chi/delete', [KhachHangController::class, 'destroyD
 //ACTOR SHIPPER
 Route::get('/shipper/check-token', [ShipperController::class, 'checkTokenShipper']);
 Route::post('/shipper/dang-nhap', [ShipperController::class, 'Login']);
+Route::post('/shipper/dang-ky', [ShipperController::class, 'Register']);
 Route::get('/shipper/data-login', [ShipperController::class, 'dataSP'])->middleware('shipperMiddle');
 Route::post('/shipper/update-profile', [ShipperController::class, 'updateSP'])->middleware('shipperMiddle');
 Route::post('/shipper/update-password', [ShipperController::class, 'updatePassword'])->middleware('shipperMiddle');

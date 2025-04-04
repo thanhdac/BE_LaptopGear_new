@@ -15,6 +15,7 @@ use App\Http\Requests\ThemMoiShipperRequest;
 use App\Http\Requests\updatePasswordShipperRequest;
 use App\Http\Requests\updateProFileShipperRequest;
 use App\Http\Requests\XoaShipperRequest;
+use App\Models\DiaChi;
 use App\Models\DonHang;
 use App\Models\Shipper;
 use Illuminate\Http\Request;
@@ -57,24 +58,29 @@ class ShipperController extends Controller
     }
     public function getData()
     {
-        $shipper = Shipper::join('dia_chis', 'dia_chis.id','shippers.id_dia_chi')
-                            ->join('chi_tiet_dia_chis', 'chi_tiet_dia_chis.id','shippers.id_dia_chi')
-                            ->select('shippers.*', 'dia_chis.dia_chi')
-                            ->get();
+        $shipper = Shipper::join('dia_chis', 'dia_chis.id', 'shippers.id_dia_chi')
+            ->select('shippers.*', 'dia_chis.dia_chi', 'dia_chis.id_quan_huyen')
+            ->get();
         return response()->json([
             'data' => $shipper
         ]);
     }
     public function store(ThemMoiShipperRequest $request)
     {
+        $diaChi = DiaChi::create([
+            'dia_chi' => $request->dia_chi,
+            'id_quan_huyen' => $request->id_quan_huyen,
+        ]);
+
         Shipper::create([
             'ho_va_ten'     => $request->ho_va_ten,
             'email'         => $request->email,
             'password'      => $request->password,
             'cccd'          => $request->cccd,
             'so_dien_thoai' => $request->so_dien_thoai,
-            'is_active'    => $request->is_active,
-            'is_open '   => $request->is_open,
+            'id_dia_chi'    => $diaChi->id,
+            'is_active'     => $request->is_active,
+            'is_open '      => $request->is_open,
 
         ]);
         return response()->json([
@@ -94,14 +100,20 @@ class ShipperController extends Controller
 
     public function update(CapNhatShipperRequest $request)
     {
+        $diaChi = DiaChi::where('id_quan_huyen', $request->id_quan_huyen)->first();
+        $diaChi->update([
+            'dia_chi'       => $request->dia_chi,
+            'id_quan_huyen' => $request->id_quan_huyen,
+        ]);
+
         Shipper::where('id', $request->id)->update([
-                'ho_va_ten'     => $request->ho_va_ten,
-                'email'         => $request->email,
-                'password'      => $request->password,
-                'cccd'          => $request->cccd,
-                'so_dien_thoai' => $request->so_dien_thoai,
-                'is_active'     => $request->is_active,
-                'is_open'       => $request->is_open,
+            'ho_va_ten'     => $request->ho_va_ten,
+            'email'         => $request->email,
+            'cccd'          => $request->cccd,
+            'so_dien_thoai' => $request->so_dien_thoai,
+            'id_dia_chi'    => $diaChi->id,
+            'is_active'     => $request->is_active,
+            'is_open'      => $request->is_open,
 
         ]);
         return response()->json([
@@ -192,21 +204,19 @@ class ShipperController extends Controller
     {
         $user_login = Auth::guard('sanctum')->user();
         if ($user_login) {
-            if($request->old_password == $user_login->password){
+            if ($request->old_password == $user_login->password) {
                 Shipper::where('id', $user_login->id)->update([
                     'password'  => $request->password,
                 ]);
                 return response()->json([
-                'status'    => 1,
-                'message'   => 'Cập nhật mật khẩu thành công!'
-            ]);
-
+                    'status'    => 1,
+                    'message'   => 'Cập nhật mật khẩu thành công!'
+                ]);
             }
             return response()->json([
                 'status'    => 0,
                 'message'   => 'Mật khẩu cũ không đúng!'
             ]);
-
         } else {
             return response()->json([
                 'status'    => 0,
@@ -217,12 +227,12 @@ class ShipperController extends Controller
     public function donHangChuaNhan()
     {
         $data = DonHang::where('tinh_trang', 0)
-        ->whereNull('id_shipper')
-        ->get();
+            ->whereNull('id_shipper')
+            ->get();
 
-            return response()->json([
-                'data'      => $data
-            ]);
+        return response()->json([
+            'data'      => $data
+        ]);
     }
     public function dataDonHangNhan()
     {
@@ -294,24 +304,24 @@ class ShipperController extends Controller
     public function hoanThanhDonHang(Request $request)
     {
         $user = Auth::guard('sanctum')->user();
-        if($user) {
+        if ($user) {
             $donHang = DonHang::find($request->id);
-            if($donHang) {
-                if($donHang->id_shipper !== $user->id) {
+            if ($donHang) {
+                if ($donHang->id_shipper !== $user->id) {
                     return response()->json([
                         'status'    => 0,
                         'message'   => 'Bạn không thể hoàn thành đơn hàng này!'
                     ]);
-                } else if($donHang->tinh_trang == 2) {
+                } else if ($donHang->tinh_trang == 2) {
                     return response()->json([
                         'status'    => 0,
                         'message'   => 'Đơn hàng này đã được giao trước đó!'
                     ]);
                 } else if ($donHang->id_shipper == null) {
-                   return response()->json([
-                       'status'    => 0,
-                       'message'   => 'Đơn hàng chưa được nhận!'
-                   ]);
+                    return response()->json([
+                        'status'    => 0,
+                        'message'   => 'Đơn hàng chưa được nhận!'
+                    ]);
                 }
                 $donHang->tinh_trang    = 2;
                 $donHang->is_thanh_toan = 1;
@@ -331,5 +341,26 @@ class ShipperController extends Controller
                 ]);
             }
         }
+    }
+
+    public function Register(Request $request)
+    {
+        $diaChi = DiaChi::create([
+            'dia_chi'       => $request->dia_chi,
+            'id_quan_huyen' => $request->id_quan_huyen,
+        ]);
+
+        Shipper::create([
+            'ho_va_ten'     => $request->ho_va_ten,
+            'email'         => $request->email,
+            'password'      => $request->password,
+            'cccd'          => $request->cccd,
+            'so_dien_thoai' => $request->so_dien_thoai,
+            'id_dia_chi'    => $diaChi->id,
+        ]);
+        return response()->json([
+            'status'  => 1,
+            'message' => 'Đã thêm mới shipper  ' . $request->ho_va_ten . ' thành công.'
+        ]);
     }
 }

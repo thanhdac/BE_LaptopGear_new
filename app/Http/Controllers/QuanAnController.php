@@ -66,7 +66,10 @@ class QuanAnController extends Controller
 
     public function getData()
     {
-        $data = QuanAn::all();
+        $data = QuanAn::join('dia_chis', 'quan_ans.id_dia_chi', 'dia_chis.id')
+            ->join('quan_huyens', 'dia_chis.id_quan_huyen', 'quan_huyens.id')
+            ->select('quan_ans.*', 'dia_chis.dia_chi', 'dia_chis.id_quan_huyen')
+            ->get();
         return response()->json([
             'data' => $data
         ]);
@@ -83,89 +86,73 @@ class QuanAnController extends Controller
 
     public function store(QuanAnThemMoiRequest $request)
     {
-        $check = Auth::guard('sanctum')->user();
-        if (!$check) {
-            return response()->json([
-                'status'    => 0,
-                'message'   => 'Bạn cần đăng nhập hệ thống!'
-            ]);
-        } else {
-            $data = QuanAn::create([
-                'email'                 => $request->email,
-                'password'              => $request->password,
-                'ma_so_thue'            => $request->ma_so_thue,
-                'ten_quan_an'           => $request->ten_quan_an,
-                'gio_mo_cua'            => $request->gio_mo_cua,
-                'gio_dong_cua'          => $request->gio_dong_cua,
-                'id_dia_chi'            => $request->id_dia_chi,
-                'hinh_anh'              => $request->hinh_anh,
-                'so_dien_thoai'         => $request->so_dien_thoai,
-            ]);
-            return response()->json([
-                'status'    => 1,
-                'message'   => 'Thêm quán ăn thành công!',
-                'data'      => $data
-            ]);
-        }
+        $diaChi = DiaChi::create([
+            'dia_chi'       => $request->dia_chi,
+            'id_quan_huyen' => $request->id_quan_huyen,
+        ]);
+        QuanAn::create([
+            'email'                 => $request->email,
+            'password'              => $request->password,
+            'ma_so_thue'            => $request->ma_so_thue,
+            'ten_quan_an'           => $request->ten_quan_an,
+            'gio_mo_cua'            => $request->gio_mo_cua,
+            'gio_dong_cua'          => $request->gio_dong_cua,
+            'so_dien_thoai'         => $request->so_dien_thoai,
+            'id_dia_chi'            => $diaChi->id,
+            'is_active'             => $request->is_active,
+            'tinh_trang'            => $request->tinh_trang,
+        ]);
+        return response()->json([
+            'status'    => 1,
+            'message'   => 'Thêm mới quán ăn thành công!',
+        ]);
     }
 
     public function update(QuanAnUpdateRequest $request)
     {
-        $check = Auth::guard('sanctum')->user();
-        if (!$check) {
+        $diaChi = DiaChi::where('id_quan_huyen', $request->id_quan_huyen)->first();
+        $diaChi->update([
+            'dia_chi'       => $request->dia_chi,
+            'id_quan_huyen' => $request->id_quan_huyen,
+        ]);
+        $data = QuanAn::find($request->id);
+        if ($data) {
+            $data->update([
+                'email'                 => $request->email,
+                'ma_so_thue'            => $request->ma_so_thue,
+                'ten_quan_an'           => $request->ten_quan_an,
+                'gio_mo_cua'            => $request->gio_mo_cua,
+                'gio_dong_cua'          => $request->gio_dong_cua,
+                'so_dien_thoai'         => $request->so_dien_thoai,
+                'id_dia_chi'            => $diaChi->id,
+                'is_active'             => $request->is_active,
+                'tinh_trang'            => $request->tinh_trang,
+            ]);
             return response()->json([
-                'status'    => 0,
-                'message'   => 'Bạn cần đăng nhập hệ thống!'
+                'status'    => 1,
+                'message'   => 'Cập nhật quán ăn thành công!',
             ]);
         } else {
-            $data = QuanAn::find($request->id);
-            if ($data) {
-                $data->update([
-                    'email'                 => $request->email,
-                    'ma_so_thue'            => $request->ma_so_thue,
-                    'ten_quan_an'           => $request->ten_quan_an,
-                    'gio_mo_cua'            => $request->gio_mo_cua,
-                    'gio_dong_cua'          => $request->gio_dong_cua,
-                    'id_dia_chi'            => $request->id_dia_chi,
-                    'hinh_anh'              => $request->hinh_anh,
-                    'so_dien_thoai'         => $request->so_dien_thoai,
-                    'is_active'             => $request->is_active,
-                ]);
-                return response()->json([
-                    'status'    => 1,
-                    'message'   => 'Cập nhật quán ăn thành công!',
-                    'data'      => $data
-                ]);
-            } else {
-                return response()->json([
-                    'status'    => 0,
-                    'message'   => 'Quán ăn không tồn tại!',
-                ]);
-            }
+            return response()->json([
+                'status'    => 0,
+                'message'   => 'Quán ăn không tồn tại!',
+            ]);
         }
     }
     public function destroy(QuanAnDeleteRequest $request)
     {
-        $check = Auth::guard('sanctum')->user();
-        if (!$check) {
+        $data = QuanAn::find($request->id);
+        if ($data) {
+            $data->delete();
             return response()->json([
-                'status'    => 0,
-                'message'   => 'Bạn cần đăng nhập hệ thống!'
+                'status'    => 1,
+                'message'   => 'Xóa quán ăn thành công!',
             ]);
         } else {
-            $data = QuanAn::find($request->id);
-            if ($data) {
-                $data->delete();
-                return response()->json([
-                    'status'    => 1,
-                    'message'   => 'Xóa quán ăn thành công!',
-                ]);
-            } else {
-                return response()->json([
-                    'status'    => 0,
-                    'message'   => 'Quán ăn không tồn tại!',
-                ]);
-            }
+            return response()->json([
+                'status'    => 0,
+                'message'   => 'Quán ăn không tồn tại!',
+            ]);
         }
     }
     public function changeStatus(ChangeStatusQuanAnrequest $request)

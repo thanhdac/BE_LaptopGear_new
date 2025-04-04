@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\ChiTietDonHangController;
 use App\Http\Controllers\ChucVuController;
 use App\Http\Controllers\ChucNangController;
 use App\Http\Controllers\DanhMucController;
@@ -13,6 +13,7 @@ use App\Http\Controllers\QuanHuyenController;
 use App\Http\Controllers\ShipperController;
 use App\Http\Controllers\TinhThanhController;
 use App\Http\Controllers\VoucherController;
+use App\Models\ChiTietDonHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -175,3 +176,6 @@ Route::post('/quan-an/voucher/update', [VoucherController::class, 'updateQuanAnV
 Route::post('/quan-an/voucher/delete', [VoucherController::class, 'deleteQuanAnVoucher']);
 Route::post('/quan-an/voucher/change', [VoucherController::class, 'doiTrangThaiQuanAnVoucher']);
 Route::get('/khach-hang/quan-an/data-open', [QuanAnController::class, 'getDataOpen']);
+
+Route::get('/khach-hang/don-dat-hang/{id_quan_an}', [ChiTietDonHangController::class, 'getDonDatHang']);
+Route::post('/khach-hang/don-dat-hang/create', [ChiTietDonHangController::class, 'themGioHang']);

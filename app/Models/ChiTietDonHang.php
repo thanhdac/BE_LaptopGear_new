@@ -13,7 +13,7 @@ class ChiTietDonHang extends Model
         'don_gia',
         'so_luong',
         'thanh_tien',
-        'tinh_trang',
+        'id_khach_hang',
         'ghi_chu',
     ];
 

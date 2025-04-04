@@ -132,6 +132,8 @@ class KhachHangController extends Controller
                     'so_dien_thoai' => $request->so_dien_thoai,
                     'email'         => $request->email,
                     'ngay_sinh'     => $request->ngay_sinh,
+                    'is_active'     => $request->is_active,
+                    'is_block'      => $request->is_block,
                 ]);
                 return response()->json([
                     'status'    => 1,

@@ -16,7 +16,7 @@ class updateMonAnRequest extends FormRequest
         return [
             'id'                => 'required|exists:mon_ans,id',
             'ten_mon_an'        => 'required|min:5|max:255',
-            'slug_mon_an'       => 'required|unique:mon_ans,slug_mon_an',
+            'slug_mon_an'       => 'required|unique:mon_ans,slug_mon_an,' . $this->id,
             'gia_ban'           => 'required|numeric',
             'gia_khuyen_mai'    => 'required|numeric',
             'id_quan_an'        => 'required|exists:quan_ans,id',

@@ -7,6 +7,7 @@ use App\Http\Requests\changeActiveQuanAnrequest;
 use App\Http\Requests\ChangeStatusQuanAnrequest;
 use App\Http\Requests\crateDanhMucQuanAnRequest;
 use App\Http\Requests\createMonAnRequest;
+use App\Http\Requests\DangKyQuanAnRequest;
 use App\Http\Requests\deleteMonAnRequest;
 use App\Http\Requests\QuanAnCapNhatRequest;
 use App\Http\Requests\QuanAnDangKyRequest;
@@ -21,6 +22,7 @@ use App\Http\Requests\updateMonAnRequest;
 use App\Http\Requests\XoaDanhMucRequest;
 use App\Models\ChiTietDanhMucQuanAn;
 use App\Models\DanhMuc;
+use App\Models\DiaChi;
 use App\Models\MonAn;
 use App\Models\QuanAn;
 use Illuminate\Http\Request;
@@ -336,7 +338,7 @@ class QuanAnController extends Controller
         }
         $data = DanhMuc::find($request->id);
         $check = ChiTietDanhMucQuanAn::where('id_danh_muc', $request->id)
-                                      ->where('id_quan_an', $user->id)
+            ->where('id_quan_an', $user->id)
             ->first();
         if ($check) {
             $data->tinh_trang = $data->tinh_trang == 1 ? 0 : 1;
@@ -479,8 +481,12 @@ class QuanAnController extends Controller
         ]);
     }
 
-    public function dangKy(Request $request)
+    public function dangKy(DangKyQuanAnRequest $request)
     {
+        $diaChi = DiaChi::create([
+            'dia_chi' => $request->dia_chi,
+            'id_quan_huyen' => $request->id_quan_huyen,
+        ]);
         QuanAn::create([
             'email'                 => $request->email,
             'password'              => $request->password,
@@ -489,6 +495,7 @@ class QuanAnController extends Controller
             'gio_mo_cua'            => $request->gio_mo_cua,
             'gio_dong_cua'          => $request->gio_dong_cua,
             'so_dien_thoai'         => $request->so_dien_thoai,
+            'id_dia_chi'            => $diaChi->id,
         ]);
         return response()->json([
             'status'    => 1,

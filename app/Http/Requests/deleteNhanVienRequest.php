@@ -18,18 +18,11 @@ class deleteNhanVienRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
-            'required'       => ' :attribute không được để trống.',
-            'exists'         => ' :attribute không tồn tại trong hệ thống.',
-        ];
-    }
-
-    public function attributes()
-    {
-        return [
-            'id'        => 'Nhân viên',
+            'id.required' => 'Nhân viên không được để trống',
+            'id.exists' => 'Nhân viên không tồn tại',
         ];
     }
 }

@@ -15,27 +15,21 @@ class updateTinhThanhRequest extends FormRequest
     {
         return [
             'id'                => 'required|exists:tinh_thanhs,id',
-            'ten_tinh_thanh'    => 'required|min:3|max:255',
+            'ten_tinh_thanh'    => 'required|min:1|max:255',
             'tinh_trang'        => 'required|boolean'
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
-            'required'      => ':attribute không được để trống',
-            'min'           => ':attribute không được nhỏ hơn :min',
-            'max'           => ':attribute không được lớn hơn :max',
-            'boolean'       => ':attribute phải là true hoặc false'
-        ];
-    }
-
-    public function attributes()
-    {
-        return [
-            'id'                => 'Tỉnh thành',
-            'ten_tinh_thanh'    => 'Tên tỉnh thành',
-            'tinh_trang'        => 'Tình trạng'
+            'id.required' => 'Tỉnh thành không được để trống',
+            'id.exists' => 'Tỉnh thành không tồn tại',
+            'ten_tinh_thanh.required' => 'Tên tỉnh thành không được để trống',
+            'ten_tinh_thanh.min' => 'Tên tỉnh thành phải có ít nhất 1 ký tự',
+            'ten_tinh_thanh.max' => 'Tên tỉnh thành không được quá 255 ký tự',
+            'tinh_trang.required' => 'Tình trạng không được để trống',
+            'tinh_trang.boolean' => 'Tình trạng phải là true hoặc false'
         ];
     }
 }

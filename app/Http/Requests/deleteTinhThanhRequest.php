@@ -18,18 +18,11 @@ class deleteTinhThanhRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
-            'required'      => ':attribute không được để trống',
-            'exists'        => ':attribute không tồn tại'
-        ];
-    }
-
-    public function attributes()
-    {
-        return [
-            'id'                => 'Tỉnh thành',
+            'id.required' => 'Tỉnh thành không được để trống',
+            'id.exists' => 'Tỉnh thành không tồn tại',
         ];
     }
 }

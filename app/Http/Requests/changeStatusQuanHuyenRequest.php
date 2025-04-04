@@ -18,18 +18,11 @@ class changeStatusQuanHuyenRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
-            'required'          => ':attribute không được để trống',
-            'exists'            => ':attribute không tồn tại'
-        ];
-    }
-
-    public function attributes()
-    {
-        return [
-            'id'        => 'Quận huyện'
+            'id.required' => 'Quận huyện không được để trống',
+            'id.exists' => 'Quận huyện không tồn tại',
         ];
     }
 }

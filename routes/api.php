@@ -156,6 +156,7 @@ Route::post('/khach-hang/doi-mat-khau', [KhachHangController::class, 'doiMatKhau
 
 // BT tối nay
 Route::get('/quan-an/danh-muc/data', [QuanAnController::class, 'getDataDanhMuc'])->middleware('quanAnMiddle');
+Route::get('/quan-an/danh-muc/data-danh-muc-cha', [QuanAnController::class, 'getDataDanhMucCha'])->middleware('quanAnMiddle');
 Route::post('/quan-an/danh-muc/create', [QuanAnController::class, 'createDanhMuc']);
 Route::post('/quan-an/danh-muc/update', [QuanAnController::class, 'updateDanhMuc']);
 Route::post('/quan-an/danh-muc/delete', [QuanAnController::class, 'deleteDanhMuc']);

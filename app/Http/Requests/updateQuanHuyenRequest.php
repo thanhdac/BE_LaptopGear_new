@@ -15,7 +15,7 @@ class updateQuanHuyenRequest extends FormRequest
     {
         return [
             'id'                  => 'required|exists:quan_huyens,id',
-            'ten_quan_huyen'      => 'required|min:10|max:255',
+            'ten_quan_huyen'      => 'required|min:1|max:255',
             'toa_do_x'            => '',
             'toa_do_y'            => '',
             'tinh_trang'          => 'required|boolean',
@@ -23,26 +23,16 @@ class updateQuanHuyenRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
-            'required'          => ':attribute không được để trống',
-            'min'               => ':attribute không được nhỏ hơn :min ký tự',
-            'max'               => ':attribute không được lớn hơn :max ký tự',
-            'boolean'           => ':attribute phải là true hoặc false',
-            'exists'            => ':attribute không tồn tại'
-        ];
-    }
-
-    public function attributes()
-    {
-        return [
-            'id'                  => 'Quận Huyện',
-            'ten_quan_huyen'      => 'Tên quận huyện',
-            'toa_do_x'            => 'Tọa độ x',
-            'toa_do_y'            => 'Tọa độ y',
-            'tinh_trang'          => 'Tình trạng',
-            'id_tinh_thanh'       => 'Tỉnh thành'
+            'ten_quan_huyen.required' => 'Tên quận huyện không được để trống',
+            'ten_quan_huyen.min' => 'Tên quận huyện phải có ít nhất 1 ký tự',
+            'ten_quan_huyen.max' => 'Tên quận huyện không được quá 255 ký tự',
+            'tinh_trang.required' => 'Tình trạng không được để trống',
+            'tinh_trang.boolean' => 'Tình trạng phải là true hoặc false',
+            'id_tinh_thanh.required' => 'Tỉnh thành không được để trống',
+            'id_tinh_thanh.exists' => 'Tỉnh thành không tồn tại'
         ];
     }
 }

@@ -226,6 +226,20 @@ class QuanAnController extends Controller
             'data'      => $data
         ]);
     }
+    public function getDataDanhMucCha()
+    {
+        $user = Auth::guard('sanctum')->user();
+        $data = DanhMuc::join('chi_tiet_danh_muc_quan_ans', 'danh_mucs.id', 'chi_tiet_danh_muc_quan_ans.id_danh_muc')
+            ->join('quan_ans', 'chi_tiet_danh_muc_quan_ans.id_quan_an', 'quan_ans.id')
+            ->select('danh_mucs.*', 'chi_tiet_danh_muc_quan_ans.id_quan_an', 'quan_ans.ten_quan_an', 'chi_tiet_danh_muc_quan_ans.id_danh_muc')
+            // ->where('chi_tiet_danh_muc_quan_ans.id_quan_an', $user->id)
+            ->whereNull('danh_mucs.id_danh_muc_cha')
+            ->get();
+
+        return response()->json([
+            'data'      => $data
+        ]);
+    }
     public function createDanhMuc(ThemMoiDanhMucRequest $request)
     {
         $user = Auth::guard('sanctum')->user();

@@ -18,18 +18,11 @@ class deleteMonAnRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
-            'required'          => ':attribute không được để trống',
-            'exists'            => ':attribute không tồn tại',
-        ];
-    }
-
-    public function attributes()
-    {
-        return [
-            'id'                => 'Món ăn cần xóa',
+            'id.required' => 'Món ăn không được để trống',
+            'id.exists' => 'Món ăn không tồn tại',
         ];
     }
 }

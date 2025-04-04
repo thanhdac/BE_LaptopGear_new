@@ -14,26 +14,20 @@ class createTinhThanhRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ten_tinh_thanh'    => 'required|min:3|max:255',
+            'ten_tinh_thanh'    => 'required|min:1|max:255|unique:tinh_thanhs,ten_tinh_thanh',
             'tinh_trang'        => 'required|boolean'
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
-            'required'      => ':attribute không được để trống',
-            'min'           => ':attribute không được nhỏ hơn :min',
-            'max'           => ':attribute không được lớn hơn :max',
-            'boolean'       => ':attribute phải là true hoặc false'
-        ];
-    }
-
-    public function attributes()
-    {
-        return [
-            'ten_tinh_thanh'    => 'Tên tỉnh thành',
-            'tinh_trang'        => 'Tình trạng'
+            'ten_tinh_thanh.required' => 'Tên tỉnh thành không được để trống',
+            'ten_tinh_thanh.min' => 'Tên tỉnh thành phải có ít nhất 1 ký tự',
+            'ten_tinh_thanh.max' => 'Tên tỉnh thành không được quá 255 ký tự',
+            'ten_tinh_thanh.unique' => 'Tên tỉnh thành đã tồn tại',
+            'tinh_trang.required' => 'Tình trạng không được để trống',
+            'tinh_trang.boolean' => 'Tình trạng phải là true hoặc false'
         ];
     }
 }

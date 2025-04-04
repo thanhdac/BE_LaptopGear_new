@@ -24,11 +24,12 @@ class createQuanAnVoucherRequest extends FormRequest
         return [
             'ma_code'               => "required|min:3|unique:vouchers,ma_code",
             'thoi_gian_bat_dau'     => "required|date",
-            'thoi_gian_ket_thuc'    => "required|date",
+            'thoi_gian_ket_thuc'    => "required|date|after:thoi_gian_bat_dau",
             'loai_giam'             => "required|integer",
             'so_giam_gia'           => "required|min:1",
             'so_tien_toi_da'        => "required|min:1",
-            'don_hang_toi_thieu'    => "required|min:1"
+            'don_hang_toi_thieu'    => "required|min:1",
+            'tinh_trang'            => "required|boolean"
         ];
     }
 
@@ -44,12 +45,15 @@ class createQuanAnVoucherRequest extends FormRequest
             'so_giam_gia.min'                => 'Số giảm giá phải lớn hơn 0',
             'thoi_gian_bat_dau.required'     => 'Thời gian bắt đầu không được để trống',
             'thoi_gian_ket_thuc.required'    => 'Thời gian kết thúc không được để trống',
+            'thoi_gian_ket_thuc.after'       => 'Thời gian kết thúc phải sau thời gian bắt đầu',
             'loai_giam.required'             => 'Loại giảm không được để trống',
             'so_giam_gia.required'           => 'Số giảm giá không được để trống',
             'so_tien_toi_da.required'        => 'Số tiền tối đa không được để trống',
             'so_tien_toi_da.min'             => 'Số tiền tối đa phải lớn hơn 0',
             'don_hang_toi_thieu.required'    => 'Đơn hàng tối thiểu không được để trống',
-            'don_hang_toi_thieu.min'         => 'Đơn hàng tối thiểu phải lớn hơn 0'
+            'don_hang_toi_thieu.min'         => 'Đơn hàng tối thiểu phải lớn hơn 0',
+            'tinh_trang.required'             => 'Tình trạng không được để trống',
+            'tinh_trang.boolean'              => 'Tình trạng phải là true hoặc false'
         ];
     }
 

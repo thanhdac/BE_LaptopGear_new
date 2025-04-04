@@ -111,6 +111,7 @@ Route::get('/admin/quan-huyen/data', [QuanHuyenController::class, 'getData']);
 //ACTOR KHÁCH HÀNG
 Route::get('/khach-hang/check-token', [KhachHangController::class, 'checkToken']);
 Route::post('/khach-hang/dang-nhap', [KhachHangController::class, 'Login']);
+Route::post('/khach-hang/dang-xuat', [KhachHangController::class, 'DangXuat']);
 
 Route::get('/khach-hang/data-login', [KhachHangController::class, 'getDataKhachHang'])->middleware('khachHangMiddle');
 Route::post('/khach-hang/update-profile', [KhachHangController::class, 'updateProfile'])->middleware('khachHangMiddle');
@@ -155,7 +156,6 @@ Route::post('/admin/phan-quyen-chuc-vu/delete', [PhanQuyenController::class, 'de
 Route::get('/khach-hang/data-mon-an', [KhachHangController::class, 'getMonAn']);
 Route::post('/khach-hang/doi-mat-khau', [KhachHangController::class, 'doiMatKhau']);
 
-// BT tối nay
 Route::get('/quan-an/danh-muc/data', [QuanAnController::class, 'getDataDanhMuc'])->middleware('quanAnMiddle');
 Route::get('/quan-an/danh-muc/data-danh-muc-cha', [QuanAnController::class, 'getDataDanhMucCha'])->middleware('quanAnMiddle');
 Route::post('/quan-an/danh-muc/create', [QuanAnController::class, 'createDanhMuc']);
@@ -163,14 +163,12 @@ Route::post('/quan-an/danh-muc/update', [QuanAnController::class, 'updateDanhMuc
 Route::post('/quan-an/danh-muc/delete', [QuanAnController::class, 'deleteDanhMuc']);
 Route::post('/quan-an/danh-muc/change', [QuanAnController::class, 'doiTrangThaiDanhMuc']);
 
-// BT tối nay
 Route::get('/quan-an/mon-an/data', [QuanAnController::class, 'getDataMonAn'])->middleware('quanAnMiddle');
 Route::post('/quan-an/mon-an/create', [QuanAnController::class, 'createMonAn']);
 Route::post('/quan-an/mon-an/update', [QuanAnController::class, 'updateMonAn']);
 Route::post('/quan-an/mon-an/delete', [QuanAnController::class, 'deleteMonAn']);
 Route::post('/quan-an/mon-an/change', [QuanAnController::class, 'doiTrangThaiMonAn'])->middleware('quanAnMiddle');
 
-// BTVN
 Route::get('/quan-an/voucher/data', [VoucherController::class, 'getDataQuanAnVoucher']);
 Route::post('/quan-an/voucher/create', [VoucherController::class, 'createQuanAnVoucher']);
 Route::post('/quan-an/voucher/update', [VoucherController::class, 'updateQuanAnVoucher']);

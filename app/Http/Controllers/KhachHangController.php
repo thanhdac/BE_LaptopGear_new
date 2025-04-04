@@ -330,4 +330,8 @@ class KhachHangController extends Controller
             }
         }
     }
+    public function DangXuat()
+    {
+        // Đăng xuất khách hàng
+    }
 }

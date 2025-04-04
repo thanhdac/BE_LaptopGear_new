@@ -31,7 +31,7 @@ class QuanAnSeeder extends Seeder
                 'gio_dong_cua' => '22:00:00',
                 'id_dia_chi' => 1,
                 'hinh_anh' => 'https://mms.img.susercontent.com/vn-11134513-7r98o-lsvba1hvgxj82e@resize_ss1242x600!@crop_w1242_h600_cT',
-                'so_dien_thoai' => '376659762',
+                'so_dien_thoai' => '0376659762',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1
@@ -46,7 +46,7 @@ class QuanAnSeeder extends Seeder
                 'gio_dong_cua' => '23:00:00',
                 'id_dia_chi' => 2,
                 'hinh_anh' => 'https://mms.img.susercontent.com/vn-11134513-7r98o-lsvftuo7o0pl83@resize_ss1242x600!@crop_w1242_h600_cT',
-                'so_dien_thoai' => '123321123',
+                'so_dien_thoai' => '0123321123',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1
@@ -61,7 +61,7 @@ class QuanAnSeeder extends Seeder
                 'gio_dong_cua' => '22:00:00',
                 'id_dia_chi' => 3,
                 'hinh_anh' => 'https://mms.img.susercontent.com/vn-11134513-7r98o-lsvbott8ho61cc@resize_ss1242x600!@crop_w1242_h600_cT',
-                'so_dien_thoai' => '190081981',
+                'so_dien_thoai' => '090081981',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1
@@ -76,7 +76,7 @@ class QuanAnSeeder extends Seeder
                 'gio_dong_cua' => '22:30:00',
                 'id_dia_chi' => 4,
                 'hinh_anh' => 'https://aeonmall-haiphong-lechan.com.vn/wp-content/uploads/2020/12/hc-flagships-750x468-1.png',
-                'so_dien_thoai' => '123123654',
+                'so_dien_thoai' => '0123123654',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1
@@ -91,7 +91,7 @@ class QuanAnSeeder extends Seeder
                 'gio_dong_cua' => '21:00:00',
                 'id_dia_chi' => 5,
                 'hinh_anh' => 'https://mms.img.susercontent.com/vn-11134513-7r98o-lsu9h27u4lok00@resize_ss1242x600!@crop_w1242_h600_cT',
-                'so_dien_thoai' => '112222111',
+                'so_dien_thoai' => '0112222111',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1
@@ -106,7 +106,7 @@ class QuanAnSeeder extends Seeder
                 'gio_dong_cua' => '21:00:00',
                 'id_dia_chi' => 6,
                 'hinh_anh' => 'https://images.foody.vn/res/g92/916004/prof/s/foody-upload-api-foody-mobile-seatalk_img_15876368-200423171714.jpg',
-                'so_dien_thoai' => '123123312',
+                'so_dien_thoai' => '0123123312',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1
@@ -121,7 +121,7 @@ class QuanAnSeeder extends Seeder
                 'gio_dong_cua' => '21:30:00',
                 'id_dia_chi' => 7,
                 'hinh_anh' => 'https://bazantravel.com/cdn/medias/uploads/72/72732-com-ga-cap-tien-da-nang-700x615.jpg',
-                'so_dien_thoai' => '123122311',
+                'so_dien_thoai' => '0123122311',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1
@@ -136,7 +136,7 @@ class QuanAnSeeder extends Seeder
                 'gio_dong_cua' => '20:30:00',
                 'id_dia_chi' => 8,
                 'hinh_anh' => 'https://mms.img.susercontent.com/vn-11134513-7r98o-lsv4ug0qcuroe7@resize_ss1242x600!@crop_w1242_h600_cT',
-                'so_dien_thoai' => '123987911',
+                'so_dien_thoai' => '0123987911',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1
@@ -151,7 +151,7 @@ class QuanAnSeeder extends Seeder
                 'gio_dong_cua' => '23:00:00',
                 'id_dia_chi' => 9,
                 'hinh_anh' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQezTLNix3tk-m9RzdEydJoVwu9rR5qCDpkzrm0Tm3jQA&s',
-                'so_dien_thoai' => '786182312',
+                'so_dien_thoai' => '0786182312',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1
@@ -166,7 +166,7 @@ class QuanAnSeeder extends Seeder
                 'gio_dong_cua' => '21:00:00',
                 'id_dia_chi' => 10,
                 'hinh_anh' => 'https://www.cet.edu.vn/wp-content/uploads/2018/03/bun-thit-nuong-kieu-mien-nam.jpg',
-                'so_dien_thoai' => '431231231',
+                'so_dien_thoai' => '0431231231',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1
@@ -181,7 +181,7 @@ class QuanAnSeeder extends Seeder
                 'gio_dong_cua' => '21:00:00',
                 'id_dia_chi' => 11,
                 'hinh_anh' => 'https://chaipetsaigon.com/wp-content/uploads/2021/03/10-cong-thuc-lam-nuoc-ep-detox.jpg',
-                'so_dien_thoai' => '123421212',
+                'so_dien_thoai' => '0123421212',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1
@@ -196,7 +196,7 @@ class QuanAnSeeder extends Seeder
                 'gio_dong_cua' => '22:00:00',
                 'id_dia_chi' => 12,
                 'hinh_anh' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3LTDYwStuK8NaZCp_hkTaz7qZy8jx2zB3Qz54ZhSrHg&s',
-                'so_dien_thoai' => '567125312',
+                'so_dien_thoai' => '0567125312',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1
@@ -211,7 +211,7 @@ class QuanAnSeeder extends Seeder
                 'gio_dong_cua' => '21:30:00',
                 'id_dia_chi' => 13,
                 'hinh_anh' => 'https://images.foody.vn/res/g66/658430/prof/s/foody-upload-api-foody-mobile-650c7590-4246-4eff-8-200504103214.jpg',
-                'so_dien_thoai' => '789126310',
+                'so_dien_thoai' => '0789126310',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1
@@ -226,7 +226,7 @@ class QuanAnSeeder extends Seeder
                 'gio_dong_cua' => '21:00:00',
                 'id_dia_chi' => 14,
                 'hinh_anh' => 'https://mms.img.susercontent.com/vn-11134513-7r98o-lsu8naawqtok4a@resize_ss1242x600!@crop_w1242_h600_cT',
-                'so_dien_thoai' => '971263787',
+                'so_dien_thoai' => '0971263787',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1
@@ -241,7 +241,7 @@ class QuanAnSeeder extends Seeder
                 'gio_dong_cua' => '22:00:00',
                 'id_dia_chi' => 15,
                 'hinh_anh' => 'https://demtrang.vn/wp-content/uploads/2019/09/Bonpas-05-01.jpg',
-                'so_dien_thoai' => '187263123',
+                'so_dien_thoai' => '0187263123',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1
@@ -256,7 +256,7 @@ class QuanAnSeeder extends Seeder
                 'gio_dong_cua' => '23:00:00',
                 'id_dia_chi' => 16,
                 'hinh_anh' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQieyuN-1Hm1N7LR6ubuvXCiAL1k3AkxC__SRo2FHf8eA&s',
-                'so_dien_thoai' => '987612893',
+                'so_dien_thoai' => '0987612893',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1
@@ -271,7 +271,7 @@ class QuanAnSeeder extends Seeder
                 'gio_dong_cua' => '22:00:00',
                 'id_dia_chi' => 17,
                 'hinh_anh' => 'https://statics.vinpearl.com/che-sau-lien-ha-noi-0_1693400399.jpg',
-                'so_dien_thoai' => '127863856',
+                'so_dien_thoai' => '0127863856',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1
@@ -286,7 +286,7 @@ class QuanAnSeeder extends Seeder
                 'gio_dong_cua' => '21:00:00',
                 'id_dia_chi' => 18,
                 'hinh_anh' => 'https://statics.vinpearl.com/com-tam-ngon-o-sai-gon-0_1630562640.jpg',
-                'so_dien_thoai' => '789126389',
+                'so_dien_thoai' => '0789126389',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1
@@ -301,7 +301,7 @@ class QuanAnSeeder extends Seeder
                 'gio_dong_cua' => '21:30:00',
                 'id_dia_chi' => 19,
                 'hinh_anh' => 'https://mms.img.susercontent.com/vn-11134513-7r98o-lsu4z5obhrixb3@resize_ss1242x600!@crop_w1242_h600_cT',
-                'so_dien_thoai' => '817263811',
+                'so_dien_thoai' => '0817263811',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1
@@ -311,12 +311,12 @@ class QuanAnSeeder extends Seeder
                 'email' => 'chaolong@gmail.com',
                 'password' => '123456',
                 'ma_so_thue' => '1872756381',
-                'ten_quan_an' => 'Cháo Lòng Gia Truyề',
+                'ten_quan_an' => 'Cháo Lòng Gia Trường',
                 'gio_mo_cua' => '06:00:00',
                 'gio_dong_cua' => '20:00:00',
                 'id_dia_chi' => 20,
                 'hinh_anh' => 'https://mms.img.susercontent.com/vn-11134513-7r98o-lsvba1hvgxj82e@resize_ss1242x600!@crop_w1242_h600_cT',
-                'so_dien_thoai' => '198273611',
+                'so_dien_thoai' => '0198273611',
                 'tong_tien' => 0,
                 'tinh_trang' => 1,
                 'is_active' => 1

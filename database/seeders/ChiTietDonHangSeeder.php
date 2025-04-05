@@ -25,6 +25,7 @@ class ChiTietDonHangSeeder extends Seeder
             ],
             [
                 'id_don_hang'    => 1,
+                'id_khach_hang'  => 1,
                 'id_mon_an'      => 2,
                 'id_khach_hang'  => 1,
                 'so_luong'       => 1,
@@ -37,6 +38,7 @@ class ChiTietDonHangSeeder extends Seeder
             // Chi tiết đơn hàng DH002
             [
                 'id_don_hang'    => 2,
+                'id_khach_hang'  => 1,
                 'id_mon_an'      => 3,
                 'id_khach_hang'  => 2,
                 'so_luong'       => 5,
@@ -49,6 +51,7 @@ class ChiTietDonHangSeeder extends Seeder
             // Chi tiết đơn hàng DH003
             [
                 'id_don_hang'    => 3,
+                'id_khach_hang'  => 1,
                 'id_mon_an'      => 1,
                 'id_khach_hang'  => 3,
                 'so_luong'       => 2,
@@ -59,6 +62,7 @@ class ChiTietDonHangSeeder extends Seeder
             ],
             [
                 'id_don_hang'    => 3,
+                'id_khach_hang'  => 1,
                 'id_mon_an'      => 4,
                 'id_khach_hang'  => 3,
                 'so_luong'       => 2,
@@ -71,6 +75,7 @@ class ChiTietDonHangSeeder extends Seeder
             // Chi tiết đơn hàng DH004
             [
                 'id_don_hang'    => 4,
+                'id_khach_hang'  => 1,
                 'id_mon_an'      => 5,
                 'id_khach_hang'  => 4,
                 'so_luong'       => 1,

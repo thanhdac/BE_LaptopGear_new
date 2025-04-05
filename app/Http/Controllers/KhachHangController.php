@@ -165,17 +165,22 @@ class KhachHangController extends Controller
 
     public function changeActive(changeActiveRequest $request)
     {
-        $data = KhachHang::find($request->id);
-        if ($data->is_active == 1) {
-            $data->is_active = 0;
+        $khachhang = KhachHang::find($request->id);
+
+        if ($khachhang->is_active == 0) {
+            $khachhang->is_active = 1;
+            $khachhang->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Đã kích hoạt quán ăn thành công!'
+            ]);
         } else {
-            $data->is_active = 1;
+            return response()->json([
+                'status' => false,
+                'message' => 'Quán ăn này đã được kích hoạt trước đó!'
+            ]);
         }
-        $data->save();
-        return response()->json([
-            'status' => 1,
-            'message' => 'Cập nhật trạng thái khách hàng thành công',
-        ]);
     }
 
     public function getDataKhachHang()

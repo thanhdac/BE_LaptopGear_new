@@ -126,16 +126,16 @@ class ShipperController extends Controller
     {
         $shipper = Shipper::where('id', $request->id)->first();
 
-        if ($shipper->is_active == 1) {
-            $shipper->is_active = 0;
+        if ($shipper->is_open == 1) {
+            $shipper->is_open = 0;
             $shipper->save();
         } else {
-            $shipper->is_active = 1;
+            $shipper->is_open = 1;
             $shipper->save();
         }
         return response()->json([
             'status'    =>  true,
-            'message'   =>  'Bạn đã cập nhật trạng thái' . $request->ho_va_ten . ' thành công'
+            'message'   =>  'Bạn đã cập nhật trạng thái ' . $request->ho_va_ten . ' thành công'
         ]);
     }
 
@@ -143,23 +143,23 @@ class ShipperController extends Controller
     {
         $shipper = Shipper::where('id', $request->id)->first();
         if ($shipper) {
-            if ($shipper->is_open) {
+            if ($shipper->is_active) {
                 return response()->json([
                     'status'  => 2,
-                    'message' => "Tài khoản đã được kích hoạt trước đó",
+                    'message' => "Tài khoản đã được kích hoạt trước đó ",
                 ]);
             } else {
-                $shipper->is_open = 1;
+                $shipper->is_active = 1;
                 $shipper->save();
                 return response()->json([
                     'status'  => 1,
-                    'message' => "Kích hoạt tài khoản thành công",
+                    'message' => "Kích hoạt tài khoản thành công ",
                 ]);
             }
         } else {
             return response()->json([
                 'status'  => 0,
-                'message' => "Tài khoản không tồn tại",
+                'message' => "Tài khoản không tồn tại ",
             ]);
         }
     }

@@ -103,6 +103,10 @@ Route::post('/quan-an/dang-nhap', [QuanAnController::class, 'Login']);
 Route::post('/quan-an/dang-ky', [QuanAnController::class, 'dangKy']);
 
 
+Route::get('/quan-an/data-login', [QuanAnController::class, 'getDataQuanAn'])->middleware('quanAnMiddle');
+Route::post('/quan-an/update-password', [QuanAnController::class, 'updatePassword'])->middleware('quanAnMiddle');
+
+
 
 
 Route::get('/admin/quan-huyen/data', [QuanHuyenController::class, 'getData']);

@@ -489,4 +489,41 @@ class QuanAnController extends Controller
             'message'   => 'Đăng ký quán ăn thành công!',
         ]);
     }
+    public function getDataQuanAn()
+    {
+        $user_login = Auth::guard('sanctum')->user();
+        if ($user_login) {
+            $quanan = QuanAn::where('id', $user_login->id)->first();
+            return response()->json([
+                'status'    => 1,
+                'data'      => $quanan
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 0,
+                'message'   => 'Bạn cần đăng nhập hệ thống!'
+            ]);
+        }
+    }
+    public function updatePassword(Request $request)
+    {
+        $user = Auth::guard('sanctum')->user();
+        $data = QuanAn::where('id', $user->id)
+            ->where('password', $request->old_password)
+            ->first();
+        if ($data) {
+            $data->update([
+                'password' => $request->password,
+            ]);
+            return response()->json([
+                'status'    => 1,
+                'message'   => 'Cập nhật mật khẩu thành công!',
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 0,
+                'message'   => 'Mật khẩu cũ không đúng!',
+            ]);
+        }
+    }
 }

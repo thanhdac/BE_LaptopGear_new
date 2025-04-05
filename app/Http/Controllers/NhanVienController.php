@@ -6,6 +6,8 @@ use App\Http\Requests\AdminDoiMatKhauRequest;
 use App\Http\Requests\AdminLoginRequest;
 use App\Http\Requests\createNhanVienRequest;
 use App\Http\Requests\deleteNhanVienRequest;
+use App\Http\Requests\NhanVienDoiMatKhauRequest;
+use App\Http\Requests\NhanVienUpdateProfileRequest;
 use App\Http\Requests\updateNhanVienRequest;
 use App\Models\NhanVien;
 use Illuminate\Http\Request;
@@ -16,8 +18,8 @@ class NhanVienController extends Controller
     public function Login(AdminLoginRequest $request)
     {
         $check = NhanVien::where('email', $request->email)
-                        ->where('password', $request->password)
-                        ->first();
+            ->where('password', $request->password)
+            ->first();
         if ($check) {
             return response()->json([
                 'status'    => 1,
@@ -28,6 +30,68 @@ class NhanVienController extends Controller
             return response()->json([
                 'status' => 0,
                 'message' => "Tài khoản hoặc mật khẩu không đúng.",
+            ]);
+        }
+    }
+
+    public function profile()
+    {
+        $user_login = Auth::guard('sanctum')->user();
+        if ($user_login) {
+            $nhanVien = NhanVien::where('id', $user_login->id)->first();
+            return response()->json([
+                'status'    => 1,
+                'data'      => $nhanVien
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 0,
+                'message'   => 'Bạn cần đăng nhập hệ thống!'
+            ]);
+        }
+    }
+
+    public function doiMatKhau(NhanVienDoiMatKhauRequest $request)
+    {
+        $user = Auth::guard('sanctum')->user();
+        $data = NhanVien::where('id', $user->id)
+            ->where('password', $request->mat_khau_cu)
+            ->first();
+        if ($data) {
+            $data->update([
+                'password' => $request->mat_khau_moi,
+            ]);
+            return response()->json([
+                'status'    => 1,
+                'message'   => 'Cập nhật mật khẩu thành công!',
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 0,
+                'message'   => 'Mật khẩu cũ không đúng!',
+            ]);
+        }
+    }
+
+    public function updateProfile(NhanVienUpdateProfileRequest $request)
+    {
+        $user = Auth::guard('sanctum')->user();
+        $data = NhanVien::find($user->id);
+        if ($data) {
+            $data->update([
+                'ho_va_ten'     => $request->ho_va_ten,
+                'so_dien_thoai' => $request->so_dien_thoai,
+                'email'         => $request->email,
+                'dia_chi'     => $request->dia_chi
+            ]);
+            return response()->json([
+                'status'    => 1,
+                'message'   => 'Cập nhật thông tin thành công!',
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 0,
+                'message'   => 'Thông tin nhân viên không tồn tại!',
             ]);
         }
     }
@@ -50,9 +114,9 @@ class NhanVienController extends Controller
 
     public function getData()
     {
-        $data = NhanVien::join('chuc_vus', 'nhan_viens.id_chuc_vu','chuc_vus.id')
-                        ->select('nhan_viens.*', 'chuc_vus.ten_chuc_vu')
-                        ->get();
+        $data = NhanVien::join('chuc_vus', 'nhan_viens.id_chuc_vu', 'chuc_vus.id')
+            ->select('nhan_viens.*', 'chuc_vus.ten_chuc_vu')
+            ->get();
         return response()->json([
             'data' => $data
         ]);

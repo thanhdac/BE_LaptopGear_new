@@ -6,29 +6,18 @@ use App\Http\Requests\CapNhatKhachHangRequest;
 use App\Http\Requests\changeActiveRequest;
 use App\Http\Requests\changKhachHangRequest;
 use App\Http\Requests\createDiaChiKhachHangRequest;
-use App\Http\Requests\createKhachHangRequest;
 use App\Http\Requests\deleteDiaChiKhachHangRequest;
-use App\Http\Requests\deleteKhachHangRequest;
-use App\Http\Requests\DiaChiKhachHangCreateRequest;
-use App\Http\Requests\DiaChiKhachHangUpdateRequest;
 use App\Http\Requests\doiMatKhauKhachHangRequest;
-use App\Http\Requests\KhachHangDoiMatKhauRequest;
 use App\Http\Requests\KhachHangLoginRequest;
-use App\Http\Requests\KhachHangUpdateRequest;
-use App\Http\Requests\KhachHangXoaDiaChiRequest;
-use App\Http\Requests\registerKhachHangRequest;
 use App\Http\Requests\ThemMoiKhachHangRequest;
 use App\Http\Requests\updateDiaChiKhachHangRequest;
-use App\Http\Requests\updateKhachHangRequest;
 use App\Http\Requests\updatePasswordKhachHangRequest;
 use App\Http\Requests\updateProfileKhachHangRequest;
 use App\Http\Requests\XoaKhachHangRequest;
 use App\Models\ChiTietDiaChi;
 use App\Models\DiaChi;
-use App\Models\DiaChiKhachHang;
 use App\Models\KhachHang;
 use App\Models\MonAn;
-use App\Models\QuanHuyen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,7 +29,8 @@ class KhachHangController extends Controller
         if ($user_login) {
             return response()->json([
                 'status'    => 1,
-                'ho_ten'    => $user_login->ho_va_ten
+                'ho_ten'    => $user_login->ho_va_ten,
+                'avatar'    => $user_login->avatar,
             ]);
         } else {
             return response()->json([

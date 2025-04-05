@@ -24,6 +24,10 @@ Route::get('/user', function (Request $request) {
 // Admin
 Route::get('/admin/check-token', [NhanVienController::class, 'checkToken']);
 Route::post('/admin/dang-nhap', [NhanVienController::class, 'Login']);
+Route::get('/admin/profile', [NhanVienController::class, 'profile'])->middleware('nhanVienMiddle');
+Route::post('/admin/doi-mat-khau', [NhanVienController::class, 'doiMatKhau'])->middleware('nhanVienMiddle');
+Route::post('/admin/update-profile', [NhanVienController::class, 'updateProfile'])->middleware('nhanVienMiddle');
+
 //CHỨC VỤ
 Route::get('/admin/chuc-vu/data', [ChucVuController::class, 'getData'])->middleware('nhanVienMiddle');
 Route::post('/admin/chuc-vu/create', [ChucVuController::class, 'store'])->middleware('nhanVienMiddle');
@@ -104,6 +108,7 @@ Route::post('/quan-an/dang-ky', [QuanAnController::class, 'dangKy']);
 
 
 Route::get('/quan-an/data-login', [QuanAnController::class, 'getDataQuanAn'])->middleware('quanAnMiddle');
+Route::post('/quan-an/update-profile', [QuanAnController::class, 'updateProfile'])->middleware('quanAnMiddle');
 Route::post('/quan-an/update-password', [QuanAnController::class, 'updatePassword'])->middleware('quanAnMiddle');
 
 

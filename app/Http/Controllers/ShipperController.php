@@ -29,7 +29,7 @@ class ShipperController extends Controller
         if ($user_login) {
             return response()->json([
                 'status'    => 1,
-                'ho_ten'    => $user_login->ho_va_ten
+                'ho_ten'    => $user_login->ho_va_ten,
             ]);
         } else {
             return response()->json([
@@ -167,7 +167,10 @@ class ShipperController extends Controller
     {
         $user_login = Auth::guard('sanctum')->user();
         if ($user_login) {
-            $shipper = Shipper::where('id', $user_login->id)->first();
+            $shipper = Shipper::join('dia_chis', 'dia_chis.id', 'shippers.id_dia_chi')
+                            ->select('shippers.*', 'dia_chis.dia_chi', 'dia_chis.id_quan_huyen')
+                            ->where('shippers.id', $user_login->id)
+                            ->first();
             return response()->json([
                 'status'    => 1,
                 'data'      => $shipper
@@ -184,9 +187,9 @@ class ShipperController extends Controller
         $user_login = Auth::guard('sanctum')->user();
         if ($user_login) {
             Shipper::where('id', $user_login->id)->update([
-                'ho_va_ten' => $request->ho_va_ten,
-                'password'  => $request->password,
-                'cccd'  => $request->cccd,
+                'ho_va_ten'     => $request->ho_va_ten,
+                'password'      => $request->password,
+                'cccd'          => $request->cccd,
                 'so_dien_thoai' => $request->so_dien_thoai,
             ]);
             return response()->json([

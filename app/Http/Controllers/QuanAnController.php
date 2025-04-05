@@ -15,6 +15,7 @@ use App\Http\Requests\QuanAnDeleteRequest;
 use App\Http\Requests\QuanAnDoiMatKhauRequest;
 use App\Http\Requests\QuanAnLoginRequest;
 use App\Http\Requests\QuanAnThemMoiRequest;
+use App\Http\Requests\QuanAnUpdateProfileRequest;
 use App\Http\Requests\QuanAnUpdateRequest;
 use App\Http\Requests\QuanAnXoaRequest;
 use App\Http\Requests\ThemMoiDanhMucRequest;
@@ -36,7 +37,8 @@ class QuanAnController extends Controller
         if ($user_login) {
             return response()->json([
                 'status'    => 1,
-                'ten_quan_an'    => $user_login->ten_quan_an
+                'ten_quan_an'    => $user_login->ten_quan_an,
+                'hinh_anh'  => $user_login->hinh_anh,
             ]);
         } else {
             return response()->json([
@@ -493,7 +495,10 @@ class QuanAnController extends Controller
     {
         $user_login = Auth::guard('sanctum')->user();
         if ($user_login) {
-            $quanan = QuanAn::where('id', $user_login->id)->first();
+            $quanan = QuanAn::join('dia_chis', 'dia_chis.id', 'quan_ans.id_dia_chi')
+                            ->select('quan_ans.*', 'dia_chis.dia_chi')
+
+                            ->where('quan_ans.id', $user_login->id)->first();
             return response()->json([
                 'status'    => 1,
                 'data'      => $quanan
@@ -523,6 +528,29 @@ class QuanAnController extends Controller
             return response()->json([
                 'status'    => 0,
                 'message'   => 'Mật khẩu cũ không đúng!',
+            ]);
+        }
+    }
+
+    public function updateProfile(QuanAnUpdateProfileRequest $request)
+    {
+        $user = Auth::guard('sanctum')->user();
+        $data = QuanAn::find($user->id);
+        if ($data) {
+            $data->update([
+                'ten_quan_an'     => $request->ten_quan_an,
+                'so_dien_thoai' => $request->so_dien_thoai,
+                'email'         => $request->email,
+                'dia_chi'       => $request->dia_chi
+            ]);
+            return response()->json([
+                'status'    => 1,
+                'message'   => 'Cập nhật thông tin thành công!',
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 0,
+                'message'   => 'Thông tin quán ăn không tồn tại!',
             ]);
         }
     }

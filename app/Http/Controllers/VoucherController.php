@@ -160,11 +160,11 @@ class VoucherController extends Controller
                 'ma_code'           => $request->ma_code,
                 'id_quan_an'        => $check->id,
                 'thoi_gian_bat_dau' => $request->thoi_gian_bat_dau,
-                'thoi_gian_ket_thuc'=> $request->thoi_gian_ket_thuc,
+                'thoi_gian_ket_thuc' => $request->thoi_gian_ket_thuc,
                 'loai_giam'         => $request->loai_giam,
                 'so_giam_gia'       => $request->so_giam_gia,
                 'so_tien_toi_da'    => $request->so_tien_toi_da,
-                'don_hang_toi_thieu'=> $request->don_hang_toi_thieu,
+                'don_hang_toi_thieu' => $request->don_hang_toi_thieu,
             ]);
 
             return response()->json([

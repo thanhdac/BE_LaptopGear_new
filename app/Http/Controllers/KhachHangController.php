@@ -18,6 +18,8 @@ use App\Models\ChiTietDiaChi;
 use App\Models\DiaChi;
 use App\Models\KhachHang;
 use App\Models\MonAn;
+use App\Models\QuanHuyen;
+use App\Models\TinhThanh;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -287,9 +289,8 @@ class KhachHangController extends Controller
 
     public function destroyDiaChi(deleteDiaChiKhachHangRequest $request)
     {
-        $dia_chi = DiaChi::find($request->id)->first();
-        ChiTietDiaChi::where('id_dia_chi', $dia_chi->id)->delete();
-        $dia_chi->delete();
+        $dia_chi = DiaChi::find($request->id)->delete();
+        ChiTietDiaChi::where('id_dia_chi', $request->id)->delete();
         return response()->json([
             'status'    => 1,
             'message'   => 'Xóa Địa Chỉ thành công!',
@@ -327,6 +328,25 @@ class KhachHangController extends Controller
             }
         }
     }
+
+    public function getDataTinhThanh()
+    {
+        $data = TinhThanh::where('tinh_trang', 1)->get();
+        return response()->json([
+            'data'  => $data
+        ]);
+    }
+
+    public function getDataQuanHuyen(Request $request)
+    {
+        $data = QuanHuyen::where('tinh_trang', 1)
+                        ->where('id_tinh_thanh', $request->id_tinh_thanh)
+                        ->get();
+        return response()->json([
+            'data'  => $data
+        ]);
+    }
+
     public function DangXuat()
     {
         // Đăng xuất khách hàng

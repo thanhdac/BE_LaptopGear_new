@@ -209,8 +209,8 @@ class QuanAnController extends Controller
         $user = Auth::guard('sanctum')->user();
         $data = DanhMuc::join('chi_tiet_danh_muc_quan_ans', 'danh_mucs.id', 'chi_tiet_danh_muc_quan_ans.id_danh_muc')
             ->join('quan_ans', 'chi_tiet_danh_muc_quan_ans.id_quan_an', 'quan_ans.id')
-            ->select('danh_mucs.*', 'chi_tiet_danh_muc_quan_ans.id_quan_an', 'quan_ans.ten_quan_an', 'chi_tiet_danh_muc_quan_ans.id_danh_muc')
             ->where('chi_tiet_danh_muc_quan_ans.id_quan_an', $user->id)
+            ->select('danh_mucs.*', 'chi_tiet_danh_muc_quan_ans.id_quan_an', 'quan_ans.ten_quan_an')
             ->get();
 
         return response()->json([
@@ -347,9 +347,9 @@ class QuanAnController extends Controller
     {
         $user = Auth::guard('sanctum')->user();
         $data = MonAn::join('quan_ans', 'mon_ans.id_quan_an', 'quan_ans.id')
+            ->where('mon_ans.id_quan_an', $user->id)
             ->join('danh_mucs', 'mon_ans.id_danh_muc', 'danh_mucs.id')
             ->select('mon_ans.*', 'quan_ans.ten_quan_an', 'danh_mucs.ten_danh_muc')
-            // ->where('id_quan_an', $user->id)
             ->get();
         return response()->json([
             'data' => $data
@@ -496,9 +496,9 @@ class QuanAnController extends Controller
         $user_login = Auth::guard('sanctum')->user();
         if ($user_login) {
             $quanan = QuanAn::join('dia_chis', 'dia_chis.id', 'quan_ans.id_dia_chi')
-                            ->select('quan_ans.*', 'dia_chis.dia_chi')
+                ->select('quan_ans.*', 'dia_chis.dia_chi')
 
-                            ->where('quan_ans.id', $user_login->id)->first();
+                ->where('quan_ans.id', $user_login->id)->first();
             return response()->json([
                 'status'    => 1,
                 'data'      => $quanan

@@ -14,7 +14,7 @@ class updateDiaChiKhachHangRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id'                => 'required|exists:chi_tiet_dia_chis,id',
+            'id'                => 'required|exists:dia_chis,id',
             'dia_chi'           => 'required|min:10|max:255',
             'id_quan_huyen'     => 'required|exists:quan_huyens,id',
             'ten_nguoi_nhan'    => 'required|min:3|max:255',

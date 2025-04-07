@@ -18,4 +18,7 @@ class Voucher extends Model
         'don_hang_toi_thieu',
         'tinh_trang',
     ];
+
+    const GIAM_PHAN_TRAM = 1;
+    const GIAM_TIEN_MAT = 0;
 }

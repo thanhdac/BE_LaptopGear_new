@@ -160,11 +160,25 @@ class NhanVienController extends Controller
 
     public function destroy(deleteNhanVienRequest $request)
     {
-        $nhanVien = NhanVien::where('id', $request->id)->delete();
-        return response()->json([
-            'status'  => 1,
-            'message' => 'Xóa ' . $request->ho_va_ten . ' thành công'
-        ]);
+        $user = Auth::guard('sanctum')->user();
+        $nhanVien = NhanVien::where('id', $request->id)->first();
+        if ($nhanVien->is_master == 1) {
+            return response()->json([
+                'status'  => 0,
+                'message' => 'Bạn không thể xóa tài khoản master!!!'
+            ]);
+        } else if ($nhanVien->id == $user->id) {
+            return response()->json([
+                'status'  => 0,
+                'message' => 'Bạn không thể xóa tài khoản bạn đang đăng nhập'
+            ]);
+        } else {
+            $nhanVien->delete();
+            return response()->json([
+                'status'  => 1,
+                'message' => 'Bạn đã xóa tài khoản nhân viên ' . $request->ho_va_ten . ' thành công!!!'
+            ]);
+        }
     }
 
     public function changeStatus(deleteNhanVienRequest $request)

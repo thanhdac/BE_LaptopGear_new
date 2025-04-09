@@ -17,23 +17,33 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         $this->call([
-            DiaChiSeeder::class,
-            NhanVienSeeder::class,
-            KhachHangSeeder::class,
-            ShipperSeeder::class,
-            DanhMucSeeder::class,
+            // Đã làm lại
             QuanHuyenSeeder::class,
             TinhThanhSeeder::class,
+
+            DiaChiSeeder::class,
+            QuanAnSeeder::class,
+
+            KhachHangSeeder::class,
+            ChiTietDiaChiSeeder::class,
+
+            MonAnSeeder::class,
+            ChiTietDonHangSeeder::class,
+
+            // Chưa làm lại
+            NhanVienSeeder::class,
+            ShipperSeeder::class,
+            DanhMucSeeder::class,
+
             ChucVuSeeder::class,
             ChucNangSeeder::class,
             PhanQuyenSeeder::class,
-            QuanAnSeeder::class,
+
             VoucherSeeder::class,
-            MonAnSeeder::class,
+
             ChiTietDanhMucQuanAnSeeder::class,
             DonHangSeeder::class,
-            ChiTietDonHangSeeder::class,
-            ChiTietDiaChiSeeder::class,
+
         ]);
     }
 }

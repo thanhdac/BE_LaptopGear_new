@@ -12,9 +12,9 @@ use Illuminate\Http\Request;
 class QuanHuyenController extends Controller
 {
 
-    public function getData()
+    public function getData(Request $request)
     {
-        $data = QuanHuyen::get();
+        $data = QuanHuyen::where('id_tinh_thanh', $request->id)->get();
         return response()->json([
             'data' => $data
         ]);
@@ -75,7 +75,8 @@ class QuanHuyenController extends Controller
             $tinhThanh->save();
         }
         return response()->json([
-            'message' => 'Cập nhật trạng thái ' . $request->ten_quan_huyen . ' thành công'
+            'status'    => 1,
+            'message'   => 'Cập nhật trạng thái ' . $request->ten_quan_huyen . ' thành công'
         ]);
     }
 }

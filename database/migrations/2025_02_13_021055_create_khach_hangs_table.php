@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('cccd')->nullable();
             $table->date('ngay_sinh');
             $table->string('avatar')->nullable();
-            $table->integer('id_dia_chi')->nullable();
             $table->string('hash_reset')->nullable();
             $table->string('hash_active')->nullable();
             $table->integer('is_active')->default(0);

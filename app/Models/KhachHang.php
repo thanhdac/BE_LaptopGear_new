@@ -20,7 +20,6 @@ class KhachHang extends Authenticatable
         'cccd',
         'ngay_sinh',
         'avatar',
-        'id_dia_chi',
         'hash_reset',
         'hash_active',
         'is_active',

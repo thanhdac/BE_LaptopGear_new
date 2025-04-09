@@ -10,10 +10,11 @@ class ChiTietDonHang extends Model
     protected $fillable = [
         'id_don_hang',
         'id_mon_an',
+        'id_quan_an',
+        'id_khach_hang',
         'don_gia',
         'so_luong',
         'thanh_tien',
-        'id_khach_hang',
         'ghi_chu',
     ];
 

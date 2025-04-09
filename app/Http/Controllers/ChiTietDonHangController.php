@@ -64,6 +64,7 @@ class ChiTietDonHangController extends Controller
         } else {
             ChiTietDonHang::create([
                 'id_mon_an'     =>  $request->id,
+                'id_quan_an'    =>  $monAn->id_quan_an,
                 'don_gia'       =>  $monAn->gia_khuyen_mai,
                 'so_luong'      =>  1,
                 'thanh_tien'    =>  $monAn->gia_khuyen_mai,

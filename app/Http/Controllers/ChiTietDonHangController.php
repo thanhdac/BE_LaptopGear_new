@@ -7,6 +7,7 @@ use App\Http\Requests\TinhPhiShipRequest;
 use App\Http\Requests\UpdateGioHangRequest;
 use App\Models\ChiTietDonHang;
 use App\Models\DiaChi;
+use App\Models\DonHang;
 use App\Models\MonAn;
 use App\Models\QuanAn;
 use Illuminate\Http\Request;
@@ -29,6 +30,7 @@ class ChiTietDonHangController extends Controller
 
         $gio_hang     =   ChiTietDonHang::where('id_don_hang', 0)
                                         ->where('id_khach_hang', $khachHang->id)
+                                        ->where('chi_tiet_don_hangs.id_quan_an', $id_quan_an)
                                         ->join('mon_ans', 'mon_ans.id', '=', 'chi_tiet_don_hangs.id_mon_an')
                                         ->select('chi_tiet_don_hangs.*', 'mon_ans.ten_mon_an')
                                         ->get();
@@ -54,7 +56,7 @@ class ChiTietDonHangController extends Controller
     public function tinhPhiShip(TinhPhiShipRequest $request)
     {
         $link_get = 'https://api.openrouteservice.org/geocode/search';
-        $dia_chi_quan = QuanAn::where('id', $request->id_quan_an)->first();
+        $dia_chi_quan  = QuanAn::where('id', $request->id_quan_an)->first();
         $dia_chi_khach = DiaChi::where('id', $request->id_dia_chi_khach)->first();
 
         $client        = new Client();
@@ -71,6 +73,7 @@ class ChiTietDonHangController extends Controller
                 'size'    => 1
             ]
         ]);
+        // return ($dia_chi_quan->dia_chi);
         $body = $response_quan->getBody()->getContents();
         $response_quan = json_decode($body, true);
         $toa_do_quan   = $response_quan['features'][0]['geometry']['coordinates'];
@@ -91,10 +94,35 @@ class ChiTietDonHangController extends Controller
         $response_khach = json_decode($body, true);
         $toa_do_khach   = $response_khach['features'][0]['geometry']['coordinates'];
 
+        $link_directions = 'https://api.openrouteservice.org/v2/directions/driving-car';
+        // Tính khoảng cách
+        $response_distance = $client->request('POST', $link_directions, [
+            'headers' => [
+                'Authorization' => '5b3ce3597851110001cf62484c960a399b1d44f4829554f302e513b8', // API Key
+                'Content-Type'  => 'application/json',
+                'Accept'        => 'application/json',
+            ],
+            'json' => [
+                'coordinates' => [
+                    $toa_do_quan,  // Tọa độ quán
+                    $toa_do_khach  // Tọa độ khách
+                ],
+                'units' => 'km' // Đơn vị khoảng cách: kilômét
+            ]
+        ]);
+
+        $body               = $response_distance->getBody()->getContents();
+        $response_distance  = json_decode($body, true);
+        try {
+            $khoang_cach        = $response_distance['routes'][0]['summary']['distance'];
+            $phi_ship           = round($khoang_cach * 25000, -3); // 20.000đ/km
+        } catch (\Exception $e) {
+            $phi_ship  = 25000;
+        }
 
         return response()->json([
-            'toa_do_quan'       => $toa_do_quan,
-            'toa_do_khach'     => $toa_do_khach
+            'status'        => true,
+            'phi_ship'      => $phi_ship
         ]);
     }
 
@@ -156,5 +184,112 @@ class ChiTietDonHangController extends Controller
                 'message'   => "Cập nhật giỏ hàng thành công!!"
             ]);
         }
+    }
+
+    public function xacNhanDatHang($id_quan_an, $id_dia_chi_khach)
+    {
+        // return response()->json([
+        //     $id_quan_an, $id_dia_chi_khach
+        // ]);
+        $gio_hang     =   ChiTietDonHang::where('id_don_hang', 0)
+                                        ->where('id_khach_hang', Auth::guard('sanctum')->user()->id)
+                                        ->where('chi_tiet_don_hangs.id_quan_an', $id_quan_an)
+                                        ->join('mon_ans', 'mon_ans.id', '=', 'chi_tiet_don_hangs.id_mon_an')
+                                        ->select('chi_tiet_don_hangs.*', 'mon_ans.ten_mon_an')
+                                        ->get();
+
+        $link_get = 'https://api.openrouteservice.org/geocode/search';
+        $dia_chi_quan  = QuanAn::where('id', $id_quan_an)->first();
+        $dia_chi_khach = DiaChi::where('id', $id_dia_chi_khach)->first();
+
+        $client        = new Client();
+
+        // Lấy tọa độ quán
+        $response_quan      = $client->request('GET', $link_get, [
+            'headers' => [
+                'User-Agent' => 'MyApp/1.0',
+                'Accept'     => 'application/json',
+            ],
+            'query' => [
+                'api_key' => '5b3ce3597851110001cf62484c960a399b1d44f4829554f302e513b8',
+                'text'    => $dia_chi_quan->dia_chi,
+                'size'    => 1
+            ]
+        ]);
+        // return ($dia_chi_quan->dia_chi);
+        $body = $response_quan->getBody()->getContents();
+        $response_quan = json_decode($body, true);
+        $toa_do_quan   = $response_quan['features'][0]['geometry']['coordinates'];
+
+        // Lấy tọa độ khách
+        $response_khach      = $client->request('GET', $link_get, [
+            'headers' => [
+                'User-Agent' => 'MyApp/1.0',
+                'Accept'     => 'application/json',
+            ],
+            'query' => [
+                'api_key' => '5b3ce3597851110001cf62484c960a399b1d44f4829554f302e513b8',
+                'text'    => $dia_chi_khach->dia_chi,
+                'size'    => 1
+            ]
+        ]);
+        $body = $response_khach->getBody()->getContents();
+        $response_khach = json_decode($body, true);
+        $toa_do_khach   = $response_khach['features'][0]['geometry']['coordinates'];
+
+        $link_directions = 'https://api.openrouteservice.org/v2/directions/driving-car';
+        // Tính khoảng cách
+        $response_distance = $client->request('POST', $link_directions, [
+            'headers' => [
+                'Authorization' => '5b3ce3597851110001cf62484c960a399b1d44f4829554f302e513b8', // API Key
+                'Content-Type'  => 'application/json',
+                'Accept'        => 'application/json',
+            ],
+            'json' => [
+                'coordinates' => [
+                    $toa_do_quan,  // Tọa độ quán
+                    $toa_do_khach  // Tọa độ khách
+                ],
+                'units' => 'km' // Đơn vị khoảng cách: kilômét
+            ]
+        ]);
+
+        $body               = $response_distance->getBody()->getContents();
+        $response_distance  = json_decode($body, true);
+        try {
+            $khoang_cach        = $response_distance['routes'][0]['summary']['distance'];
+            $phi_ship           = round($khoang_cach * 25000, -3); // 20.000đ/km
+        } catch (\Exception $e) {
+            $phi_ship  = 25000;
+        }
+
+
+        $donHang = DonHang::create([
+            'ma_don_hang'       =>  'DH' . time(),
+            'id_khach_hang'     =>  Auth::guard('sanctum')->user()->id,
+            'id_voucher'        =>  0,
+            'id_shipper'        =>  0,
+            'id_quan_an'        =>  $id_quan_an,
+            'id_dia_chi_nhan'   =>  $id_dia_chi_khach,
+            'ten_nguoi_nhan'    =>  DiaChi::find($id_dia_chi_khach)->ten_nguoi_nhan,
+            'so_dien_thoai'     =>  DiaChi::find($id_dia_chi_khach)->so_dien_thoai,
+            'tien_hang'         =>  $gio_hang->sum('thanh_tien'),
+            'phi_ship'          =>  $phi_ship,
+            'tong_tien'         =>  $gio_hang->sum('thanh_tien') + $phi_ship,
+            'is_thanh_toan'     =>  0,
+            'tinh_trang'        =>  0,
+        ]);
+
+        ChiTietDonHang::where('id_don_hang', 0)
+                    ->where('id_khach_hang', Auth::guard('sanctum')->user()->id)
+                    ->where('chi_tiet_don_hangs.id_quan_an', $id_quan_an)
+                    ->update([
+                        'id_don_hang' => $donHang->id,
+                    ]);
+
+        return response()->json([
+            'status'    =>  1,
+            'message'   =>  'Đã xác nhận đơn hàng thành công!'
+        ]);
     }
 }

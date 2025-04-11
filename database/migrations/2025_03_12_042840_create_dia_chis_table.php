@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('dia_chis', function (Blueprint $table) {
             $table->id();
-            $table->string('dia_chi');
+            $table->integer('id_khach_hang');
             $table->integer('id_quan_huyen');
+            $table->text('dia_chi');
             $table->double('toa_do_x')->nullable();
             $table->double('toa_do_y')->nullable();
-            $table->integer('tinh_trang')->default(1);
+            $table->string('ten_nguoi_nhan');
+            $table->string('so_dien_thoai');
             $table->timestamps();
         });
     }

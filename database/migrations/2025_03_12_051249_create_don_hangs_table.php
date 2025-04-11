@@ -18,15 +18,14 @@ return new class extends Migration
             $table->integer('id_voucher')->nullable();
             $table->integer('id_shipper')->nullable();
             $table->integer('id_quan_an');
-            $table->integer('tong_tien');
-            $table->string('dia_chi');
+            $table->integer('id_dia_chi_nhan');
             $table->string('ten_nguoi_nhan');
             $table->string('so_dien_thoai');
-            $table->integer('phi_ship')->default(0);
-            $table->tinyInteger('tinh_trang')->default(1);
+            $table->double('tien_hang')->default(0);
+            $table->double('phi_ship')->default(0);
+            $table->double('tong_tien')->default(0);
             $table->integer('is_thanh_toan')->default(0);
-            $table->integer('toa_do_x')->nullable();
-            $table->integer('toa_do_y')->nullable();
+            $table->integer('tinh_trang')->default(0);
             $table->timestamps();
         });
     }

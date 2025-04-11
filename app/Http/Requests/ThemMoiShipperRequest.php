@@ -6,19 +6,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ThemMoiShipperRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
@@ -28,7 +20,6 @@ class ThemMoiShipperRequest extends FormRequest
             're_password'   => 'required|min:6|max:30|same:password',
             'cccd'          => 'required|digits:12|unique:shippers,cccd',
             'so_dien_thoai' => 'required|digits:10|unique:shippers,so_dien_thoai',
-            'dia_chi'       => 'required|min:3|max:255',
         ];
     }
 
@@ -53,9 +44,6 @@ class ThemMoiShipperRequest extends FormRequest
             'so_dien_thoai.required'=> 'Số điện thoại không được để trống',
             'so_dien_thoai.digits'  => 'Số điện thoại không đúng định dạng',
             'so_dien_thoai.unique'  => 'Số điện thoại đã tồn tại',
-            'dia_chi.required'      => 'Địa chỉ không được để trống',
-            'dia_chi.min'           => 'Địa chỉ không được ít hơn 3 ký tự',
-            'dia_chi.max'           => 'Địa chỉ không được quá 255 ký tự',
         ];
     }
 }

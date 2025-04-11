@@ -58,30 +58,21 @@ class ShipperController extends Controller
     }
     public function getData()
     {
-        $shipper = Shipper::join('dia_chis', 'dia_chis.id', 'shippers.id_dia_chi')
-            ->select('shippers.*', 'dia_chis.dia_chi', 'dia_chis.id_quan_huyen')
-            ->get();
+        $shipper = Shipper::get();
         return response()->json([
             'data' => $shipper
         ]);
     }
     public function store(ThemMoiShipperRequest $request)
     {
-        $diaChi = DiaChi::create([
-            'dia_chi' => $request->dia_chi,
-            'id_quan_huyen' => $request->id_quan_huyen,
-        ]);
-
         Shipper::create([
             'ho_va_ten'     => $request->ho_va_ten,
+            'so_dien_thoai' => $request->so_dien_thoai,
             'email'         => $request->email,
             'password'      => $request->password,
             'cccd'          => $request->cccd,
-            'so_dien_thoai' => $request->so_dien_thoai,
-            'id_dia_chi'    => $diaChi->id,
             'is_active'     => $request->is_active,
             'is_open '      => $request->is_open,
-
         ]);
         return response()->json([
             'status'  => 1,
@@ -100,21 +91,13 @@ class ShipperController extends Controller
 
     public function update(CapNhatShipperRequest $request)
     {
-        $diaChi = DiaChi::where('id_quan_huyen', $request->id_quan_huyen)->first();
-        $diaChi->update([
-            'dia_chi'       => $request->dia_chi,
-            'id_quan_huyen' => $request->id_quan_huyen,
-        ]);
-
         Shipper::where('id', $request->id)->update([
             'ho_va_ten'     => $request->ho_va_ten,
             'email'         => $request->email,
             'cccd'          => $request->cccd,
             'so_dien_thoai' => $request->so_dien_thoai,
-            'id_dia_chi'    => $diaChi->id,
             'is_active'     => $request->is_active,
             'is_open'      => $request->is_open,
-
         ]);
         return response()->json([
             'status'  => 1,
@@ -167,10 +150,7 @@ class ShipperController extends Controller
     {
         $user_login = Auth::guard('sanctum')->user();
         if ($user_login) {
-            $shipper = Shipper::join('dia_chis', 'dia_chis.id', 'shippers.id_dia_chi')
-                            ->select('shippers.*', 'dia_chis.dia_chi', 'dia_chis.id_quan_huyen')
-                            ->where('shippers.id', $user_login->id)
-                            ->first();
+            $shipper = Shipper::where('id', $user_login->id)->first();
             return response()->json([
                 'status'    => 1,
                 'data'      => $shipper
@@ -348,18 +328,12 @@ class ShipperController extends Controller
 
     public function Register(Request $request)
     {
-        $diaChi = DiaChi::create([
-            'dia_chi'       => $request->dia_chi,
-            'id_quan_huyen' => $request->id_quan_huyen,
-        ]);
-
         Shipper::create([
             'ho_va_ten'     => $request->ho_va_ten,
             'email'         => $request->email,
             'password'      => $request->password,
             'cccd'          => $request->cccd,
             'so_dien_thoai' => $request->so_dien_thoai,
-            'id_dia_chi'    => $diaChi->id,
         ]);
         return response()->json([
             'status'  => 1,

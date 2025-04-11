@@ -6,14 +6,10 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class QuanAnUpdateRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
-
     public function rules(): array
     {
         return [
@@ -23,8 +19,8 @@ class QuanAnUpdateRequest extends FormRequest
             'ten_quan_an'   => 'required|max:255',
             'gio_mo_cua'    => 'required',
             'gio_dong_cua'  => 'required',
-            'id_dia_chi'    => 'required|exists:dia_chis,id',
             'so_dien_thoai' => 'required|digits:10',
+            'dia_chi'       => 'required'
         ];
     }
     public function messages()
@@ -41,8 +37,7 @@ class QuanAnUpdateRequest extends FormRequest
             'ten_quan_an.max'       => 'Tên quán ăn không được quá 255 ký tự!',
             'gio_mo_cua.required'   => 'Giờ mở cửa không được để trống!',
             'gio_dong_cua.required' => 'Giờ đóng cửa không được để trống!',
-            'id_dia_chi.required'   => 'Địa chỉ không được để trống!',
-            'id_dia_chi.exists'     => 'Địa chỉ không tồn tại!',
+            'dia_chi.required'      => 'Địa chỉ không được để trống!',
             'so_dien_thoai.required'=> 'Số điện thoại không được để trống!',
             'so_dien_thoai.digits'  => 'Số điện thoại không đúng định dạng!',
         ];

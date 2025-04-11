@@ -18,10 +18,8 @@ class Shipper extends Authenticatable
         'email',
         'password',
         'cccd',
-        'id_dia_chi',
         'is_active',
         'is_open',
         'tong_tien',
     ];
 }
-

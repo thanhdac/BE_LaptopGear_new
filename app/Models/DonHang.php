@@ -13,19 +13,18 @@ class DonHang extends Model
         'id_voucher',
         'id_shipper',
         'id_quan_an',
-        'tong_tien',
-        'dia_chi',
+        'id_dia_chi_nhan',
         'ten_nguoi_nhan',
         'so_dien_thoai',
+        'tien_hang',
         'phi_ship',
-        'tinh_trang',
+        'tong_tien',
         'is_thanh_toan',
-        'toa_do_x',
-        'toa_do_y',
+        'tinh_trang',
     ];
 
-    CONST TINH_TRANG_CHUA_NHAN = 0;
-    CONST TINH_TRANG_DA_NHAN = 1;
-    CONST TINH_TRANG_DA_GIAO = 2;
-    CONST TINH_TRANG_DA_HUY = 3;
+    const TINH_TRANG_CHUA_NHAN = 0;
+    const TINH_TRANG_DA_NHAN = 1;
+    const TINH_TRANG_DA_GIAO = 2;
+    const TINH_TRANG_DA_HUY = 3;
 }

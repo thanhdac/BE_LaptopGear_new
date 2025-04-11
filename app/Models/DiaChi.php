@@ -8,10 +8,12 @@ class DiaChi extends Model
 {
     protected $table = 'dia_chis';
     protected $fillable = [
-        'dia_chi',
+        'id_khach_hang',
         'id_quan_huyen',
+        'dia_chi',
         'toa_do_x',
         'toa_do_y',
-        'tinh_trang',
+        'ten_nguoi_nhan',
+        'so_dien_thoai',
     ];
 }

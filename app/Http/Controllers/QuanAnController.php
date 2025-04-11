@@ -26,6 +26,7 @@ use App\Models\DanhMuc;
 use App\Models\DiaChi;
 use App\Models\MonAn;
 use App\Models\QuanAn;
+use App\Models\QuanHuyen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -68,10 +69,10 @@ class QuanAnController extends Controller
 
     public function getData()
     {
-        $data = QuanAn::join('dia_chis', 'quan_ans.id_dia_chi', 'dia_chis.id')
-            ->join('quan_huyens', 'dia_chis.id_quan_huyen', 'quan_huyens.id')
-            ->select('quan_ans.*', 'dia_chis.dia_chi', 'dia_chis.id_quan_huyen')
-            ->get();
+        $data = QuanAn::join('quan_huyens', 'quan_ans.id_quan_huyen', 'quan_huyens.id')
+                        ->join('tinh_thanhs', 'tinh_thanhs.id', 'quan_huyens.id_tinh_thanh')
+                        ->select('quan_ans.*', 'quan_huyens.ten_quan_huyen', 'tinh_thanhs.ten_tinh_thanh')
+                        ->get();
         return response()->json([
             'data' => $data
         ]);
@@ -88,10 +89,6 @@ class QuanAnController extends Controller
 
     public function store(QuanAnThemMoiRequest $request)
     {
-        $diaChi = DiaChi::create([
-            'dia_chi'       => $request->dia_chi,
-            'id_quan_huyen' => $request->id_quan_huyen,
-        ]);
         QuanAn::create([
             'email'                 => $request->email,
             'password'              => $request->password,
@@ -100,9 +97,10 @@ class QuanAnController extends Controller
             'gio_mo_cua'            => $request->gio_mo_cua,
             'gio_dong_cua'          => $request->gio_dong_cua,
             'so_dien_thoai'         => $request->so_dien_thoai,
-            'id_dia_chi'            => $diaChi->id,
             'is_active'             => $request->is_active,
             'tinh_trang'            => $request->tinh_trang,
+            'dia_chi'               => $request->dia_chi,
+            'id_quan_huyen'         => $request->id_quan_huyen,
         ]);
         return response()->json([
             'status'    => 1,
@@ -112,11 +110,6 @@ class QuanAnController extends Controller
 
     public function update(QuanAnUpdateRequest $request)
     {
-        $diaChi = DiaChi::where('id_quan_huyen', $request->id_quan_huyen)->first();
-        $diaChi->update([
-            'dia_chi'       => $request->dia_chi,
-            'id_quan_huyen' => $request->id_quan_huyen,
-        ]);
         $data = QuanAn::find($request->id);
         if ($data) {
             $data->update([
@@ -126,9 +119,10 @@ class QuanAnController extends Controller
                 'gio_mo_cua'            => $request->gio_mo_cua,
                 'gio_dong_cua'          => $request->gio_dong_cua,
                 'so_dien_thoai'         => $request->so_dien_thoai,
-                'id_dia_chi'            => $diaChi->id,
                 'is_active'             => $request->is_active,
                 'tinh_trang'            => $request->tinh_trang,
+                'dia_chi'               => $request->dia_chi,
+                'id_quan_huyen'         => $request->id_quan_huyen,
             ]);
             return response()->json([
                 'status'    => 1,
@@ -472,10 +466,6 @@ class QuanAnController extends Controller
 
     public function dangKy(DangKyQuanAnRequest $request)
     {
-        $diaChi = DiaChi::create([
-            'dia_chi' => $request->dia_chi,
-            'id_quan_huyen' => $request->id_quan_huyen,
-        ]);
         QuanAn::create([
             'email'                 => $request->email,
             'password'              => $request->password,
@@ -484,7 +474,8 @@ class QuanAnController extends Controller
             'gio_mo_cua'            => $request->gio_mo_cua,
             'gio_dong_cua'          => $request->gio_dong_cua,
             'so_dien_thoai'         => $request->so_dien_thoai,
-            'id_dia_chi'            => $diaChi->id,
+            'dia_chi'               => $request->dia_chi,
+            'id_quan_huyen'         => $request->id_quan_huyen,
         ]);
         return response()->json([
             'status'    => 1,
@@ -495,10 +486,7 @@ class QuanAnController extends Controller
     {
         $user_login = Auth::guard('sanctum')->user();
         if ($user_login) {
-            $quanan = QuanAn::join('dia_chis', 'dia_chis.id', 'quan_ans.id_dia_chi')
-                ->select('quan_ans.*', 'dia_chis.dia_chi')
-
-                ->where('quan_ans.id', $user_login->id)->first();
+            $quanan = QuanAn::where('quan_ans.id', $user_login->id)->first();
             return response()->json([
                 'status'    => 1,
                 'data'      => $quanan

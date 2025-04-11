@@ -23,7 +23,6 @@ class ShipperSeeder extends Seeder
                 'email'          => 'shippera@gmail.com',
                 'password'       => '123456',
                 'cccd'           => '123456789012',
-                'id_dia_chi'     => 1,
                 'is_active'      => 1,
                 'is_open'        => 1,
                 'tong_tien'      => 0,
@@ -34,9 +33,8 @@ class ShipperSeeder extends Seeder
                 'email'          => 'shipperb@gmail.com',
                 'password'       => '123456',
                 'cccd'           => '987654321098',
-                'id_dia_chi'     => 2,
                 'is_active'      => 1,
-                'is_open'        => 0,
+                'is_open'        => 1,
                 'tong_tien'      => 0,
             ],
         ]);

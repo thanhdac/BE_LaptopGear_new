@@ -183,4 +183,5 @@ Route::get('/khach-hang/don-dat-hang/{id_quan_an}', [ChiTietDonHangController::c
 Route::get('/khach-hang/xac-nhan-dat-hang/{id_quan_an}/{id_dia_chi_khach}', [ChiTietDonHangController::class, 'xacNhanDatHang']);
 Route::post('/khach-hang/don-dat-hang/create', [ChiTietDonHangController::class, 'themGioHang']);
 Route::post('/khach-hang/don-dat-hang/update', [ChiTietDonHangController::class, 'updateGioHang']);
+Route::post('/khach-hang/don-dat-hang/delete', [ChiTietDonHangController::class, 'deleteGioHang']);
 Route::post('/khach-hang/don-dat-hang/phi-ship', [ChiTietDonHangController::class, 'tinhPhiShip']);

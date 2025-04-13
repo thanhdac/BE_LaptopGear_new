@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeleteGioHangRequest;
 use App\Http\Requests\ThemGioHangRequest;
 use App\Http\Requests\TinhPhiShipRequest;
 use App\Http\Requests\UpdateGioHangRequest;
@@ -184,6 +185,15 @@ class ChiTietDonHangController extends Controller
                 'message'   => "Cập nhật giỏ hàng thành công!!"
             ]);
         }
+    }
+
+    public function deleteGioHang(DeleteGioHangRequest $request)
+    {
+        ChiTietDonHang::where('id', $request->all())->delete();
+        return response()->json([
+            'status'    => 1,
+            'message'   => "Đã hủy món " . $request->ten_mon_an . " thành công!!",
+        ]);
     }
 
     public function xacNhanDatHang($id_quan_an, $id_dia_chi_khach)

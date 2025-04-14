@@ -18,6 +18,7 @@ class ShipperSeeder extends Seeder
         DB::table('shippers')->truncate();
         DB::table('shippers')->insert([
             [
+                'id'             => 1,
                 'ho_va_ten'      => 'Shipper A',
                 'so_dien_thoai'  => '0123456789',
                 'email'          => 'shippera@gmail.com',
@@ -28,6 +29,7 @@ class ShipperSeeder extends Seeder
                 'tong_tien'      => 0,
             ],
             [
+                'id'             => 2,
                 'ho_va_ten'      => 'Shipper B',
                 'so_dien_thoai'  => '0987654321',
                 'email'          => 'shipperb@gmail.com',

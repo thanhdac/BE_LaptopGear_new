@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             QuanAnSeeder::class,
             MonAnSeeder::class,
             ChiTietDonHangSeeder::class,
-
+            DonHangSeeder::class,
 
             // chưa làm lại
             NhanVienSeeder::class,
@@ -37,10 +37,6 @@ class DatabaseSeeder extends Seeder
             PhanQuyenSeeder::class,
             VoucherSeeder::class,
             ChiTietDanhMucQuanAnSeeder::class,
-
-
-            // Chưa sửa, đang lỗi
-            // DonHangSeeder::class,
         ]);
     }
 }

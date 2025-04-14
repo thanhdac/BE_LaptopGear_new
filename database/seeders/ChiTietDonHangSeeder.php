@@ -13,7 +13,8 @@ class ChiTietDonHangSeeder extends Seeder
         DB::table('chi_tiet_don_hangs')->truncate();
         DB::table('chi_tiet_don_hangs')->insert([
             [
-                'id_don_hang'    => 0,
+                'id'             => 1,
+                'id_don_hang'    => 2,
                 'id_khach_hang'  => 1,
                 'id_mon_an'      => 12,
                 'id_quan_an'     => 3,
@@ -22,6 +23,7 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 25000,
             ],
             [
+                'id'             => 2,
                 'id_don_hang'    => 0,
                 'id_khach_hang'  => 2,
                 'id_mon_an'      => 7,
@@ -31,6 +33,7 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 20000,
             ],
             [
+                'id'             => 3,
                 'id_don_hang'    => 0,
                 'id_khach_hang'  => 3,
                 'id_mon_an'      => 26,
@@ -40,6 +43,7 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 40000,
             ],
             [
+                'id'             => 4,
                 'id_don_hang'    => 0,
                 'id_khach_hang'  => 4,
                 'id_mon_an'      => 33,
@@ -49,7 +53,8 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 10000,
             ],
             [
-                'id_don_hang'    => 0,
+                'id'             => 5,
+                'id_don_hang'    => 8,
                 'id_khach_hang'  => 5,
                 'id_mon_an'      => 45,
                 'id_quan_an'     => 12,
@@ -58,6 +63,7 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 30000,
             ],
             [
+                'id'             => 6,
                 'id_don_hang'    => 0,
                 'id_khach_hang'  => 6,
                 'id_mon_an'      => 3,
@@ -67,7 +73,8 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 17000,
             ],
             [
-                'id_don_hang'    => 0,
+                'id'             => 7,
+                'id_don_hang'    => 10,
                 'id_khach_hang'  => 7,
                 'id_mon_an'      => 18,
                 'id_quan_an'     => 4,
@@ -76,7 +83,8 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 50000,
             ],
             [
-                'id_don_hang'    => 0,
+                'id'             => 8,
+                'id_don_hang'    => 3,
                 'id_khach_hang'  => 1,
                 'id_mon_an'      => 38,
                 'id_quan_an'     => 10,
@@ -85,7 +93,8 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 25000,
             ],
             [
-                'id_don_hang'    => 0,
+                'id'             => 9,
+                'id_don_hang'    => 5,
                 'id_khach_hang'  => 2,
                 'id_mon_an'      => 56,
                 'id_quan_an'     => 14,
@@ -94,6 +103,7 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 25000,
             ],
             [
+                'id'             => 10,
                 'id_don_hang'    => 0,
                 'id_khach_hang'  => 3,
                 'id_mon_an'      => 61,
@@ -103,7 +113,8 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 20000,
             ],
             [
-                'id_don_hang'    => 0,
+                'id'             => 11,
+                'id_don_hang'    => 2,
                 'id_khach_hang'  => 1,
                 'id_mon_an'      => 12,
                 'id_quan_an'     => 3,
@@ -112,6 +123,7 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 25000,
             ],
             [
+                'id'             => 12,
                 'id_don_hang'    => 0,
                 'id_khach_hang'  => 2,
                 'id_mon_an'      => 14,
@@ -121,6 +133,7 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 30000,
             ],
             [
+                'id'             => 13,
                 'id_don_hang'    => 0,
                 'id_khach_hang'  => 4,
                 'id_mon_an'      => 20,
@@ -130,6 +143,7 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 30000,
             ],
             [
+                'id'             => 14,
                 'id_don_hang'    => 0,
                 'id_khach_hang'  => 5,
                 'id_mon_an'      => 22,
@@ -139,6 +153,7 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 40000,
             ],
             [
+                'id'             => 15,
                 'id_don_hang'    => 0,
                 'id_khach_hang'  => 6,
                 'id_mon_an'      => 25,
@@ -148,6 +163,7 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 40000,
             ],
             [
+                'id'             => 16,
                 'id_don_hang'    => 0,
                 'id_khach_hang'  => 1,
                 'id_mon_an'      => 13,
@@ -157,7 +173,8 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 30000,
             ],
             [
-                'id_don_hang'    => 0,
+                'id'             => 17,
+                'id_don_hang'    => 4,
                 'id_khach_hang'  => 2,
                 'id_mon_an'      => 23,
                 'id_quan_an'     => 6,
@@ -166,6 +183,7 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 40000,
             ],
             [
+                'id'             => 18,
                 'id_don_hang'    => 0,
                 'id_khach_hang'  => 3,
                 'id_mon_an'      => 2,
@@ -175,6 +193,7 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 20000,
             ],
             [
+                'id'             => 19,
                 'id_don_hang'    => 0,
                 'id_khach_hang'  => 5,
                 'id_mon_an'      => 26,
@@ -184,7 +203,8 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 40000,
             ],
             [
-                'id_don_hang'    => 0,
+                'id'             => 20,
+                'id_don_hang'    => 9,
                 'id_khach_hang'  => 6,
                 'id_mon_an'      => 27,
                 'id_quan_an'     => 8,
@@ -193,7 +213,8 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 30000,
             ],
             [
-                'id_don_hang'    => 0,
+                'id'             => 21,
+                'id_don_hang'    => 1,
                 'id_khach_hang'  => 1,
                 'id_mon_an'      => 3,
                 'id_quan_an'     => 2,
@@ -202,7 +223,8 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 17000,
             ],
             [
-                'id_don_hang'    => 0,
+                'id'             => 22,
+                'id_don_hang'    => 4,
                 'id_khach_hang'  => 2,
                 'id_mon_an'      => 24,
                 'id_quan_an'     => 6,
@@ -211,6 +233,7 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 40000,
             ],
             [
+                'id'             => 23,
                 'id_don_hang'    => 0,
                 'id_khach_hang'  => 3,
                 'id_mon_an'      => 4,
@@ -220,6 +243,7 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 25000,
             ],
             [
+                'id'             => 24,
                 'id_don_hang'    => 0,
                 'id_khach_hang'  => 4,
                 'id_mon_an'      => 11,
@@ -229,6 +253,7 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 25000,
             ],
             [
+                'id'             => 25,
                 'id_don_hang'    => 0,
                 'id_khach_hang'  => 5,
                 'id_mon_an'      => 28,
@@ -238,6 +263,7 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 30000,
             ],
             [
+                'id'             => 26,
                 'id_don_hang'    => 0,
                 'id_khach_hang'  => 1,
                 'id_mon_an'      => 25,
@@ -247,6 +273,7 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 40000,
             ],
             [
+                'id'             => 28,
                 'id_don_hang'    => 0,
                 'id_khach_hang'  => 2,
                 'id_mon_an'      => 31,
@@ -256,7 +283,8 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 10000,
             ],
             [
-                'id_don_hang'    => 0,
+                'id'             => 29,
+                'id_don_hang'    => 6,
                 'id_khach_hang'  => 3,
                 'id_mon_an'      => 38,
                 'id_quan_an'     => 10,
@@ -265,7 +293,8 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 25000,
             ],
             [
-                'id_don_hang'    => 0,
+                'id'             => 30,
+                'id_don_hang'    => 7,
                 'id_khach_hang'  => 4,
                 'id_mon_an'      => 19,
                 'id_quan_an'     => 5,
@@ -274,6 +303,7 @@ class ChiTietDonHangSeeder extends Seeder
                 'thanh_tien'     => 30000,
             ],
             [
+                'id'             => 31,
                 'id_don_hang'    => 0,
                 'id_khach_hang'  => 5,
                 'id_mon_an'      => 6,

@@ -207,16 +207,6 @@ class ShipperController extends Controller
             ]);
         }
     }
-    public function donHangChuaNhan()
-    {
-        $data = DonHang::where('tinh_trang', 0)
-            ->whereNull('id_shipper')
-            ->get();
-
-        return response()->json([
-            'data'      => $data
-        ]);
-    }
     public function dataDonHangNhan()
     {
         $user = Auth::guard('sanctum')->user();

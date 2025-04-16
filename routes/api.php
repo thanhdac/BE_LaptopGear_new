@@ -150,6 +150,8 @@ Route::post('/quan-an/voucher/change', [VoucherController::class, 'doiTrangThaiQ
 
 // quan an / dơn hàng
 Route::get('/quan-an/don-hang/data', [DonHangController::class, 'getDonHangQuanAn'])->middleware('quanAnMiddle');
+Route::post('/quan-an/don-hang/da-xong', [DonHangController::class, 'daXongDonHang'])->middleware('quanAnMiddle');
+Route::post('/quan-an/don-hang/chi-tiet', [DonHangController::class, 'chiTietDonHangQuanAn'])->middleware('quanAnMiddle');
 
 
 
@@ -176,7 +178,9 @@ Route::post('/shipper/hoan-thanh-don', [ShipperController::class, 'hoanThanhDonH
 
 // shipper - đơn hàng
 Route::get('/shipper/don-hang/data', [DonHangController::class, 'getDonHangShipper'])->middleware('shipperMiddle');
+Route::get('/shipper/don-hang/data-dang-giao', [DonHangController::class, 'getDonHangShipperDangGiao'])->middleware('shipperMiddle');
 Route::post('/shipper/don-hang/nhan-don', [DonHangController::class, 'nhanDonDonHangShipper'])->middleware('shipperMiddle');
+Route::post('/shipper/don-hang/hoan-thanh', [DonHangController::class, 'hoanThanhDonHangShipper'])->middleware('shipperMiddle');
 
 
 

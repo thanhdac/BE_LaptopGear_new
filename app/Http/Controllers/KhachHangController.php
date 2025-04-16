@@ -22,6 +22,7 @@ use App\Models\QuanHuyen;
 use App\Models\TinhThanh;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class KhachHangController extends Controller
 {
@@ -43,6 +44,18 @@ class KhachHangController extends Controller
     }
     public function Login(KhachHangLoginRequest $request)
     {
+        $res = Http::get("https://www.google.com/recaptcha/api/siteverify", [
+            'secret'    => "6LftzRorAAAAAE0IHevZsTvnvUxU16FIK4dcYLY5",
+            'response'  => $request->code,
+        ]);
+
+        if($res->json()['success'] == false){
+            return response()->json([
+                'status'    => 0,
+                'message'   => 'Captcha không hợp lệ!'
+            ]);
+        }
+
         $check = KhachHang::where('email', $request->email)
             ->where('password', $request->password)
             ->first();

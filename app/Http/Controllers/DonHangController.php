@@ -61,7 +61,7 @@ class DonHangController extends Controller
         $user = Auth::guard('sanctum')->user();
 
         $data = DonHang::where('don_hangs.id_quan_an', $user->id)
-                        ->where('tinh_trang', 1)
+                        ->where('tinh_trang', '>=', 1)
                         ->join('khach_hangs', 'khach_hangs.id', 'don_hangs.id_khach_hang')
                         ->join('shippers', 'shippers.id', 'don_hangs.id_shipper')
                         ->select(
@@ -74,14 +74,51 @@ class DonHangController extends Controller
                             'shippers.ho_va_ten as ho_va_ten_shipper',
                         )
                         ->get();
-                    return response()->json([
-                        'data' => $data,
-                    ]);
+        return response()->json([
+            'data' => $data,
+        ]);
+    }
+
+    public function daXongDonHang(Request $request)
+    {
+        $user = Auth::guard('sanctum')->user();
+        DonHang::where('id', $request->id)
+                ->where('id_quan_an', $user->id)
+                ->where('tinh_trang', 1)
+                ->update([
+                    'tinh_trang' => 2,
+                ]);
+        return response()->json([
+            'status'    =>  1,
+            'message'   =>  'Đã hoàn thành đơn hàng!!',
+        ]);
+    }
+
+    public function chiTietDonHangQuanAn(Request $request)
+    {
+        $user = Auth::guard('sanctum')->user();
+
+        $data = ChiTietDonHang::join('don_hangs', 'don_hangs.id', 'chi_tiet_don_hangs.id_don_hang')
+                                ->join('mon_ans', 'mon_ans.id', 'chi_tiet_don_hangs.id_mon_an')
+                                ->where('chi_tiet_don_hangs.id_don_hang', $request->id)
+                                ->where('don_hangs.id_quan_an', $user->id)
+                                ->select(
+                                    'mon_ans.ten_mon_an',
+                                    'chi_tiet_don_hangs.so_luong',
+                                    'chi_tiet_don_hangs.don_gia',
+                                    'chi_tiet_don_hangs.thanh_tien',
+                                    'chi_tiet_don_hangs.ghi_chu',
+                                )
+                                ->get();
+        return response()->json([
+            'status'    =>  1,
+            'data'      =>  $data,
+        ]);
     }
 
     public function getDonHangShipper()
     {
-        $list_don_hang_co_the_nhan = DonHang::whereNull('don_hangs.id_shipper')
+        $list_don_hang_co_the_nhan = DonHang::where('don_hangs.id_shipper', 0)
                                             ->where('don_hangs.tinh_trang', 0)
                                             ->join('quan_ans', 'quan_ans.id', 'don_hangs.id_quan_an')
                                             ->join('khach_hangs', 'khach_hangs.id', 'don_hangs.id_khach_hang')
@@ -104,12 +141,54 @@ class DonHangController extends Controller
         ]);
     }
 
+    public function getDonHangShipperDangGiao()
+    {
+        $user = Auth::guard('sanctum')->user();
+        $list_don_hang_co_the_nhan = DonHang::where('don_hangs.id_shipper', $user->id)
+                                            ->whereIn('don_hangs.tinh_trang', [1, 2])
+                                            ->join('quan_ans', 'quan_ans.id', 'don_hangs.id_quan_an')
+                                            ->join('khach_hangs', 'khach_hangs.id', 'don_hangs.id_khach_hang')
+                                            ->join('dia_chis', 'dia_chis.id', 'don_hangs.id_dia_chi_nhan')
+                                            ->select(
+                                                'don_hangs.id',
+                                                'don_hangs.ma_don_hang',
+                                                'quan_ans.ten_quan_an',
+                                                'quan_ans.hinh_anh',
+                                                'quan_ans.dia_chi as dia_chi_quan',
+                                                'don_hangs.ten_nguoi_nhan',
+                                                'khach_hangs.avatar',
+                                                'dia_chis.dia_chi as dia_chi_khach',
+                                                'don_hangs.tong_tien',
+                                                'don_hangs.phi_ship',
+                                            )
+                                            ->get();
+
+        return response()->json([
+            'data' => $list_don_hang_co_the_nhan,
+        ]);
+    }
+
+    public function hoanThanhDonHangShipper(Request $request)
+    {
+        $user = Auth::guard('sanctum')->user(); // shipper
+        DonHang::where('id', $request->id)
+                ->where('id_shipper', $user->id)
+                ->where('tinh_trang', 2) // Quán đã chế biến xong
+                ->update([
+                    'tinh_trang' => 3,
+                ]);
+        return response()->json([
+            'status'    =>  1,
+            'message'   =>  'Đã hoàn thành đơn hàng!!',
+        ]);
+    }
+
     public function nhanDonDonHangShipper(ShipperNhanDonHangRequest $request)
     {
         $user = Auth::guard('sanctum')->user();
 
         $check = DonHang::where('id', $request->id)
-                        ->whereNULL('id_shipper')->first();
+                        ->where('id_shipper', 0)->first();
         if($check) {
             $check->update([
                 'id_shipper' => $user->id,

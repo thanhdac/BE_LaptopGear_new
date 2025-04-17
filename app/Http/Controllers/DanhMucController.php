@@ -12,7 +12,9 @@ class DanhMucController extends Controller
 {
     public function getData()
     {
-        $data = DanhMuc::all();
+        $data = DanhMuc::join('danh_mucs as A', 'A.id', 'danh_mucs.id_danh_muc_cha')
+                        ->select('danh_mucs.*', 'A.ten_danh_muc as ten_danh_muc_cha')
+                        ->get();
         return response()->json([
             'status' => 1,
             'data' => $data

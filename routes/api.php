@@ -3,6 +3,7 @@
 use App\Http\Controllers\ChiTietDonHangController;
 use App\Http\Controllers\ChucVuController;
 use App\Http\Controllers\ChucNangController;
+use App\Http\Controllers\ClientHomeController;
 use App\Http\Controllers\DanhMucController;
 use App\Http\Controllers\DonHangController;
 use App\Http\Controllers\KhachHangController;
@@ -111,7 +112,10 @@ Route::post('/admin/nhan-vien/delete', [NhanVienController::class, 'destroy'])->
 Route::post('/admin/nhan-vien/update', [NhanVienController::class, 'update'])->middleware('nhanVienMiddle');
 Route::post('/admin/nhan-vien/change-status', [NhanVienController::class, 'changeStatus'])->middleware('nhanVienMiddle');
 
-
+// Admin - đơn đặt
+Route::get('/admin/don-hang/data', [DonHangController::class, 'getDonHangAdmin'])->middleware('nhanVienMiddle');
+Route::post('/admin/don-hang/data-chi-tiet', [DonHangController::class, 'getChiTietDonHangAdmin'])->middleware('nhanVienMiddle');
+Route::post('/admin/don-hang/huy-don-hang', [DonHangController::class, 'huyDonHangAdmin'])->middleware('nhanVienMiddle');
 
 
 
@@ -208,6 +212,11 @@ Route::post('/khach-hang/dia-chi/create', [KhachHangController::class, 'storeDia
 Route::post('/khach-hang/dia-chi/update', [KhachHangController::class, 'updateDiaChi'])->middleware('khachHangMiddle');
 Route::post('/khach-hang/dia-chi/delete', [KhachHangController::class, 'destroyDiaChi'])->middleware('khachHangMiddle');
 
+
+// kh-trang chủ
+Route::get('/khach-hang/trang-chu/data', [ClientHomeController::class, 'getDataHome']);
+
+// Khach-hang/don-dat-hang
 Route::get('/khach-hang/don-dat-hang/{id_quan_an}', [ChiTietDonHangController::class, 'getDonDatHang']);
 Route::get('/khach-hang/xac-nhan-dat-hang/{id_quan_an}/{id_dia_chi_khach}', [ChiTietDonHangController::class, 'xacNhanDatHang']);
 Route::post('/khach-hang/don-dat-hang/create', [ChiTietDonHangController::class, 'themGioHang']);

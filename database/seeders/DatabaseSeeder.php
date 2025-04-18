@@ -14,8 +14,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             QuanHuyenSeeder::class,
             TinhThanhSeeder::class,
-
-            // Đã làm lại
             DiaChiSeeder::class,
             KhachHangSeeder::class,
             ShipperSeeder::class,

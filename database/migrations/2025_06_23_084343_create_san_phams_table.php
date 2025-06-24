@@ -21,6 +21,7 @@ Schema::create('san_phams', function (Blueprint $table) {
     $table->string('hinh');
     $table->unsignedBigInteger('ma_dm');
     $table->text('mo_ta');
+    $table->string('trailer');
     $table->timestamps();
 });
     }

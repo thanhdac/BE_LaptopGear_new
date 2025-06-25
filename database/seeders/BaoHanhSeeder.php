@@ -23,7 +23,7 @@ class BaoHanhSeeder extends Seeder
                 'trang_thai'        => 1,
                 'ghi_chu'           => 'Yêu cầu bảo hành nhanh chóng',
                 'ngay_hen'          => '2025-06-30',
-                'ngay_hoan_thanh'   => null,
+                'ngay_hoan_thanh'   => '2025-07-05',
                 'ma_nv'             => 1,
             ],
             [
@@ -35,7 +35,7 @@ class BaoHanhSeeder extends Seeder
                 'trang_thai'        => 0,
                 'ghi_chu'           => 'Chờ xử lý',
                 'ngay_hen'          => '2025-07-01',
-                'ngay_hoan_thanh'   => null,
+                'ngay_hoan_thanh'   => '2025-07-05',
                 'ma_nv'             => 2,
             ],
             [
@@ -47,7 +47,7 @@ class BaoHanhSeeder extends Seeder
                 'trang_thai'        => 2,
                 'ghi_chu'           => 'Đã gửi sản phẩm đi bảo hành',
                 'ngay_hen'          => '2025-07-02',
-                'ngay_hoan_thanh'   => null,
+                'ngay_hoan_thanh'   => '2025-07-05',
                 'ma_nv'             => 3,
             ]
         ]);

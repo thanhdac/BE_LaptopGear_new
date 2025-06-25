@@ -47,7 +47,7 @@ class HoaDonSeeder extends Seeder
                 'dia_chi'           => '789 Tran Hung Dao, Da Nang',
                 'ma_nv'             => 3,
                 'ghi_chu'           => 'khách hàng yêu cầu giao hàng vào cuối tuần',
-                'ngay_duyet'        => null,
+                'ngay_duyet'        => '2025-06-24 11:00:00',
                 'trang_thai'        => 0,
             ]
         ]);

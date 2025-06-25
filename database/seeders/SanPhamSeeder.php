@@ -45,6 +45,7 @@ class SanPhamSeeder extends Seeder
                 'hinh'          => 'https://hanoilab.com/wp-content/uploads/2022/08/Dell-xps-13-plus-9320-hanoilab.jpg',
                 'ma_dm'         => 3,
                 'mo_ta'         => 'Macbook Pro 16 với hiệu năng vượt trội, thiết kế tinh tế, phù hợp cho các chuyên gia sáng tạo.',
+                'trailer'       => 'https://www.youtube.com/watch?v=example2'
             ]
         ]);
 

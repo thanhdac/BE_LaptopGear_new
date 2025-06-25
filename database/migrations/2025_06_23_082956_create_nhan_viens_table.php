@@ -16,7 +16,7 @@ Schema::create('nhan_viens', function (Blueprint $table) {
     $table->date('ngay_sinh');
     $table->string('dia_chi');
     $table->date('ngay_vao_lam');
-    $table->decimal('luong_cb');
+    $table->decimal('luong_cb', 12, 2)->unsigned();
     $table->string('vai_tro');
     $table->string('sdt');
     $table->string('email');

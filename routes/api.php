@@ -12,6 +12,7 @@ use App\Http\Controllers\NhanVienController;
 use App\Http\Controllers\PhanQuyenController;
 use App\Http\Controllers\QuanAnController;
 use App\Http\Controllers\QuanHuyenController;
+use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\ShipperController;
 use App\Http\Controllers\TinhThanhController;
 use App\Http\Controllers\VoucherController;
@@ -211,8 +212,8 @@ use Illuminate\Support\Facades\Route;
 // Route::post('/khach-hang/dia-chi/create', [KhachHangController::class, 'storeDiaChi'])->middleware('khachHangMiddle');
 // Route::post('/khach-hang/dia-chi/update', [KhachHangController::class, 'updateDiaChi'])->middleware('khachHangMiddle');
 // Route::post('/khach-hang/dia-chi/delete', [KhachHangController::class, 'destroyDiaChi'])->middleware('khachHangMiddle');
-
-
+// Route::get('/client/Laptop/get-data', [SanPhamController::class, 'getData']);
+Route::get('/client/Laptop/get-data', [SanPhamController::class, 'getData']);
 // // kh-trang chủ
 // Route::get('/khach-hang/trang-chu/data', [ClientHomeController::class, 'getDataHome']);
 

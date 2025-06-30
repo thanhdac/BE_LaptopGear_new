@@ -214,6 +214,7 @@ use Illuminate\Support\Facades\Route;
 // Route::post('/khach-hang/dia-chi/delete', [KhachHangController::class, 'destroyDiaChi'])->middleware('khachHangMiddle');
 // Route::get('/client/Laptop/get-data', [SanPhamController::class, 'getData']);
 Route::get('/client/Laptop/get-data', [SanPhamController::class, 'getData']);
+Route::get('/client/Laptop/san-pham/{id_san_pham}', [SanPhamController::class, 'getSanPhamById']);
 // // kh-trang chủ
 // Route::get('/khach-hang/trang-chu/data', [ClientHomeController::class, 'getDataHome']);
 

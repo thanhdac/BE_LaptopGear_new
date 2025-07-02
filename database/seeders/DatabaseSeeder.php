@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             NhanVienSeeder::class,
             NhapXuatSeeder::class,
             SanPhamSeeder::class,
-            TaiKhoanSeeder::class,
+            KhachHangSeeder::class,
             Thueseeder::class,
 
 

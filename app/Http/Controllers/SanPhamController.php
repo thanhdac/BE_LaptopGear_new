@@ -10,12 +10,19 @@ class SanPhamController
 {
     public function getData()
     {
-        $data = SanPham::all();
+        // $data = SanPham::all();
 
-        return response()->json([
-            'status' => 'success',
-            'data' => $data
-        ]);
+        // return response()->json([
+        //     'status' => 'success',
+        //     'data' => $data
+        // ]);
+
+        $data = SanPham::take(4)->get(); // hoặc ->limit(4)->get();
+
+    return response()->json([
+        'status' => 'success',
+        'data' => $data
+    ]);
     }
     public function getSanPhamById($id_san_pham)
     {
@@ -38,4 +45,19 @@ class SanPhamController
             ]);
         }
     }
+//     public function getSanPhamKhac()
+// {
+//     // $data = SanPham::take(4)->get(); // hoặc ->limit(4)->get();
+
+//     // return response()->json([
+//     //     'data' => $data
+//     // ]);
+//     $data = SanPham::all();
+
+//         return response()->json([
+//             'status' => 'success',
+//             'data' => $data
+//         ]);
+// }
+
 }

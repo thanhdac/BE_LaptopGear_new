@@ -6,13 +6,13 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class TaiKhoanSeeder extends Seeder
+class KhachHangSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('tai_khoans')->delete();
-        DB::table('tai_khoans')->truncate();
-        DB::table('tai_khoans')->insert([
+        DB::table('khachhangs')->delete();
+        DB::table('khachhangs')->truncate();
+        DB::table('khachhangs')->insert([
             [
                 'ten_dang_nhap' => 'thanhdac',
                 'mat_khau'      => '123456',

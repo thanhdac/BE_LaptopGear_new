@@ -30,6 +30,11 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/admin/profile', [NhanVienController::class, 'profile'])->middleware('nhanVienMiddle');
 // Route::post('/admin/doi-mat-khau', [NhanVienController::class, 'doiMatKhau'])->middleware('nhanVienMiddle');
 // Route::post('/admin/update-profile', [NhanVienController::class, 'updateProfile'])->middleware('nhanVienMiddle');
+Route::get('/admin/danh-muc/get-data', [DanhMucController::class, 'getData']);
+Route::post('/admin/danh-muc/add-data', [DanhMucController::class, 'addData']);
+Route::post('/admin/danh-muc/update', [DanhMucController::class, 'update']);
+Route::post('/admin/danh-muc/delete', [DanhMucController::class, 'destroy']);
+Route::post('/admin/danh-muc/change-status', [DanhMucController::class, 'changeStatus']);
 
 // Admin - CHỨC VỤ
 // Route::get('/admin/chuc-vu/data', [ChucVuController::class, 'getData'])->middleware('nhanVienMiddle');
@@ -214,6 +219,7 @@ use Illuminate\Support\Facades\Route;
 // Route::post('/khach-hang/dia-chi/delete', [KhachHangController::class, 'destroyDiaChi'])->middleware('khachHangMiddle');
 // Route::get('/client/Laptop/get-data', [SanPhamController::class, 'getData']);
 Route::get('/client/Laptop/get-data', [SanPhamController::class, 'getData']);
+Route::get('/client/Laptop/get-data-trang-chu', [SanPhamController::class, 'getDataTrangChu']);
 Route::get('/client/Laptop/san-pham/{id_san_pham}', [SanPhamController::class, 'getSanPhamById']);
 // // kh-trang chủ
 // Route::get('/khach-hang/trang-chu/data', [ClientHomeController::class, 'getDataHome']);

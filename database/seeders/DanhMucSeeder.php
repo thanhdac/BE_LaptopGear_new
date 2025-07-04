@@ -15,22 +15,19 @@ class DanhMucSeeder extends Seeder
         DB::table('danh_mucs')->truncate();
         DB::table('danh_mucs')->insert([
             [
-                'ma_dm'        => 1,
+                'ma_dm'        => 'DM01',
                 'ten_danh_muc' => 'Điện thoại',
                 'trang_thai'   => 1,
-                'ma_thue'      => 1,
             ],
             [
-                'ma_dm'        => 2,
+                'ma_dm'        => 'DM02',
                 'ten_danh_muc' => 'Máy tính bảng',
                 'trang_thai'   => 1,
-                'ma_thue'      => 1,
             ],
             [
-                'ma_dm'        => 3,
+                'ma_dm'        => 'DM03',
                 'ten_danh_muc' => 'Laptop',
                 'trang_thai'   => 1,
-                'ma_thue'      => 2,
             ]
         ]);
     }

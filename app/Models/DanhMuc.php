@@ -11,6 +11,7 @@ protected $fillable = [
     'ma_dm',
    'ten_danh_muc',
     'trang_thai',
-    'ma_thue',
 ];
+    const TAM_TAT   = 0;
+    const HOAT_DONG     = 1;
 }

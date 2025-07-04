@@ -10,10 +10,9 @@ return new class extends Migration
     {
         Schema::create('danh_mucs', function (Blueprint $table) {
             $table->id();
-            $table->integer('ma_dm');
+            $table->string('ma_dm');
             $table->string('ten_danh_muc');
             $table->integer('trang_thai');
-            $table->integer('ma_thue');
             $table->timestamps();
         });
     }

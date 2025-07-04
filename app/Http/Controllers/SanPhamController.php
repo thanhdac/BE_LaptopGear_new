@@ -10,19 +10,32 @@ class SanPhamController
 {
     public function getData()
     {
+        $data = SanPham::inRandomOrder()->take(4)->get();
+
+        return response()->json([
+        'status' => 'success',
+        'data' => $data
+    ]);
+    }
+
+    public function getDataTrangChu()
+    {
         $data = SanPham::all();
+
 
         return response()->json([
             'status' => 'success',
             'data' => $data
         ]);
     }
+
     public function getSanPhamById($id_san_pham)
     {
         $data_1 = SanPham::where('san_phams.id', $id_san_pham)
                  ->first();
 
         $data_2 = DanhGia::all();
+
 
 
         if ($data_1) {

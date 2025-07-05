@@ -25,7 +25,7 @@ class SanPhamSeeder extends Seeder
                 'ma_dm'         => 1,
                 'mo_ta'         => 'Laptop Dell XPS 13 với thiết kế mỏng nhẹ, hiệu năng mạnh mẽ, phù hợp cho công việc và giải trí.',
                 'trailer'       => 'https://www.youtube.com/watch?v=example1',
-                'danh_muc_may'  => 'Laptop văn phòng',
+                // 'danh_muc_may'  => 'Laptop văn phòng',
             ],
             [
                 'ma_sp'         => 2,
@@ -38,7 +38,7 @@ class SanPhamSeeder extends Seeder
                 'ma_dm'         => 2,
                 'mo_ta'         => 'Laptop HP Pavilion, hiệu năng ổn định, thiết kế sang trọng, phù hợp với nhu cầu học tập và làm việc.',
                 'trailer'       => 'https://www.youtube.com/watch?v=example2',
-                'danh_muc_may'  => 'Laptop Gaming',
+                // 'danh_muc_may'  => 'Laptop Gaming',
             ],
             [
                 'ma_sp'         => 3,
@@ -51,7 +51,7 @@ class SanPhamSeeder extends Seeder
                 'ma_dm'         => 3,
                 'mo_ta'         => 'Macbook Pro 16 với hiệu năng vượt trội, thiết kế tinh tế, phù hợp cho các chuyên gia sáng tạo.',
                 'trailer'       => 'https://www.youtube.com/watch?v=example2',
-                'danh_muc_may'  => 'Laptop văn phòng',
+                // 'danh_muc_may'  => 'Laptop văn phòng',
             ],
             [
                 'ma_sp'         => 4,
@@ -64,7 +64,7 @@ class SanPhamSeeder extends Seeder
                 'ma_dm'         => 4,
                 'mo_ta'         => 'Laptop Asus ZenBook 14, thiết kế mỏng nhẹ, hiệu năng cao, phù hợp cho người dùng di chuyển nhiều.',
                 'trailer'       => 'https://www.youtube.com/watch?v=example3',
-                'danh_muc_may'  => 'Laptop đồ họa',
+                // 'danh_muc_may'  => 'Laptop đồ họa',
             ],
             [
                 'ma_sp'         => 5,
@@ -77,7 +77,7 @@ class SanPhamSeeder extends Seeder
                 'ma_dm'         => 5,
                 'mo_ta'         => 'Laptop Lenovo ThinkPad X1 Carbon, bền bỉ, hiệu năng cao, phù hợp cho doanh nhân.',
                 'trailer'       => 'https://www.youtube.com/watch?v=example4',
-                'danh_muc_may'  => 'Laptop văn phòng',
+                // 'danh_muc_may'  => 'Laptop văn phòng',
             ],
             [
                 'ma_sp'         => 6,
@@ -90,7 +90,7 @@ class SanPhamSeeder extends Seeder
                 'ma_dm'         => 6,
                 'mo_ta'         => 'Laptop Acer Swift 3, thiết kế mỏng nhẹ, hiệu năng tốt, phù hợp cho học sinh, sinh viên.',
                 'trailer'       => 'https://www.youtube.com/watch?v=example5',
-                'danh_muc_may'  => 'Laptop đồ họa',
+                // 'danh_muc_may'  => 'Laptop đồ họa',
             ],
             [
                 'ma_sp'         => 7,
@@ -103,7 +103,7 @@ class SanPhamSeeder extends Seeder
                 'ma_dm'         => 7,
                 'mo_ta'         => 'Laptop MSI Gaming GF63, hiệu năng mạnh mẽ, thiết kế hầm hố, phù hợp cho game thủ.',
                 'trailer'       => 'https://www.youtube.com/watch?v=example6',
-                'danh_muc_may'  => 'Laptop Gaming',
+                // 'danh_muc_may'  => 'Laptop Gaming',
             ],
             [
                 'ma_sp'         => 8,
@@ -116,7 +116,7 @@ class SanPhamSeeder extends Seeder
                 'ma_dm'         => 8,
                 'mo_ta'         => 'Laptop Razer Blade Stealth, thiết kế cao cấp, hiệu năng đỉnh cao, phù hợp cho game thủ và người sáng tạo nội dung.',
                 'trailer'       => 'https://www.youtube.com/watch?v=example7',
-                'danh_muc_may'  => 'Laptop Gaming',
+                // 'danh_muc_may'  => 'Laptop Gaming',
             ],
             [
                 'ma_sp'         => 9,
@@ -129,7 +129,7 @@ class SanPhamSeeder extends Seeder
                 'ma_dm'         => 9,
                 'mo_ta'         => 'Laptop Huawei MateBook X Pro, thiết kế sang trọng, hiệu năng mạnh mẽ, phù hợp cho người dùng doanh nhân.',
                 'trailer'       => 'https://www.youtube.com/watch?v=example8',
-                'danh_muc_may'  => 'Laptop văn phòng',
+                // 'danh_muc_may'  => 'Laptop văn phòng',
             ],
             [
                 'ma_sp'         => 10,
@@ -142,7 +142,7 @@ class SanPhamSeeder extends Seeder
                 'ma_dm'         => 10,
                 'mo_ta'         => 'Laptop LG Gram dòng 17 inch, thiết kế nhẹ nhàng, hiệu năng cao, phù hợp cho người dùng  di chuyển nhiều.',
                 'trailer'       => 'https://www.youtube.com/watch?v=example9',
-                'danh_muc_may'  => 'Laptop văn phòng',
+                // 'danh_muc_may'  => 'Laptop văn phòng',
             ],
         ]);
 

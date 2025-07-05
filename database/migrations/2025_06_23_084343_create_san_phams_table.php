@@ -22,7 +22,7 @@ Schema::create('san_phams', function (Blueprint $table) {
     $table->string('hinh');
     $table->unsignedBigInteger('ma_dm');
     $table->text('mo_ta');
-    $table->text('danh_muc_may');
+    // $table->text('danh_muc_may');
     $table->string('trailer');
     $table->timestamps();
 });

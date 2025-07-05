@@ -54,25 +54,24 @@ class DanhMucController
         ]);
     }
 
-    public function changeStatus(Request $request)
-    {
-        $DanhMuc = DanhMuc::where('id', $request->id)->first();
-        if ($DanhMuc->tinh_trang == DanhMuc::TAM_TAT) {
-            $DanhMuc->tinh_trang = DanhMuc::HOAT_DONG;
-        } else {
-            $DanhMuc->tinh_trang = DanhMuc::TAM_TAT;
-        }
-        $DanhMuc->save();
+public function changeStatus(Request $request)
+{
+    $DanhMuc = DanhMuc::where('id', $request->id)->first();
+    // Đảo trạng thái: nếu đang hoạt động (1) thì chuyển thành tạm tắt (0), ngược lại thì chuyển thành hoạt động
+    $DanhMuc->trang_thai = ($DanhMuc->trang_thai == DanhMuc::HOAT_DONG) ? DanhMuc::TAM_TAT : DanhMuc::HOAT_DONG;
 
-        return response()->json([
-            'status'    => true,
-            'message'   => 'Thay đổi trạng thái DanhMuc thành công',
-        ]);
-    }
+    $DanhMuc->save();
+
+    return response()->json([
+        'status'  => true,
+        'message' => 'Thay đổi trạng thái DanhMuc thành công',
+    ]);
+}
+
 
     public function getDataClientDanhMuc()
     {
-        $data = DanhMuc::where('tinh_trang', '>', 0)->get();
+        $data = DanhMuc::where('trang_thai', '>', 0)->get();
 
         return response()->json([
             'status'    => true,
